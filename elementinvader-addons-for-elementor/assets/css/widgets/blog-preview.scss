@@ -1,0 +1,35 @@
+.widget-eli  {
+    .eli_blog_preview_button {
+        .eli_blog_preview_button--btn {
+            .icon-left {
+                margin-left: 0 !important;
+            }
+            .icon-right {
+                margin-right: 0 !important;
+            }
+        }
+    }
+}
+
+body .eli_popup_modal_preview {
+    .modal-dialog  {
+        max-width: initial;
+    }
+
+    button.close {
+        position: absolute;
+        right: 10px;
+        top: 10px;
+        z-index: 1000;
+        cursor: pointer;
+    }
+}
+
+.eli_blog_preview_thumbnail img {
+    object-fit: contain;
+    object-position: center;
+    height: 100%;
+    width: 100%;
+    display: inline-block;
+    display: block;
+}
