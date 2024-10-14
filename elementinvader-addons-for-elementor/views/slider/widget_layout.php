@@ -85,10 +85,9 @@
                             slidesToScroll: <?php echo (!empty($settings['layout_carousel_columns_tablet'])) ?  (int)$settings['layout_carousel_columns_tablet'] : 2;?>,
                         }
                     },
-                    { 
+                    {
                         breakpoint: 768,
                         settings: {
-                            
                             slidesToShow: <?php echo (!empty($settings['layout_carousel_columns_mobile'])) ? (int)$settings['layout_carousel_columns_mobile'] : 1;?>,
                             slidesToScroll: <?php echo (!empty($settings['layout_carousel_columns_mobile'])) ?  (int)$settings['layout_carousel_columns_mobile'] : 1;?>,
                         }

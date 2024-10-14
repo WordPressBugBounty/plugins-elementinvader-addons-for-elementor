@@ -249,6 +249,7 @@ class EliSlider extends Elementinvader_Base {
                             'rand'  => __('Random', 'elementinvader-addons-for-elementor'),
                             'comment_count' => __('Number of Comments', 'elementinvader-addons-for-elementor'),
                             'menu_order ' => __('Field Order ', 'elementinvader-addons-for-elementor'),
+                            'custom_field ' => __('Custom Field', 'elementinvader-addons-for-elementor'),
                         ],
                         'default'       => 'date',
                         'conditions' => [
@@ -262,6 +263,26 @@ class EliSlider extends Elementinvader_Base {
                         ],
                     ]
                 );
+
+                $this->add_control(
+                    't_settings_sec_basic_post_orderby_custom',
+                    [
+                        'label' => __( 'Custom Order Field', 'elementinvader-addons-for-elementor' ),
+                        'hint' => __( 'Work with meta fields, select exists meta field', 'elementinvader-addons-for-elementor' ),
+                        'type' => \Elementor\Controls_Manager::TEXT,
+                        'conditions' => [
+                            'terms' => [
+                                [
+                                    'name' => 't_settings_sec_basic_post_orderby',
+                                    'operator' => '==',
+                                    'value' => 'custom_field',
+                                ]
+                            ],
+                        ],
+                    ]
+                );
+
+
             }
 
             if(true) {
@@ -1070,12 +1091,12 @@ class EliSlider extends Elementinvader_Base {
         $id_int = substr($this->get_id_int(), 0, 3);
         $settings = $this->get_settings();
 
-
+       
         global $paged;
         $allposts = array( 
             'post_type'           =>  'post',
             'orderby'      =>  $settings['t_settings_sec_basic_post_orderby'],
-            'order'      =>  $settings['t_settings_sec_basic_post_type'],
+            'order'      =>  $settings['t_settings_sec_basic_post_order'],
             'post_type'      =>  $settings['t_settings_sec_basic_post_type'],
             'posts_per_page'      =>  $settings['t_settings_sec_basic_post_limit'],
             'post_status'		  => 'publish',	
@@ -1088,6 +1109,23 @@ class EliSlider extends Elementinvader_Base {
                 ),
             )
         );
+
+                
+        if($settings['t_settings_sec_basic_post_orderby'] == 'custom_field') {
+            $settings['t_settings_sec_basic_post_orderby'] =  $settings['t_settings_sec_basic_post_orderby_custom'];
+        }
+
+
+        if($settings['t_settings_sec_basic_post_orderby'] == 'custom_field' && !empty($settings['t_settings_sec_basic_post_orderby_custom'])) {
+            $allposts ['meta_query'] = [
+                                            [
+                                                'key' => $settings['t_settings_sec_basic_post_orderby_custom'],
+                                            ],
+                                    ];
+            $allposts ['meta_key'] = $settings['t_settings_sec_basic_post_orderby_custom'];                 
+            $allposts ['orderby'] = 'meta_value';                 
+            $allposts ['order'] = $settings['t_settings_sec_basic_post_order'];                
+        }
 
         $wp_query = new \WP_Query($allposts); 
 
@@ -1107,17 +1145,16 @@ class EliSlider extends Elementinvader_Base {
             if(!empty($settings['t_settings_sec_basic_sliders']))
                 foreach($settings['t_settings_sec_basic_sliders'] as $item) {
                     $row = [];
-                    $row ['thumbnail'] = (!empty($item['slider_image']['id'])) ? wp_get_attachment_image_url( $item['slider_image']['id'], 'full' )  : ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_URL.'/assets/img/placeholder.jpg';
+                    $row ['thumbnail'] = $this->_ch($item['slider_image']['url'], ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_URL.'/assets/img/placeholder.jpg');
                     $row ['title'] = $item['slider_title'];
                     $row ['description'] = $item['slider_description'];
                     $row ['_id'] = $item['_id'];
                     $row ['data'] = $item;
                     $row ['link'] = $this->_ch($item['slider_url']['url'], '');
                     $results[]=$row;
-
                 }
         }
-        
+
         //$wp_query->query($allposts);
        // while ($wp_query->have_posts()) : $wp_query->the_post(); 
         

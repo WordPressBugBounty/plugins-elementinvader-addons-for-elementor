@@ -422,12 +422,33 @@ class EliBlog_Grid extends Elementinvader_Base {
 					'modified' => __('Last Modified', 'elementinvader-addons-for-elementor'),
 					'rand'  => __('Random', 'elementinvader-addons-for-elementor'),
 					'comment_count' => __('Number of Comments', 'elementinvader-addons-for-elementor'),
-					'menu_order ' => __('Field Order ', 'elementinvader-addons-for-elementor'),
+					'menu_order' => __('Field Order ', 'elementinvader-addons-for-elementor'),
+					'custom_field' => __('Custom Field', 'elementinvader-addons-for-elementor'),
 				],
 				'default'       => 'date'
 			]
 		);
-        
+
+        $this->add_control(
+            'config_limit_order_by_custom',
+            [
+                'label' => __( 'Custom Order Field', 'elementinvader-addons-for-elementor' ),
+                'hint' => __( 'Work with meta fields, select exists meta field', 'elementinvader-addons-for-elementor' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'conditions' => [
+                    'terms' => [
+                        [
+                            'name' => 'config_limit_order_by',
+                            'operator' => '==',
+                            'value' => 'custom_field',
+                        ]
+                    ],
+                ],
+            ]
+        );
+
+
+         
         $this->add_control(
             'important_note',
             [
@@ -1190,9 +1211,20 @@ class EliBlog_Grid extends Elementinvader_Base {
             }
         }
 
-
-        $wp_query = new \WP_Query($allposts); 
         
+        if($settings['config_limit_order_by'] == 'custom_field' && !empty($settings['config_limit_order_by_custom'])) {
+            $allposts ['meta_query'] = [
+                                            [
+                                                'key' => $settings['config_limit_order_by_custom'],
+                                            ],
+                                    ];
+             $allposts ['meta_key'] = $settings['config_limit_order_by_custom'];                 
+             $allposts ['orderby'] = 'meta_value';                 
+             $allposts ['order'] = $settings['config_limit_order'];                
+        }
+   
+        $wp_query = new \WP_Query($allposts); 
+
         $object = ['wp_query'=>$wp_query, 'settings'=>$settings,'id_int'=>$id_int];
                 
         $object['is_edit_mode'] = false;          

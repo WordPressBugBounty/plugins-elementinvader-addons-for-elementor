@@ -259,7 +259,7 @@ class Ajax_Handler {
             $form_data = $form_data['settings'];
 
             if(!empty($form_data['redirect_url'])) {
-                $ajax_output['redirect'] = $form_data['redirect_url'];
+                $ajax_output['redirect'] = sanitize_text_field(esc_url($form_data['redirect_url']));
             }
 
             /* start recaptcha */

@@ -2,7 +2,7 @@
     <div class="eli_container">
         <?php if (!empty($settings['custom_logo_image']['url']) ) : ?>
             <a href="<?php echo esc_url( $link ); ?>" <?php if($link_new_window):?> target="_blank" <?php endif;?> class="custom-logo-link">
-                <img src="<?php echo esc_url( $settings['custom_logo_image']['url'] ) ?>" alt="<?php echo esc_attr($this->image_alt($settings['custom_logo_image']['id']));?>"  alt="<?php bloginfo( 'name' ); ?>">
+                <img src="<?php echo esc_url( $settings['custom_logo_image']['url'] ) ?>" alt="<?php bloginfo( 'name' ); ?>">
             </a>
         <?php elseif (has_custom_logo() ) : ?>
             <?php if($settings['logo_image_footer_enable'] == 'yes' && get_theme_mod( 'footer_logo' )) :?>
@@ -14,7 +14,7 @@
                     $custom_logo__url = wp_get_attachment_image_src( get_theme_mod( 'custom_logo' ), 'full' ); 
                 ?>
                 <a  href="<?php echo esc_url( $link ); ?>" <?php if($link_new_window):?> target="_blank" <?php endif;?>  class="custom-logo-link">
-                    <img src="<?php echo esc_url( $custom_logo__url[0]);?>" class="custom-logo" alt="<?php echo esc_attr($this->image_alt(get_theme_mod( 'custom_logo' )));?>" />
+                    <img src="<?php echo esc_url( $custom_logo__url[0]);?>" class="custom-logo"  />
                 </a>
             <?php endif;?>
         <?php else : ?>

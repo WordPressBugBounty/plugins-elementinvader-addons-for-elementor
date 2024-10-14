@@ -124,18 +124,24 @@ class EliPageLoader extends Elementinvader_Base {
         $settings = $this->get_settings();
 
         $content = '';
-        if(!empty($settings['content_id'])){
+        if (!empty($settings['content_id'])) {
             $post_data = get_post($settings['content_id']);
-            if($post_data){
-                if($post_data->post_type == 'page' || $post_data->post_type == 'elementor_library') {
-                    $elementor_instance = \Elementor\Plugin::instance();
-                    $content = $elementor_instance->frontend->get_builder_content_for_display($settings['content_id']);
-                    if(empty($content ))
-                        $content = $post_data->post_content;
-                } else {
+            
+            if (!$post_data || $post_data->post_status == 'private' || $post_data->post_status == 'draft' || post_password_required($post_data)) {
+                return false;
+            }
+                
+            if ($post_data->post_type == 'page' || $post_data->post_type == 'elementor_library') {
+                $elementor_instance = \Elementor\Plugin::instance();
+                $content = $elementor_instance->frontend->get_builder_content_for_display($settings['content_id']);
+                
+                if (empty($content)) {
                     $content = $post_data->post_content;
                 }
+            } else {
+                $content = $post_data->post_content;
             }
+           
         }
         ?>
         <div class="widget-eli eli_pageloader" id="eli_<?php echo esc_html($this->get_id_int());?>">

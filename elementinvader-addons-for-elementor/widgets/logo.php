@@ -263,20 +263,4 @@ class EliLogo extends Elementinvader_Base {
         echo $this->view('widget_layout', $object); 
     }
 
-    public function image_alt($link_id = '') {
-		$alt = '';
-
-		if(is_intval($link_id)) {
-			$attached_id = $link_id;
-		} else {
-			$attached_id = attachment_url_to_postid($link_id);
-		}
-
-        $alt = get_post_meta($attached_id, '_wp_attachment_image_alt', true);
-		if($alt == '') {
-			$alt = get_the_title($attached_id);
-		}
-		
-		return $alt;
-	}
 }
