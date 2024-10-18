@@ -126,8 +126,7 @@ class EliPageLoader extends Elementinvader_Base {
         $content = '';
         if (!empty($settings['content_id'])) {
             $post_data = get_post($settings['content_id']);
-            
-            if (!$post_data || $post_data->post_status == 'private' || $post_data->post_status == 'draft' || post_password_required($post_data)) {
+            if (!$post_data || $post_data->post_status != 'publish' || post_password_required($post_data)) {
                 return false;
             }
                 
@@ -146,7 +145,7 @@ class EliPageLoader extends Elementinvader_Base {
         ?>
         <div class="widget-eli eli_pageloader" id="eli_<?php echo esc_html($this->get_id_int());?>">
         <?php if(eli_user_in_role('administrator')):?>
-        <div class="eli_header"><a href="<?php echo esc_url(admin_url('wp-admin/post.php?post='.$settings['content_id'].'&action=edit'));?>"><?php echo esc_html__( 'Edit Content', 'elementinvader-addons-for-elementor' );?></a></div>
+        <div class="eli_header"><a href="<?php echo esc_url(admin_url('post.php?post='.$settings['content_id'].'&action=edit'));?>"><?php echo esc_html__( 'Edit Content', 'elementinvader-addons-for-elementor' );?></a></div>
         <?php endif;?>
             <div>
                 <?php echo wp_kses_post($content);?>

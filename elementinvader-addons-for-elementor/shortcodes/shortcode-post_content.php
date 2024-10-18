@@ -23,11 +23,16 @@ function eli_shortcode_post_content($atts) {
     $post_id = absint($atts['post_id']);
     $post_data = get_post($post_id);
 
+    if (!$post_data || $post_data->post_status != 'publish' || post_password_required($post_data)) {
+        return false;
+    }
+    
     // Check if the post exists
     if ($post_data) {
         // Return the post content
         $content = '';
         if($post_data){
+            
             if($post_data->post_type == 'page' || $post_data->post_type == 'elementor_library') {
                 $listing_page_id = get_option('wdk_listing_page');
 

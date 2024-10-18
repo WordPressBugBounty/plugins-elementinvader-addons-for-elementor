@@ -278,8 +278,8 @@ class Ajax_Handler {
                 
             if(!isset($form_data['disable_mail_send']) || empty($form_data['disable_mail_send'])) {
                 $subject = $this->_ch($form_data['mail_data_subject']);
-                $subject = $this->replace_smart_data($subject, $post);
 
+                $subject = $this->replace_smart_data($subject, $post);
 
                 // message
                 $message = '
@@ -320,7 +320,7 @@ class Ajax_Handler {
                 $email_client = false;
                 foreach($post as $key => $value){
                     if($key=='element_id') continue;
-                    if(in_array($key, array('eli_id', 'eli_type','ID','filter','action','send_action_type'))) continue;
+                    if(in_array($key, array('eli_id', 'eli_type','ID','filter','action','send_action_type', 'g-recaptcha-response'))) continue;
 
                     if($key  == 'eli_page_id'){
                         $value = get_permalink($value);
@@ -682,11 +682,10 @@ class Ajax_Handler {
                 $_post[strtolower($key)] = $value;
             }
 
-
             foreach ($matches[1] as $key => $value) {
-                if(isset($_post[$value])) {
-                    $string = str_replace('{'.$value.'}', $_post[$value], $string);
-                    $string = str_replace('{'.strtolower($value).'}', $_post[$value], $string);
+                if(isset($_post[strtolower($value)])) {
+                    $string = str_replace('{'.$value.'}', $_post[strtolower($value)], $string);
+                    $string = str_replace('{'.strtolower($value).'}', $_post[strtolower($value)], $string);
                 }
             }
         }
