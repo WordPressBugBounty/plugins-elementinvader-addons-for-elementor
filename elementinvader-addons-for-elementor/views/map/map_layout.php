@@ -124,7 +124,7 @@ if(!function_exists('eli_get_position_marker')) {
                     ";
                     if(!empty($settings['marker_icon_image']['url'])){
                         $marker_size = wp_get_attachment_image_src( $settings['marker_icon_image']['id'], 'full' );    
-                        $custom_js .= "{icon: L.icon({ iconUrl: '".$settings['marker_icon_image']['url']."',iconSize: [".(($marker_size) ? $marker_size[1]: '').", ".(($marker_size) ? $marker_size[2]: '')."],popupAnchor: [0, -".((($marker_size) ? $marker_size[2]: 2)/2)."]})}";
+                        $custom_js .= "{icon: L.icon({ iconUrl: '".esc_url($settings['marker_icon_image']['url'])."',iconSize: [".(($marker_size) ? $marker_size[1]: '').", ".(($marker_size) ? $marker_size[2]: '')."],popupAnchor: [0, -".((($marker_size) ? $marker_size[2]: 2)/2)."]})}";
                     }
                     else
                         $custom_js .= " {icon: L.divIcon({
@@ -178,7 +178,7 @@ if(!function_exists('eli_get_position_marker')) {
                                 ";
                                 if(!empty($marker['marker_icon_image']['url'])){
                                     $marker_size = wp_get_attachment_image_src( $marker['marker_icon_image']['id'], 'full' );    
-                                    $custom_js .= "{icon: L.icon({ iconUrl: '".$marker['marker_icon_image']['url']."',iconSize: [".$marker_size[1].", ".$marker_size[2]."],popupAnchor: [0, -".($marker_size[2]/2)."]})}";
+                                    $custom_js .= "{icon: L.icon({ iconUrl: '".esc_url($marker['marker_icon_image']['url'])."',iconSize: [".$marker_size[1].", ".$marker_size[2]."],popupAnchor: [0, -".($marker_size[2]/2)."]})}";
                                 }
                                 else
                                     $custom_js .= " {icon: L.divIcon({
@@ -282,7 +282,7 @@ if(!function_exists('eli_get_position_marker')) {
                         ";
             
             if(!empty($settings['marker_icon_image']['url']))
-                $custom_js .= "icon: '".$settings['marker_icon_image']['url']."'";
+                $custom_js .= "icon: '".esc_url($settings['marker_icon_image']['url'])."'";
                 
             $custom_js .= "   });";
 
@@ -332,9 +332,9 @@ if(!function_exists('eli_get_position_marker')) {
                             ";
                     
                     if(!empty($marker['marker_icon_image']['url']))
-                        $custom_js .= "icon: '".$marker['marker_icon_image']['url']."'";
+                        $custom_js .= "icon: '".esc_url($marker['marker_icon_image']['url'])."'";
                             
-                    $custom_js .= "   });
+                    $custom_js .= "   }); 
                     
                     marker.addListener('click', function(){
                         infowindow.setContent('<div class=\"eli_infobox\"><h2 class=\"eli_infobox_title\">".$this->_js($marker['title'])."</h2><div class=\"eli_infobox_text\">".$this->_js($marker['text'])."</div></div>');
