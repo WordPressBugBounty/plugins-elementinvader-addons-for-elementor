@@ -134,20 +134,24 @@
 
                         $post_data = get_post($settings['popup_layout']);
                         if($post_data){
-                            if($post_data->post_type == 'page' || $post_data->post_type == 'elementor_library') {
-                                $elementor_instance = \Elementor\Plugin::instance();
-                                $content = $elementor_instance->frontend->get_builder_content_for_display($settings['popup_layout']);
-                                if(empty($content ))
+                            if (!$post_data || $post_data->post_status != 'publish' || post_password_required($post_data)) {
+                                $content = esc_html__( 'Page is not public', 'elementinvader-addons-for-elementor' );
+                            } else {
+                                if($post_data->post_type == 'page' || $post_data->post_type == 'elementor_library') {
+                                    $elementor_instance = \Elementor\Plugin::instance();
+                                    $content = $elementor_instance->frontend->get_builder_content_for_display($settings['popup_layout']);
+                                    if(empty($content ))
+                                        $content = $post_data->post_content;
+                                } else {
                                     $content = $post_data->post_content;
-                            } else {
-                                $content = $post_data->post_content;
+                                }
                             }
-
-                            if($is_edit_mode) {
-                                echo ($content);
-                            } else {
-                                echo wp_kses_post($content);
-                            }
+                                if($is_edit_mode) {
+                                    echo ($content);
+                                } else { 
+                                    echo wp_kses_post($content);
+                                }
+                           
                         }
                     ?>
                     <?php else: ?>
