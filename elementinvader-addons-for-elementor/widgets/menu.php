@@ -7,11 +7,9 @@ use ElementinvaderAddonsForElementor\Core\Elementinvader_Base;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Utils;
-use Elementor\Typography;
 use Elementor\Editor;
 use Elementor\Plugin;
 use Elementor\Repeater;
-use Elementor\Core\Schemes;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
@@ -941,7 +939,6 @@ class EliMenu extends Elementinvader_Base {
                 Group_Control_Typography::get_type(),
                 [
                     'name' => 'dropdown_typography',
-                    'scheme' => Schemes\Typography::TYPOGRAPHY_4,
                     'exclude' => ['line_height'],
                     'selector' => '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a',
                   

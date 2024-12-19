@@ -319,6 +319,8 @@ class Ajax_Handler {
                 $custom_message = '';
                 $email_client = false;
                 foreach($post as $key => $value){
+                    if(empty($value)) continue;
+
                     if($key=='element_id') continue;
                     if(in_array($key, array('eli_id', 'eli_type','ID','filter','action','send_action_type', 'g-recaptcha-response'))) continue;
 
@@ -419,6 +421,8 @@ class Ajax_Handler {
                     $data_mess= array();
                     foreach($post as $key => $value){
                         if($key=='element_id') continue;
+                        if(empty($value)) continue;
+
                         if(in_array($key, array('eli_id', 'eli_type','ID','filter','action', 'send_action_type', 'g-recaptcha-response'))) continue;
 
                         if($key  == 'eli_page_id'){
