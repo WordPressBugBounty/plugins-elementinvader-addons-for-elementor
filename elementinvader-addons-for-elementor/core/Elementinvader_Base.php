@@ -124,7 +124,7 @@ class Elementinvader_Base extends Widget_Base {
             );
 
             $this->add_control(
-                    'custom_css',
+                    'custom_css_el',
                     [
                             'type' => Controls_Manager::CODE,
                             'label' => esc_html__( 'Custom CSS', 'elementinvader-addons-for-elementor' ),
@@ -759,10 +759,10 @@ class Elementinvader_Base extends Widget_Base {
 	public function add_page_settings_css() {
         $settings = $this->get_settings();
 
-        if(!isset($settings['custom_css']))
+        if(!isset($settings['custom_css_el']))
             return;
 
-		$custom_css = $settings['custom_css'];
+		$custom_css = $settings['custom_css_el'];
 		$custom_css = trim( $custom_css );
 
 		if ( empty( $custom_css ) ) {

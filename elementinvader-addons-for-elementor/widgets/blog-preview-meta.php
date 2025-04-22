@@ -208,14 +208,27 @@ class EliBlog_Preview_Meta extends Elementinvader_Base {
 	public static function set_dinamic_field($field_id = '', $field = '', $default = '')
 	{
         $out = '';
-        if(!empty($field) && wp_get_post_terms($field_id, $field, array('fields' => 'names')) && ( ! is_wp_error( wp_get_post_terms($field_id, $field, array('fields' => 'names')) ) ))
-            $out = implode(',',wp_get_post_terms($field_id, $field, array('fields' => 'names')));
-        elseif(function_exists('rwmb_meta') && !empty($field) &&  rwmb_meta( $field,[], $field_id)) {
-            $out = rwmb_meta( $field,[], $field_id);
-        }  
-        if(empty($out))
-            $out = $default;
 
-		return $out;
+        // Return post date if requested
+        if ($field === 'post_date') {
+            $post = get_post($field_id);
+            if ($post && !is_wp_error($post)) {
+                $out = get_the_date('', $post);
+            }
+        }
+        // Check for taxonomy terms
+        elseif (!empty($field) && wp_get_post_terms($field_id, $field, ['fields' => 'names']) && !is_wp_error(wp_get_post_terms($field_id, $field, ['fields' => 'names']))) {
+            $out = implode(',', wp_get_post_terms($field_id, $field, ['fields' => 'names']));
+        }
+        // Check for Meta Box value
+        elseif (function_exists('rwmb_meta') && !empty($field) && rwmb_meta($field, [], $field_id)) {
+            $out = rwmb_meta($field, [], $field_id);
+        }
+    
+        if (empty($out)) {
+            $out = $default;
+        }
+    
+        return $out;
 	}
 }

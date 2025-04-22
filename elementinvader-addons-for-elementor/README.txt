@@ -4,8 +4,8 @@ Donate link: elementinvader.com
 Tags: elementor addon, elementor addons, elementor widget, elementor
 Requires at least: 5.2
 Requires PHP: 5.6
-Tested up to: 6.6
-Stable tag: 1.3.3
+Tested up to: 6.8
+Stable tag: 1.3.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,15 @@ There is website where yo ucan found compatible plugin version for your wp / PHP
 4. Simple Newsletter for Elementor, with mailchimp api, email alerts for admin and export msigned maillist option.
 
 == Changelog ==
+
+= 1.3.5 =
+* Element Blog Grid, added custom layout for grid results
+* Element Blog Grid Popup / Blog Grid Custom Layout text limit for description
+* security fix
+
+= 1.3.4 =
+* Added icons for blog card
+* security fix
 
 = 1.3.3 =
 * Deprecated issue with Elementor

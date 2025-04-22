@@ -12,8 +12,8 @@ $this->add_field_css($element);
 
 $field_tyle = 'html';
 
-$output .='<div class="elementinvader_addons_for_elementor_f_group '.$field_tyle.' elementinvader_addons_for_elementor_f_group_el_'.$element['_id'].' '.$helper_classes.'" style="'.$styles.'">';
-            $output .=$element['field_html'].'
+$output .='<div class="elementinvader_addons_for_elementor_f_group '.$field_tyle.' elementinvader_addons_for_elementor_f_group_el_'.esc_attr($element['_id']).' '.$helper_classes.'" style="'.$styles.'">';
+            $output .= wp_kses_post($element['field_html']).'
             </div>';
             
 echo $output;

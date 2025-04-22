@@ -156,7 +156,7 @@ if(!function_exists('eli_get_position_marker')) {
                     $custom_js .= ";";
 
                 $custom_js .= "  
-                    $.get('https://nominatim.openstreetmap.org/search?format=json&q=" . $settings['address'] . "', function(data){
+                    $.get('https://nominatim.openstreetmap.org/search?format=json&q=" . esc_js($settings['address']) . "', function(data){
                         if(typeof data[0] !='undefined'){
                             marker.setLatLng([data[0].lat, data[0].lon]).update(); 
                             eli_map.panTo(new L.LatLng(data[0].lat, data[0].lon));
@@ -290,7 +290,7 @@ if(!function_exists('eli_get_position_marker')) {
                 $custom_js .= "
                 var eli_geocoder = new google.maps.Geocoder();
                 eli_geocoder.geocode({
-                    'address': '" . $settings['address'] . "'
+                    'address': '" . esc_js($settings['address']) . "'
                 }, function(results, status) {
 
                 if (status == google.maps.GeocoderStatus.OK) {

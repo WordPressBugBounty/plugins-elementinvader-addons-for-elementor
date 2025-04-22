@@ -92,6 +92,17 @@ class EliBlog_Preview_Content extends Elementinvader_Base {
 			]
 		);
 
+        $this->add_control(
+            'text_limit',
+            [
+                'label' => esc_html__('Limit Words', 'elementinvader-addons-for-elementor'),
+                'type' => \Elementor\Controls_Manager::NUMBER,
+                'min' => 0,
+                'max' => 1000,
+                'step' => 1,
+                'default' => 14,
+            ]
+        );
 
         $this->end_controls_section();
 

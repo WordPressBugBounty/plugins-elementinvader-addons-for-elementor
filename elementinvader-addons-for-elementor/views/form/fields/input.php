@@ -74,7 +74,7 @@ if($field_tyle =='hidden'){
 
     $output .='<input name="'.esc_attr($element['field_label']).'" id="'.esc_attr($field_id).'" type="'.esc_attr($field_tyle).'" class="elementinvader_addons_for_elementor_f_field" '.esc_attr($required).' value="'.esc_attr($value).'" placeholder="'.esc_attr($element['placeholder']).'" >';
 } else {
-$output .='<div class="elementinvader_addons_for_elementor_f_group '.$field_tyle.' elementinvader_addons_for_elementor_f_group_el_'.$element['_id'].' '.esc_attr($helper_classes).'" style="'.wp_kses_post($styles).'">';
+$output .='<div class="elementinvader_addons_for_elementor_f_group '.$field_tyle.' elementinvader_addons_for_elementor_f_group_el_'.esc_attr($element['_id']).' '.esc_attr($helper_classes).'" style="'.wp_kses_post($styles).'">';
 if($element['show_label'])
     $output .='<label for="'.esc_attr($field_id).'">'.esc_html($element['field_label']).esc_html($required_icon).'</label>';
             $output .='

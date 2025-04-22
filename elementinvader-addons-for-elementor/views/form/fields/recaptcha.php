@@ -10,7 +10,7 @@ $value = $this->_ch($element['field_value']);
 $this->add_field_css($element);
 $field_tyle = 'text';
 ?>
-<div class="elementinvader_addons_for_elementor_f_group recaptcha elementinvader_addons_for_elementor_f_group_el_<?php echo $element['_id'];?>">
+<div class="elementinvader_addons_for_elementor_f_group recaptcha elementinvader_addons_for_elementor_f_group_el_<?php echo esc_attr($element['_id']);?>">
     <?php if(empty($settings['recaptcha_site_key']) || empty($settings['recaptcha_secret_key'])):?>
     <div class="elementinvader_addons_for_elementor_alert elementinvader_addons_for_elementor_alert-info" role="alert">
       <?php esc_html_e( 'Please configurate recaptcha', 'elementinvader-addons-for-elementor' );?>

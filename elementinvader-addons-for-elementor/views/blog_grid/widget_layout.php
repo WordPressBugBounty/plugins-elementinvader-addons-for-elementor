@@ -7,6 +7,46 @@
         $helper_style = '';
         ?>
         <div class="eli_col" style="<?php echo wp_kses_post($helper_style);?>">
+        <?php if(!empty($settings['custom_layout'])):?>
+            <div class=" elementor-clickable eliblog-card <?php if($settings['thumbnail_cover'] == 'yes'):?> cover <?php endif;?> <?php if($settings['thumbnail_fixed_size'] == 'yes'):?> fixed-size <?php endif;?>"
+                <?php if(isset($settings['is_popup_enable']) && $settings['is_popup_enable'] == 'yes'):?>
+                data-eli-toggle="modal" data-eli-target="#eli_popup_modal_<?php echo esc_html($this->get_id_int());?>_<?php echo esc_html(get_the_ID()); ?>"
+                <?php endif;?>
+                >
+            <?php
+                $content = '';
+                global $eli_post_id;
+                $eli_post_id = get_the_ID();
+
+                $post_data = get_post($settings['custom_layout']);
+                if($post_data){
+                    if (!$post_data || $post_data->post_status != 'publish' || post_password_required($post_data)) {
+                        $content = esc_html__( 'Page is not public', 'elementinvader-addons-for-elementor' );
+                    } else {
+                        if($post_data->post_type == 'page' || $post_data->post_type == 'elementor_library') {
+                            $elementor_instance = \Elementor\Plugin::instance();
+                            $content = $elementor_instance->frontend->get_builder_content_for_display($settings['custom_layout']);
+                            if(empty($content ))
+                                $content = $post_data->post_content;
+                        } else {
+                            $content = $post_data->post_content;
+                        }
+                    }
+                    if($is_edit_mode) {
+                        echo ($content);
+                    } else { 
+                        echo wp_kses_post($content);
+                    }
+                    
+                }
+            ?>
+            <a href="<?php echo esc_url( get_permalink() ); ?>" class="hover_link  elementor-clickable"
+                <?php if(isset($settings['is_popup_enable']) && $settings['is_popup_enable'] == 'yes'):?>
+                    data-eli-toggle="modal" data-eli-target="#eli_popup_modal_<?php echo esc_html($this->get_id_int());?>_<?php echo esc_html(get_the_ID()); ?>"
+                <?php endif;?>
+            ></a>
+            </div>
+        <?php else: ?>
             <div class=" elementor-clickable eliblog-card <?php if($settings['thumbnail_cover'] == 'yes'):?> cover <?php endif;?> <?php if($settings['thumbnail_fixed_size'] == 'yes'):?> fixed-size <?php endif;?>"
                 <?php if(isset($settings['is_popup_enable']) && $settings['is_popup_enable'] == 'yes'):?>
                 data-eli-toggle="modal" data-eli-target="#eli_popup_modal_<?php echo esc_html($this->get_id_int());?>_<?php echo esc_html(get_the_ID()); ?>"
@@ -75,7 +115,15 @@
                         echo (wp_strip_all_tags(html_entity_decode(wp_trim_words(htmlentities(wpautop($content)), $settings['text_limit'], '...'))));
                         ?>
                     </div>
-                    <div class="eliblog-card-btn-box"><a href="<?php echo esc_url( get_permalink() ); ?>" class="eliblog-card-view"><?php echo esc_html($settings['style_options_view_btn_text']);?></a></div>
+                    <div class="eliblog-card-btn-box"><a href="<?php echo esc_url( get_permalink() ); ?>" class="eliblog-card-view">
+                        <?php if($this->_ch($settings['style_options_view_btn_icon_position']) == 'left') :?>
+                            <?php \Elementor\Icons_Manager::render_icon( $settings['style_options_view_btn_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+                        <?php endif;?>
+                        <?php echo esc_html($settings['style_options_view_btn_text']);?>
+                        <?php if($this->_ch($settings['style_options_view_btn_icon_position']) == 'right') :?>
+                            <?php \Elementor\Icons_Manager::render_icon( $settings['style_options_view_btn_icon'], [ 'aria-hidden' => 'true' ] ); ?>
+                        <?php endif;?>
+                    </a></div>
                 </div>
                 <div class="eliblog-card-thumbnail">
                     <?php
@@ -115,6 +163,8 @@
                     <a href="<?php echo esc_url( get_permalink() ); ?>" class="complete_hover_link"></a>
                 <?php endif; ?>
             </div>
+
+        <?php endif; ?>
         </div>
 
         <?php if(isset($settings['is_popup_enable']) && $settings['is_popup_enable'] == 'yes'):?>
