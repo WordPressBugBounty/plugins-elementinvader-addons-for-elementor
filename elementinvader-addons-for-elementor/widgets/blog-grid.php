@@ -97,6 +97,18 @@ class EliBlog_Grid extends Elementinvader_Base {
 			]
 		);
 
+        
+        $this->add_control (
+            'custom_layout',
+            [
+                'label' => __( 'ID Post template layout for custom layout', 'wpdirectorykit' ),
+                'type' => \Elementor\Controls_Manager::TEXT,
+                'default' => '',
+                'placeholder' => __( 'put your template id', 'wpdirectorykit' ),
+                'description' => __( 'Create layout here', 'wpdirectorykit' ).' '.sprintf(__('%1$s here %2$s','elementinvader-addons-for-elementor'),'<a target="_blank" href="'.admin_url('edit.php?post_type=elementor_library#add_new').'">','</a>'),
+            ]
+        );
+
         $this->add_control(
 			'is_complete_link',
 			[
@@ -122,17 +134,6 @@ class EliBlog_Grid extends Elementinvader_Base {
 			]
 		);
 
-        $this->add_control (
-            'custom_layout',
-            [
-                'label' => __( 'Custom Layout ID', 'elementinvader-addons-for-elementor' ),
-                'type' => \Elementor\Controls_Manager::TEXT,
-                'default' => '',
-                'placeholder' => __( 'put your template id', 'elementinvader-addons-for-elementor' ),
-                'description' => __( 'Create layout here', 'elementinvader-addons-for-elementor' ).' '.sprintf(__('%1$s here %2$s','elementinvader-addons-for-elementor'),'<a target="_blank" href="'.admin_url('edit.php?post_type=elementor_library#add_new').'">','</a>'),
-            ]
-        );
-
         $this->add_control(
 			'is_popup_enable',
 			[
@@ -148,11 +149,11 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_control (
             'popup_layout',
             [
-                'label' => __( 'ID Post template layout for popup view', 'elementinvader-addons-for-elementor' ),
+                'label' => __( 'ID Post template layout for popup view', 'wpdirectorykit' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => '',
-                'placeholder' => __( 'put your template id', 'elementinvader-addons-for-elementor' ),
-                'description' => __( 'Create layout here', 'elementinvader-addons-for-elementor' ).' '.sprintf(__('%1$s here %2$s','elementinvader-addons-for-elementor'),'<a target="_blank" href="'.admin_url('edit.php?post_type=elementor_library#add_new').'">','</a>'),
+                'placeholder' => __( 'put your template id', 'wpdirectorykit' ),
+                'description' => __( 'Create layout here', 'wpdirectorykit' ).' '.sprintf(__('%1$s here %2$s','elementinvader-addons-for-elementor'),'<a target="_blank" href="'.admin_url('edit.php?post_type=elementor_library#add_new').'">','</a>'),
                 'conditions' => [
                     'terms' => [
                         [
@@ -164,7 +165,6 @@ class EliBlog_Grid extends Elementinvader_Base {
                 ],
             ]
         );
-
         $this->start_controls_tabs( 'popup_style' );
 
         $this->start_controls_tab(
@@ -193,7 +193,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'section_form_style_header_1',
             [
-                'label' => esc_html__('Popup Styles', 'elementinvader-addons-for-elementor'),
+                'label' => esc_html__('Popup Styles', 'wpdirectorykit'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -208,7 +208,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'section_form_style_heigth',
            [
-               'label' => esc_html__('Height', 'elementinvader-addons-for-elementor'),
+               'label' => esc_html__('Height', 'wpdirectorykit'),
                'type' => Controls_Manager::SLIDER,
                'range' => [
                    'px' => [
@@ -235,7 +235,7 @@ class EliBlog_Grid extends Elementinvader_Base {
        $this->add_responsive_control(
             'section_form_style_width',
            [
-               'label' => esc_html__('Width', 'elementinvader-addons-for-elementor'),
+               'label' => esc_html__('Width', 'wpdirectorykit'),
                'type' => Controls_Manager::SLIDER,
                'range' => [
                    'px' => [
@@ -373,7 +373,7 @@ class EliBlog_Grid extends Elementinvader_Base {
             $repeater->add_control(
                 'post_id',
                 [
-                    'label' => esc_html__('Post ID', 'elementinvader-addons-for-elementor'),
+                    'label' => esc_html__('Post ID', 'wpdirectorykit'),
                     'type' => Controls_Manager::NUMBER,
                 ]
             );
@@ -617,6 +617,19 @@ class EliBlog_Grid extends Elementinvader_Base {
 			]
 		);
             
+
+        $this->add_control(
+			'carousel_enable',
+			[
+				'label' => __( 'Carousel', 'elementinvader-addons-for-elementor' ),
+				'type' => \Elementor\Controls_Manager::SWITCHER,
+				'label_on' => __( 'On', 'elementinvader-addons-for-elementor' ),
+				'label_off' => __( 'Off', 'elementinvader-addons-for-elementor' ),
+				'return_value' => 'yes',
+				'default' => '',
+			]
+		);
+            
         $this->add_responsive_control(
                 'row_gap_col',
                 [
@@ -653,6 +666,11 @@ class EliBlog_Grid extends Elementinvader_Base {
                                     'name' => 'masonry_enable',
                                     'operator' => '==',
                                     'value' => '',
+                                ],
+                                [
+                                    'name' => 'carousel_enable',
+                                    'operator' => '!=',
+                                    'value' => 'yes',
                                 ]
                             ],
                         ],
@@ -689,6 +707,11 @@ class EliBlog_Grid extends Elementinvader_Base {
                                     'name' => 'masonry_enable',
                                     'operator' => '==',
                                     'value' => 'yes',
+                                ],
+                                [
+                                    'name' => 'carousel_enable',
+                                    'operator' => '!=',
+                                    'value' => 'yes',
                                 ]
                             ],
                         ],
@@ -713,6 +736,15 @@ class EliBlog_Grid extends Elementinvader_Base {
                         '{{WRAPPER}} .eli_blog .eli_col' => 'padding-left: {{SIZE}}{{UNIT}};padding-right: {{SIZE}}{{UNIT}};;',
                         '{{WRAPPER}} .eli_blog .eli_row' => 'margin-left: -{{SIZE}}{{UNIT}};margin-right: -{{SIZE}}{{UNIT}};',
                     ],
+                    'conditions' => [
+                        'terms' => [
+                            [
+                                'name' => 'carousel_enable',
+                                'operator' => '!=',
+                                'value' => 'yes',
+                            ]
+                        ],
+                    ],
                 ]
         );
 
@@ -733,14 +765,573 @@ class EliBlog_Grid extends Elementinvader_Base {
                     'selectors' => [
                         '{{WRAPPER}} .eli_blog  .eli_col' => 'margin-bottom: {{SIZE}}{{UNIT}};',
                     ],
+                    'conditions' => [
+                        'terms' => [
+                            [
+                                'name' => 'carousel_enable',
+                                'operator' => '!=',
+                                'value' => 'yes',
+                            ]
+                        ],
+                    ],
                 ]
         );
+      /* Carousel Grid Config */
+      if(true) {
+        
+        $this->add_responsive_control(
+            'layout_carousel_columns',
+            [
+                'label' => __( 'Count grid', 'wpdirectorykit' ),
+                'type' => \Elementor\Controls_Manager::NUMBER,
+                'min' => 1,
+                'max' => 10,
+                'step' => 1,
+                'default' => 3,
+            ]
+        );
+
+
+        $this->add_responsive_control(
+                'carousel_column_gap_carousel',
+                [
+                    'label' => esc_html__('Slider Gap', 'wpdirectorykit'),
+                    'type' => Controls_Manager::SLIDER,
+                    'range' => [
+                        'px' => [
+                            'min' => 0,
+                            'max' => 60,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .slick-slider.eli_blog_carousel_ini ' => 'padding-left: {{SIZE}}{{UNIT}};padding-right: {{SIZE}}{{UNIT}};',
+                    ],
+                    'conditions' => [
+                        'terms' => [
+                            [
+                                'name' => 'carousel_enable',
+                                'operator' => '==',
+                                'value' => 'yes',
+                            ]
+                        ],
+                    ],
+                ]
+        );
+
+        $this->add_responsive_control (
+                'carousel_column_gap',
+                [
+                    'label' => esc_html__('Columns Gap', 'wpdirectorykit'),
+                    'type' => Controls_Manager::SLIDER,
+                    'default' => [
+                        'size' => 10,
+                    ],
+                    'range' => [
+                        'px' => [
+                            'min' => 0,
+                            'max' => 60,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .slick-slider.eli_blog_carousel_ini .eli_col' => 'padding-left: {{SIZE}}{{UNIT}};padding-right: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .slick-slider.eli_blog_carousel_ini' => 'margin-left: -{{SIZE}}{{UNIT}};margin-right: -{{SIZE}}{{UNIT}};',
+                    ],
+                    'conditions' => [
+                        'terms' => [
+                            [
+                                'name' => 'carousel_enable',
+                                'operator' => '==',
+                                'value' => 'yes',
+                            ]
+                        ],
+                    ],
+                ] 
+        );
+
+        $this->add_responsive_control(
+                'carousel_column_gap_top',
+                [
+                    'label' => esc_html__('Columns Gap Top', 'wpdirectorykit'),
+                    'type' => Controls_Manager::SLIDER,
+                    'default' => [
+                        'size' => 0,
+                    ],
+                    'range' => [
+                        'px' => [
+                            'min' => 0,
+                            'max' => 60,
+                        ],
+                    ],
+                    'selectors' => [
+                        '{{WRAPPER}} .eli_blog_carousel' => 'padding-top: {{SIZE}}{{UNIT}};',
+                    ],
+                    'conditions' => [
+                        'terms' => [
+                            [
+                                'name' => 'carousel_enable',
+                                'operator' => '==',
+                                'value' => 'yes',
+                            ]
+                        ],
+                    ],
+                ]
+        );
+
+        $this->add_responsive_control(
+            'carousel_column_gap_bottom',
+            [
+                'label' => esc_html__('Columns Gap Bottom', 'wpdirectorykit'),
+                'type' => Controls_Manager::SLIDER,
+                'default' => [
+                    'size' => 10,
+                ],
+                'range' => [
+                    'px' => [
+                        'min' => 0,
+                        'max' => 60,
+                    ],
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eli_blog_carousel' => 'padding-bottom: {{SIZE}}{{UNIT}};',
+                ],
+                'conditions' => [
+                    'terms' => [
+                        [
+                            'name' => 'carousel_enable',
+                            'operator' => '==',
+                            'value' => 'yes',
+                        ]
+                    ],
+                ],
+            ]
+        );
+    }
+
+    $this->add_control(
+        'basic_el_header_1',
+        [
+            'label' => esc_html__('Text', 'wpdirectorykit'),
+            'type' => Controls_Manager::HEADING,
+            'separator' => 'before',
+        ]
+    );
+
+    $this->add_control(
+        'content_button_text',
+        [
+            'label' => __( 'Button Open Text', 'wpdirectorykit' ),
+            'type' => \Elementor\Controls_Manager::TEXT,
+            'default' => '',
+        ]
+    ); 
+
+    $this->add_responsive_control(
+        'thumbn_slider_h',
+        [
+            'label' => esc_html__('Thumbnail Slider', 'wpdirectorykit'),
+            'type' => Controls_Manager::HEADING,
+            'separator' => 'before',
+        ]
+    );
+
+    $this->add_responsive_control(
+        'thumbn_slider_arrow_left',
+        [
+            'label' => esc_html__('Icon Left', 'wpdirectorykit'),
+            'type' => Controls_Manager::ICONS,
+            'label_block' => true,
+        ]
+    );
+
+    $this->add_responsive_control(
+        'thumbn_slider_arrow_right',
+        [
+            'label' => esc_html__('Icon Right', 'wpdirectorykit'),
+            'type' => Controls_Manager::ICONS,
+            'label_block' => true,
+        ]
+    );
+
+    $this->end_controls_section();
+    
+    $this->start_controls_section(
+        'layout_carousel_sec',
+        [
+            'label' => esc_html__('Carousel Options', 'wpdirectorykit'),
+            'tab' => Controls_Manager::TAB_STYLE,
+            'conditions' => [
+                'terms' => [
+                    [
+                        'name' => 'carousel_enable',
+                        'operator' => '==',
+                        'value' => 'yes',
+                    ]
+                ],
+            ],
+        ]
+    );
+
+    $this->add_control(
+        'layout_carousel_is_centerMode',
+        [
+            'label' => __( 'centerMode', 'wpdirectorykit' ),
+            'type' => \Elementor\Controls_Manager::SWITCHER,
+            'label_on' => __( 'On', 'wpdirectorykit' ),
+            'label_off' => __( 'Off', 'wpdirectorykit' ),
+            'return_value' => 'true',
+            'default' => '',
+        ]
+    );
+
+    $this->add_control(
+        'layout_carousel_is_infinite',
+        [
+            'label' => __( 'Infinite', 'wpdirectorykit' ),
+            'type' => \Elementor\Controls_Manager::SWITCHER,
+            'label_on' => __( 'On', 'wpdirectorykit' ),
+            'label_off' => __( 'Off', 'wpdirectorykit' ),
+            'return_value' => 'true',
+            'default' => 'true',
+        ]
+    );
+
+    $this->add_control(
+        'layout_carousel_is_autoplay',
+        [
+            'label' => __( 'Autoplay', 'wpdirectorykit' ),
+            'type' => \Elementor\Controls_Manager::SWITCHER,
+            'label_on' => __( 'On', 'wpdirectorykit' ),
+            'label_off' => __( 'Off', 'wpdirectorykit' ),
+            'return_value' => 'true',
+            'default' => '',
+        ]
+    );
+
+    $this->add_control(
+        'layout_carousel_speed',
+        [
+            'label' => __( 'Speed', 'wpdirectorykit' ),
+            'type' => \Elementor\Controls_Manager::NUMBER,
+            'min' => 0,
+            'max' => 100000,
+            'step' => 100,
+            'default' => 500,
+        ]
+    );
+
+    $this->add_control(
+        'layout_carousel_animation_style',
+        [
+            'label' => __( 'Animation Style', 'wpdirectorykit' ),
+            'type' => \Elementor\Controls_Manager::SELECT,
+            'default' => 'fade',
+            'options' => [
+                'slide'  => __( 'Slide', 'wpdirectorykit' ),
+                'fade' => __( 'Fade', 'wpdirectorykit' ),
+                'fade_in_in' => __( 'Fade in', 'wpdirectorykit' ),
+            ],
+        ]
+    );
+
+    $this->add_control(
+        'layout_carousel_cssease',
+        [
+            'label' => __( 'cssEase', 'wpdirectorykit' ),
+            'type' => \Elementor\Controls_Manager::SELECT,
+            'default' => 'linear',
+            'options' => [
+                'linear'  => __( 'linear', 'wpdirectorykit' ),
+                'ease' => __( 'ease', 'wpdirectorykit' ),
+                'ease-in' => __( 'ease-in', 'wpdirectorykit' ),
+                'ease-out' => __( 'ease-out', 'wpdirectorykit' ),
+                'ease-in-out' => __( 'ease-in-out', 'wpdirectorykit' ),
+                'step-start' => __( 'step-start', 'wpdirectorykit' ),
+                'step-end' => __( 'step-end', 'wpdirectorykit' ),
+            ],
+        ]
+    );
+
+    $this->end_controls_section();
+    
+
+        
+        $this->start_controls_section(
+            'styles_carousel_arrows_section',
+            [
+                'label' => esc_html__('Carousel Arrows', 'wpdirectorykit'),
+                'tab' => Controls_Manager::TAB_STYLE,
+                'conditions' => [
+                    'terms' => [
+                        [
+                            'name' => 'carousel_enable',
+                            'operator' => '==',
+                            'value' => 'yes',
+                        ]
+                    ],
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'styles_carousel_arrows_hide',
+            [
+                    'label' => esc_html__( 'Hide Element', 'wpdirectorykit' ),
+                    'type' => Controls_Manager::SWITCHER,
+                    'none' => esc_html__( 'Hide', 'wpdirectorykit' ),
+                    'block' => esc_html__( 'Show', 'wpdirectorykit' ),
+                    'return_value' => 'none',
+                    'default' => '',
+                    'selectors' => [
+                        '{{WRAPPER}} .eli_blog_carousel .eli_slider_arrows' => 'display: {{VALUE}};',
+                    ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'styles_carousel_arrows_position',
+            [
+                'label' => __( 'Position', 'wpdirectorykit' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'eli_slider_arrows_bottom',
+                'options' => [
+                    'eli_slider_arrows_bottom'  => __( 'Bottom', 'wpdirectorykit' ),
+                    'eli_slider_arrows_middle' => __( 'Center', 'wpdirectorykit' ),
+                    'eli_slider_arrows_top' => __( 'Top', 'wpdirectorykit' ),
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'styles_carousel_arrows_align',
+            [
+                'label' => __( 'Align', 'wpdirectorykit' ),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                            'title' => esc_html__( 'Left', 'wpdirectorykit' ),
+                            'icon' => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                            'title' => esc_html__( 'Center', 'wpdirectorykit' ),
+                            'icon' => 'eicon-text-align-center',
+                    ],
+                    'right' => [
+                            'title' => esc_html__( 'Right', 'wpdirectorykit' ),
+                            'icon' => 'eicon-text-align-right',
+                    ],
+                    'justify' => [
+                            'title' => esc_html__( 'Justified', 'wpdirectorykit' ),
+                            'icon' => 'eicon-text-align-justify',
+                    ],
+                ],
+                'render_type' => 'ui',
+                'selectors_dictionary' => [
+                    'left' => 'justify-content: flex-start;',
+                    'center' => 'justify-content: center;',
+                    'right' => 'justify-content: flex-end;',
+                    'justify' => 'justify-content: space-between;',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eli_blog_carousel .eli_slider_arrows' => '{{VALUE}};',
+                ],
+                'conditions' => [
+                    'terms' => [
+                        [
+                            'name' => 'styles_carousel_arrows_position',
+                            'operator' => '!=',
+                            'value' => 'eli_slider_arrows_middle',
+                        ]
+                    ],
+                ],
+            ]
+        );
+        
+        $this->add_responsive_control(
+            'styles_carousel_arrows_icon_left_h',
+            [
+                'label' => esc_html__('Arrow left', 'wpdirectorykit'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'styles_carousel_arrows_s_m_left_margin',
+            [
+                    'label' => esc_html__( 'Margin', 'wpdirectorykit' ),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => [ 'px', 'em', '%' ],
+                    'allowed_dimensions' => 'horizontal',
+                    'selectors' => [
+                        '{{WRAPPER}} .eli_blog_carousel .eli_slider_arrows .eli_blog_slider_arrow.eli-slider-prev' => 'margin-right:{{RIGHT}}{{UNIT}}; margin-left:{{LEFT}}{{UNIT}};',
+                    ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'styles_carousel_arrows_icon_left',
+            [
+                'label' => esc_html__('Icon', 'wpdirectorykit'),
+                'type' => Controls_Manager::ICONS,
+                'label_block' => true,
+                'default' => [
+                    'value' => 'fa fa-angle-left',
+                    'library' => 'solid',
+                ],
+            ]
+        );
+                            
+        $this->add_responsive_control(
+            'styles_carousel_arrows_icon_right_h',
+            [
+                'label' => esc_html__('Arrow right', 'wpdirectorykit'),
+                'type' => Controls_Manager::HEADING,
+                'separator' => 'before',
+            ]
+        );
+
+        $this->add_responsive_control(
+            'styles_carousel_arrows_s_m_right_margin',
+            [
+                    'label' => esc_html__( 'Margin', 'wpdirectorykit' ),
+                    'type' => Controls_Manager::DIMENSIONS,
+                    'size_units' => [ 'px', 'em', '%' ],
+                    'allowed_dimensions' => 'horizontal',
+                    'selectors' => [
+                        '{{WRAPPER}} .eli_blog_carousel .eli_slider_arrows .eli_blog_slider_arrow.eli-slider-next' => 'margin-right:{{RIGHT}}{{UNIT}}; margin-left:{{LEFT}}{{UNIT}};',
+                    ],
+            ]
+        );
+     
+        $this->add_responsive_control(
+            'styles_carousel_arrows_icon_right',
+            [
+                'label' => esc_html__('Icon', 'wpdirectorykit'),
+                'type' => Controls_Manager::ICONS,
+                'label_block' => true,
+                'default' => [
+                    'value' => 'fa fa-angle-right',
+                    'library' => 'solid',
+                ],
+            ]
+        );
+        
+        $selectors = array(
+            'normal' => '{{WRAPPER}} .eli_blog_carousel .eli_slider_arrows .eli_blog_slider_arrow',
+            'hover'=>'{{WRAPPER}} .eli_blog_carousel .eli_slider_arrows .eli_blog_slider_arrow%1$s'
+        );
+        $this->generate_renders_tabs($selectors, 'styles_carousel_arrows_dynamic', ['margin','color','background','border','border_radius','padding','shadow','transition','font-size','hover_animation']);
+
         $this->end_controls_section();
+
+        $this->start_controls_section(
+            'styles_carousel_dots_section',
+            [
+                'label' => esc_html__('Carousel Dots', 'wpdirectorykit'),
+                'tab' => Controls_Manager::TAB_STYLE,
+                'conditions' => [
+                    'terms' => [
+                        [
+                            'name' => 'carousel_enable',
+                            'operator' => '==',
+                            'value' => 'yes',
+                        ]
+                    ],
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+                'styles_carousel_dots_hide',
+                [
+                        'label' => esc_html__( 'Hide Element', 'wpdirectorykit' ),
+                        'type' => Controls_Manager::SWITCHER,
+                        'none' => esc_html__( 'Hide', 'wpdirectorykit' ),
+                        'block' => esc_html__( 'Show', 'wpdirectorykit' ),
+                        'return_value' => 'none',
+                        'default' => '',
+                        'selectors' => [
+                            '{{WRAPPER}} .eli_blog_carousel .slick-dots' => 'display: {{VALUE}} !important;',
+                        ],
+                ]
+        );
+
+        $this->add_responsive_control(
+            'styles_carousel_dots_position_style',
+            [
+                'label' => __( 'Position Style', 'wpdirectorykit' ),
+                'type' => \Elementor\Controls_Manager::SELECT,
+                'default' => 'eli_slider_dots_out',
+                'options' => [
+                    'eli_slider_dots_out' => __( 'Out', 'wpdirectorykit' ),
+                    'eli_slider_dots_in' => __( 'In', 'wpdirectorykit' ),
+                ],
+            ]
+        );
+
+        $this->add_responsive_control(
+            'styles_carousel_dots_align',
+            [
+                'label' => __( 'Position', 'wpdirectorykit' ),
+                'type' => Controls_Manager::CHOOSE,
+                'options' => [
+                    'left' => [
+                            'title' => esc_html__( 'Left', 'wpdirectorykit' ),
+                            'icon' => 'eicon-text-align-left',
+                    ],
+                    'center' => [
+                            'title' => esc_html__( 'Center', 'wpdirectorykit' ),
+                            'icon' => 'eicon-text-align-center',
+                    ],
+                    'right' => [
+                            'title' => esc_html__( 'Right', 'wpdirectorykit' ),
+                            'icon' => 'eicon-text-align-right',
+                    ],
+                    'justify' => [
+                            'title' => esc_html__( 'Justified', 'wpdirectorykit' ),
+                            'icon' => 'eicon-text-align-justify',
+                    ],
+                ],
+                'render_type' => 'ui',
+                'selectors_dictionary' => [
+                    'left' => 'justify-content: flex-start;',
+                    'center' => 'justify-content: center;',
+                    'right' => 'justify-content: flex-end;',
+                    'justify' => 'justify-content: space-between;',
+                ],
+                'selectors' => [
+                    '{{WRAPPER}} .eli_blog_carousel .slick-dots' => '{{VALUE}};',
+                ],
+            ]
+        );
+        
+        $this->add_responsive_control(
+            'styles_carousel_dots_icon',
+            [
+                'label' => esc_html__('Icon', 'wpdirectorykit'),
+                'type' => Controls_Manager::ICONS,
+                'label_block' => true,
+                'default' => [
+                    'value' => 'fas fa-circle',
+                    'library' => 'solid',
+                ],
+            ]
+        );
+
+        $selectors = array(
+            'normal' => '{{WRAPPER}} .eli_blog_carousel .slick-dots li .eli_blog_dot',
+            'hover'=>'{{WRAPPER}} .eli_blog_carousel .slick-dots li .eli_blog_dot%1$s',
+            'active'=>'{{WRAPPER}} .eli_blog_carousel .slick-dots li.slick-active .eli_blog_dot'
+        );
+
+        $this->generate_renders_tabs($selectors, 'styles_carousel_dots_dynamic', ['margin','color','background','border','border_radius','padding','shadow','transition','font-size','hover_animation']);
+
+    $this->end_controls_section();
 
         $this->start_controls_section(
             'pagination_styles',
             [
-                'label' => esc_html__('Pagination Section', 'elementinvader-addons-for-elementor'),
+                'label' => esc_html__('Pagination Section', 'wpdirectorykit'),
                 'tab' => '1',
                 'conditions' => [
                     'terms' => [
@@ -756,19 +1347,19 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'pagination_styles_align',
             [
-                'label' => __( 'Align', 'elementinvader-addons-for-elementor' ),
+                'label' => __( 'Align', 'wpdirectorykit' ),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                            'title' => esc_html__( 'Left', 'elementinvader-addons-for-elementor' ),
+                            'title' => esc_html__( 'Left', 'wpdirectorykit' ),
                             'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                            'title' => esc_html__( 'Center', 'elementinvader-addons-for-elementor' ),
+                            'title' => esc_html__( 'Center', 'wpdirectorykit' ),
                             'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                            'title' => esc_html__( 'Right', 'elementinvader-addons-for-elementor' ),
+                            'title' => esc_html__( 'Right', 'wpdirectorykit' ),
                             'icon' => 'eicon-text-align-right',
                     ],
                 ],
@@ -809,7 +1400,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_control(
             'pagination_styles_head',
                 [
-                    'label' => esc_html__('Pagination Links', 'elementinvader-addons-for-elementor'),
+                    'label' => esc_html__('Pagination Links', 'wpdirectorykit'),
                     'type' => Controls_Manager::HEADING,
                     'separator' => 'before',
                 ]
@@ -902,7 +1493,6 @@ class EliBlog_Grid extends Elementinvader_Base {
             ]
         ];
 
-        
         foreach ($items as $item) {
             $this->start_controls_section(
                 $item['key'].'_section',
@@ -931,8 +1521,7 @@ class EliBlog_Grid extends Elementinvader_Base {
                     ]
             );
 
-            if($item['key'] == 'style_options_view_btn') {
-
+            if($item['key'] == 'style_options_view_btn')
                 $this->add_responsive_control(
                     'style_options_view_btn_text',
                     [
@@ -940,40 +1529,9 @@ class EliBlog_Grid extends Elementinvader_Base {
                         'type' => Controls_Manager::TEXT,
                         'label_block' => true,
                         'default' => 'View',
-                        ]
-                    );
-                        
-                $this->add_control(
-                    'style_options_view_btn_icon',
-                    [
-                        'label' => esc_html__('Icon', 'elementinvader-addons-for-elementor'),
-                        'type' => Controls_Manager::ICONS,
-                        'label_block' => true,
                     ]
-                );    
-                        
-                $this->add_control(
-                    'style_options_view_btn_icon_position',
-                    [
-                        'label' => esc_html__('icon Position', 'elementinvader-addons-for-elementor'),
-                        'type' => Controls_Manager::SELECT,
-                        'options' => [
-                            'left' => esc_html__('Left', 'elementinvader-addons-for-elementor'),
-                            'right' => esc_html__('Right', 'elementinvader-addons-for-elementor'),
-                        ],
-                        'default' => 'left',
-                    ]
-                );   
+                );
                 
-                $selectors = array();
-                $selectors['normal'] = '{{WRAPPER}} .eliblog-card .eliblog-card-view i,{{WRAPPER}} .eliblog-card .eliblog-card-view svg';
-                $selectors['hover'] = '{{WRAPPER}} .eliblog-card .eliblog-card-view%1$s i,{{WRAPPER}} .eliblog-card .eliblog-card-view%1$s svg';
-
-                if(!empty($item['selector_focus']))
-                    $selectors['focus'] = $item['selector_hover'];
-                    
-                $this->generate_renders_tabs($selectors, 'style_options_view_btn_icon_dynamic', ['color','font-size','height']);
-            }
 
             if($item['key'] == 'style_options_text')
                 $this->add_responsive_control(
@@ -1141,9 +1699,6 @@ class EliBlog_Grid extends Elementinvader_Base {
             /* END special for some elements */
         }
 
-
-
-        
         parent::register_controls();
     }
 

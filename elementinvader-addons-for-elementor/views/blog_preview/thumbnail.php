@@ -16,5 +16,7 @@
         }
     ?>
     <?php endif?>
-    
+    <?php if(!empty($settings['link_enabled'])):?>
+    <a href="<?php echo esc_url(get_permalink($eli_post_id)); ?>" class="complete"></a>
+    <?php endif;?>
 </div>

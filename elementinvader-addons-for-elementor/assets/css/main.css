@@ -163,4 +163,25 @@
 .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container {
     -webkit-overflow-scrolling: touch;
 }
-  
+
+.eli_blog_preview_button--btn {
+    display: inline-block;
+}
+
+.eli_blog_preview_title a:hover,
+.eli_blog_preview_title a {
+    color: inherit;
+    text-decoration: inherit;
+}
+
+.eli_blog_preview_thumbnail {
+    position: relative;
+}
+
+.eli_blog_preview_thumbnail .complete {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+}

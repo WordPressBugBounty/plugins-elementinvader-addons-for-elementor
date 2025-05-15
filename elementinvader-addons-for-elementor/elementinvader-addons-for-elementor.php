@@ -4,7 +4,7 @@
  * Plugin Name: ElementInvader Addons for Elementor
  * Description: Ready to use Elementor Addon Elements like Menu, Forms, Maps, Newsletter with many styling options
  * Plugin URI:  https://elementinvader.com
- * Version:     1.3.5
+ * Version:     1.3.6
  * Author:      ElementInvader
  * Author URI:  https://elementinvader.com
  * Text Domain: elementinvader-addons-for-elementor

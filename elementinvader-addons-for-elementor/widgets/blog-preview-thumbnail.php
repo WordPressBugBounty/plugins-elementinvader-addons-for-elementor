@@ -92,6 +92,17 @@ class EliBlog_Preview_Thumbnail extends Elementinvader_Base {
 			]
 		);
 
+        $this->add_control(
+            'link_enabled',
+            [
+                'label' => esc_html__( 'Link to Post', 'elementinvader-addons-for-elementor' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Yes', 'elementinvader-addons-for-elementor' ),
+                'label_off' => esc_html__( 'No', 'elementinvader-addons-for-elementor' ),
+                'return_value' =>  'yes',
+                'default' => '',
+            ]
+        );
 
         $this->end_controls_section();
 
@@ -122,10 +133,10 @@ class EliBlog_Preview_Thumbnail extends Elementinvader_Base {
                 $this->add_responsive_control(
                     $item['key'].'_hide',
                     [
-                        'label' => esc_html__( 'Hide Element', 'wdk-svg-map' ),
+                        'label' => esc_html__( 'Hide Element', 'elementinvader-addons-for-elementor' ),
                         'type' => Controls_Manager::SWITCHER,
-                        'none' => esc_html__( 'Hide', 'wdk-svg-map' ),
-                        'block' => esc_html__( 'Show', 'wdk-svg-map' ),
+                        'none' => esc_html__( 'Hide', 'elementinvader-addons-for-elementor' ),
+                        'block' => esc_html__( 'Show', 'elementinvader-addons-for-elementor' ),
                         'return_value' =>  'none',
                         'default' => ($item['key'] == 'field_button_reset' ) ? 'none':'',
                         'selectors' => [

@@ -85,6 +85,7 @@ class EliPlugin {
                 require_once(ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PATH.'widgets/blog-preview-button.php');
                 require_once(ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PATH.'widgets/blog-preview-category.php');
                 require_once(ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PATH.'widgets/blog-preview-meta.php');
+                require_once(ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PATH.'widgets/blog-preview-button-custom.php');
 				do_action('eli/includes');
 	}
 
@@ -113,6 +114,7 @@ class EliPlugin {
             $this->addtp_register('ElementinvaderAddonsForElementor\Widgets\EliBlog_Preview_Button');
             $this->addtp_register('ElementinvaderAddonsForElementor\Widgets\EliBlog_Preview_Category');
             $this->addtp_register('ElementinvaderAddonsForElementor\Widgets\EliBlog_Preview_Meta');
+            $this->addtp_register('ElementinvaderAddonsForElementor\Widgets\EliBlog_Preview_Button_Custom');
 
 			do_action('eli/register_widget');
 	}

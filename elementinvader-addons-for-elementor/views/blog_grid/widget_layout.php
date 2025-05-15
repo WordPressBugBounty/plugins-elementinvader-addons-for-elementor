@@ -1,12 +1,24 @@
 <div class="widget-eli eli_blog" id="eli_<?php echo esc_html($this->get_id_int());?>">
     <?php if($wp_query->have_posts()):?>
-    <div class="eli_row <?php if($settings['masonry_enable'] == 'yes'):?> masonry <?php endif;?> <?php if($settings['is_mobile_view_enable'] == 'yes'):?> EliScrollMobileSwipe_enable <?php endif;?>">
+   
+        
+        <?php if($settings['carousel_enable'] == 'yes'):?>
+            <div class="eli_blog_carousel <?php echo esc_attr($this->_ch($settings['layout_carousel_animation_style'])).'_animation';?> <?php echo $this->_ch($settings['styles_carousel_dots_position_style']);?> <?php echo $this->_ch($settings['styles_carousel_arrows_position']);?>">
+            <div class="eli_blog_carousel_body">
+            <div class="eli_blog_carousel_ini">
+        <?php else:?>
+            <div class="eli_row <?php if($settings['masonry_enable'] == 'yes'):?> masonry <?php endif;?> <?php if($settings['is_mobile_view_enable'] == 'yes'):?> EliScrollMobileSwipe_enable <?php endif;?>">
+        <?php endif;?>
+
         <?php
         $date_format = get_option('date_format');
         while ($wp_query->have_posts()) : $wp_query->the_post(); 
         $helper_style = '';
         ?>
+
+
         <div class="eli_col" style="<?php echo wp_kses_post($helper_style);?>">
+
         <?php if(!empty($settings['custom_layout'])):?>
             <div class=" elementor-clickable eliblog-card <?php if($settings['thumbnail_cover'] == 'yes'):?> cover <?php endif;?> <?php if($settings['thumbnail_fixed_size'] == 'yes'):?> fixed-size <?php endif;?>"
                 <?php if(isset($settings['is_popup_enable']) && $settings['is_popup_enable'] == 'yes'):?>
@@ -40,13 +52,16 @@
                     
                 }
             ?>
+            <?php if(isset($settings['is_complete_link']) && $settings['is_complete_link'] == 'yes'):?>
             <a href="<?php echo esc_url( get_permalink() ); ?>" class="hover_link  elementor-clickable"
                 <?php if(isset($settings['is_popup_enable']) && $settings['is_popup_enable'] == 'yes'):?>
                     data-eli-toggle="modal" data-eli-target="#eli_popup_modal_<?php echo esc_html($this->get_id_int());?>_<?php echo esc_html(get_the_ID()); ?>"
                 <?php endif;?>
             ></a>
+            <?php endif;?>
             </div>
         <?php else: ?>
+
             <div class=" elementor-clickable eliblog-card <?php if($settings['thumbnail_cover'] == 'yes'):?> cover <?php endif;?> <?php if($settings['thumbnail_fixed_size'] == 'yes'):?> fixed-size <?php endif;?>"
                 <?php if(isset($settings['is_popup_enable']) && $settings['is_popup_enable'] == 'yes'):?>
                 data-eli-toggle="modal" data-eli-target="#eli_popup_modal_<?php echo esc_html($this->get_id_int());?>_<?php echo esc_html(get_the_ID()); ?>"
@@ -163,9 +178,10 @@
                     <a href="<?php echo esc_url( get_permalink() ); ?>" class="complete_hover_link"></a>
                 <?php endif; ?>
             </div>
+   <?php endif;?>
 
-        <?php endif; ?>
         </div>
+
 
         <?php if(isset($settings['is_popup_enable']) && $settings['is_popup_enable'] == 'yes'):?>
         <div class="eli-modal wkd-fade eli-search-popup-modal elementor-clickable nodetach eli_popup_modal_preview eli_popup_modal_<?php echo esc_html($this->get_id());?>" id="eli_popup_modal_<?php echo esc_html($this->get_id_int());?>_<?php echo esc_html(get_the_ID()); ?>" tabindex="-1" role="dialog"
@@ -215,7 +231,26 @@
         </div>
         <?php endif; ?>
         <?php endwhile; ?>
+
+
+
+
+        <?php if($settings['carousel_enable'] == 'yes'):?>
+        </div>
+            <div class="eli_slider_arrows">
+                <a title="<?php echo esc_attr__('prev slider', 'wpdirectorykit');?>" href="#" class="eli-slider-prev eli_blog_slider_arrow">
+                    <?php \Elementor\Icons_Manager::render_icon( $settings['styles_carousel_arrows_icon_left'], [ 'aria-hidden' => 'true' ] ); ?>
+                </a>
+                <a title="<?php echo esc_attr__('next slider', 'wpdirectorykit');?>" href="#" class="eli-slider-next eli_blog_slider_arrow">
+                    <?php \Elementor\Icons_Manager::render_icon( $settings['styles_carousel_arrows_icon_right'], [ 'aria-hidden' => 'true' ] ); ?>
+                </a>
+            </div>
+        </div>
     </div>
+    <?php else:?>
+        </div>
+    <?php endif;?>
+
     <?php  if($settings['is_pagination_enable'] == 'yes'):?>
     <div class="col-lg-12">
         <div class="load-more-posts-grid">
@@ -248,6 +283,53 @@
     jQuery(document).ready(function($) {
         eli_log_modal();
     });
+    </script>
+    <?php endif;?>
+
+    <?php if($settings['carousel_enable'] == 'yes'):?>
+    <script>
+        jQuery(document).ready(function($){
+            var el = $('#eli_<?php echo esc_html($this->get_id_int());?> .eli_blog_carousel_ini').slick({
+                dots: true,
+                arrows: true,
+                rtl: localStorage.getItem('siteDirection') == "rtl" ? true : false,
+                <?php if(!empty(wmvc_show_data('layout_carousel_is_centerMode', $settings))):?>
+                centerMode: <?php echo wmvc_show_data('layout_carousel_is_centerMode', $settings, 'true');?>,
+                <?php endif;?>
+                slidesToShow: <?php echo (!empty(trim(wmvc_show_data('layout_carousel_columns', $settings, '3')))) ? wmvc_show_data('layout_carousel_columns', $settings, '3') : 3;?>,
+                slidesToScroll: <?php echo (!empty(trim(wmvc_show_data('layout_carousel_columns', $settings, '3')))) ? wmvc_show_data('layout_carousel_columns', $settings, '3') : 3;?>,
+                <?php if(!empty(wmvc_show_data('layout_carousel_is_infinite', $settings))):?>
+                infinite: <?php echo wmvc_show_data('layout_carousel_is_infinite', $settings, 'true');?>,
+                <?php endif;?>
+                <?php if(!empty(wmvc_show_data('layout_carousel_is_autoplay', $settings))):?>
+                autoplay: <?php echo wmvc_show_data('layout_carousel_is_autoplay', $settings, 'false');?>,
+                <?php endif;?>
+                nextArrow: $('#eli_<?php echo esc_html($this->get_id_int());?> .eli_slider_arrows .eli-slider-next'),
+                prevArrow: $('#eli_<?php echo esc_html($this->get_id_int());?> .eli_slider_arrows .eli-slider-prev'),
+                customPaging: function(slider, i) {
+                    // this example would render "tabs" with titles
+                    return '<span class="eli_blog_dot"><?php \Elementor\Icons_Manager::render_icon( $settings['styles_carousel_dots_icon'], [ 'aria-hidden' => 'true' ] ); ?></span>';
+                },
+                responsive: [
+                    {
+                        breakpoint: 991,
+                        settings: {
+                            slidesToShow: <?php echo (!empty(trim(wmvc_show_data('layout_carousel_columns_tablet', $settings, '2')))) ? wmvc_show_data('layout_carousel_columns_tablet', $settings, '2') : 2;?>,
+                            slidesToScroll: <?php echo (!empty(trim(wmvc_show_data('layout_carousel_columns_tablet', $settings, '2')))) ? wmvc_show_data('layout_carousel_columns_tablet', $settings, '2') : 2;?>,
+                        }
+                    },
+                    {
+                        breakpoint: 768,
+                        settings: {
+                            slidesToShow: <?php echo (!empty(trim(wmvc_show_data('layout_carousel_columns_mobile', $settings, '1')))) ? wmvc_show_data('layout_carousel_columns_mobile', $settings, '1') : 1;?>,
+                            slidesToScroll: <?php echo (!empty(trim(wmvc_show_data('layout_carousel_columns_mobile', $settings, '1')))) ? wmvc_show_data('layout_carousel_columns_mobile', $settings, '1') : 1;?>,
+                        }
+                    },
+                ]
+            }).on('breakpoint', function(event, slick, breakpoint){
+
+            });
+        })
     </script>
     <?php endif;?>
 </div>

@@ -284,7 +284,7 @@ if(!function_exists('eli_get_position_marker')) {
             if(!empty($settings['marker_icon_image']['url']))
                 $custom_js .= "icon: '".esc_url($settings['marker_icon_image']['url'])."'";
                 
-            $custom_js .= "   });";
+            $custom_js .= "   });"; 
 
             if (!empty($settings['address'])) {
                 $custom_js .= "
@@ -304,7 +304,7 @@ if(!function_exists('eli_get_position_marker')) {
                     position: results[0].geometry.location,
                         ";
                     if(!empty($settings['marker_icon_image']['url']))
-                        $custom_js .= "icon: '".$settings['marker_icon_image']['url']."'";
+                        $custom_js .= "icon: '".esc_url($settings['marker_icon_image']['url'])."'";
 
                     $custom_js .= "   });
                 } else {

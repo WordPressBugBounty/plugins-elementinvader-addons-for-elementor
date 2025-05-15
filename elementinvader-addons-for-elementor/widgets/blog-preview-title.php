@@ -92,6 +92,17 @@ class EliBlog_Preview_Title extends Elementinvader_Base {
 			]
 		);
 
+        $this->add_control(
+            'link_enabled',
+            [
+                'label' => esc_html__( 'Link to Post', 'elementinvader-addons-for-elementor' ),
+                'type' => Controls_Manager::SWITCHER,
+                'label_on' => esc_html__( 'Yes', 'elementinvader-addons-for-elementor' ),
+                'label_off' => esc_html__( 'No', 'elementinvader-addons-for-elementor' ),
+                'return_value' =>  'yes',
+                'default' => '',
+            ]
+        );
 
         $this->end_controls_section();
 
