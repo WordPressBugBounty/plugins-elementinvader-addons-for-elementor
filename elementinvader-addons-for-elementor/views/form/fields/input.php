@@ -77,6 +77,10 @@ if($field_tyle =='hidden'){
 $output .='<div class="elementinvader_addons_for_elementor_f_group '.$field_tyle.' elementinvader_addons_for_elementor_f_group_el_'.esc_attr($element['_id']).' '.esc_attr($helper_classes).'" style="'.wp_kses_post($styles).'">';
 if($element['show_label'])
     $output .='<label for="'.esc_attr($field_id).'">'.esc_html($element['field_label']).esc_html($required_icon).'</label>';
+
+    if(!empty($element['field_hint']))
+        $output .='<i class="hint">'.esc_html($element['field_hint']).'</i>';
+
             $output .='
                 <input ';
 

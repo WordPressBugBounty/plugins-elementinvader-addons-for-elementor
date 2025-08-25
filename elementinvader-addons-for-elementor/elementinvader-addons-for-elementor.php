@@ -4,13 +4,13 @@
  * Plugin Name: ElementInvader Addons for Elementor
  * Description: Ready to use Elementor Addon Elements like Menu, Forms, Maps, Newsletter with many styling options
  * Plugin URI:  https://elementinvader.com
- * Version:     1.3.6
+ * Version:     1.3.7
  * Author:      ElementInvader
  * Author URI:  https://elementinvader.com
  * Text Domain: elementinvader-addons-for-elementor
  * Domain Path: /locale/
  * 
- * Elementor tested up to: 3.28.4
+ * Elementor tested up to: 3.29.0
  * Elementor Pro tested up to: 3.30.4
  * 
  */
@@ -22,7 +22,7 @@ define('ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PATH', plugin_dir_path(__FILE__));
 define('ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_URL', plugin_dir_url(__FILE__));
 
 $elementinvader_addons_for_elementor_server_prtc = wp_get_server_protocol();
-$ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PROTOCOL = stripos($elementinvader_addons_for_elementor_server_prtc, 'https') === true ? 'https://' : 'http://';
+$ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PROTOCOL = stripos($elementinvader_addons_for_elementor_server_prtc, 'https') !== false ? 'https://' : 'http://';
 define('ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PROTOCOL', $ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PROTOCOL);
 /**
  * Elementor Blocks

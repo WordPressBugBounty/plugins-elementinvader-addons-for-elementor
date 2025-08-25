@@ -32,15 +32,25 @@ if(empty($field_name)) {
     $field_name = 'field_id_'.$element['_id'];
 } 
 
-$string_options = '';
-$options = explode('|', $element['field_options']);
-foreach ($options as $key=>$option){
-    $output .='<div class="elementinvader_addons_for_elementor_f_group checkbox elementinvader_addons_for_elementor_f_group_el_'.esc_attr($element['_id']).'" style="'.$styles.'">
-        <label for="'.esc_attr($field_id).'">
-            <input name="'.esc_attr($field_name).'" id="'.esc_attr($field_id).'" type="radio" class="elementinvader_addons_for_elementor_f_field_checkbox" value="'.$option.'">
-            '.$option.'
+$output = '';
+$options = explode("\n", $element['field_options']); // Per Line
+
+foreach ($options as $option_line) {
+    $option_line = trim($option_line);
+    if ($option_line === '') {
+        continue;
+    }
+
+    $parts = explode('|', $option_line, 2);
+    $label = trim($parts[0]);
+    $value = isset($parts[1]) ? trim($parts[1]) : $label;
+
+    $output .= '<div class="elementinvader_addons_for_elementor_f_group checkbox elementinvader_addons_for_elementor_f_group_el_' . esc_attr($element['_id']) . '" style="' . $styles . '">
+        <label for="' . esc_attr($field_id . '_' . $value) . '">
+            <input name="' . esc_attr($field_name) . '" id="' . esc_attr($field_id . '_' . $value) . '" type="radio" class="elementinvader_addons_for_elementor_f_field_checkbox" value="' . esc_attr($value) . '">
+            ' . esc_html($label) . '
         </label>
     </div>';
-}
+} 
 
 echo $output;

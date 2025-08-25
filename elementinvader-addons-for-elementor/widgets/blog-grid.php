@@ -367,6 +367,67 @@ class EliBlog_Grid extends Elementinvader_Base {
 			]
 		);
 
+        
+        if(true){
+            $repeater = new Repeater();
+            $repeater->start_controls_tabs( 'custom_meta' );
+            $repeater->add_control(
+                'key',
+                [
+                    'label' => esc_html__('Key', 'wpdirectorykit'),
+                    'type' => Controls_Manager::TEXT,
+                ]
+            );
+            $repeater->add_control(
+                'compare',
+                [
+                    'label'   => esc_html__('Compare', 'wpdirectorykit'),
+                    'type'    => \Elementor\Controls_Manager::SELECT,
+                    'options' => [
+                        '='           => '= (Equal)',
+                        '!='          => '!= (Not Equal)',
+                        '>'           => '> (Greater Than)',
+                        '>='          => '>= (Greater Than or Equal)',
+                        '<'           => '< (Less Than)',
+                        '<='          => '<= (Less Than or Equal)',
+                        'LIKE'        => 'LIKE (Contains)',
+                        'NOT LIKE'    => 'NOT LIKE (Does Not Contain)',
+                        'IN'          => 'IN (In List)',
+                        'NOT IN'      => 'NOT IN (Not In List)',
+                        'BETWEEN'     => 'BETWEEN',
+                        'NOT BETWEEN' => 'NOT BETWEEN',
+                        'EXISTS'      => 'EXISTS (Has Meta Key)',
+                        'NOT EXISTS'  => 'NOT EXISTS (No Meta Key)',
+                        'REGEXP'      => 'REGEXP (Regular Expression)',
+                        'NOT REGEXP'  => 'NOT REGEXP',
+                        'RLIKE'       => 'RLIKE (Regular Expression)',
+                    ],
+                    'default' => '=',
+                ]
+            );
+            $repeater->add_control(
+                'value',
+                [
+                    'label' => esc_html__('Value', 'wpdirectorykit'),
+                    'type' => Controls_Manager::TEXT,
+                ]
+            );
+
+            $repeater->end_controls_tabs();
+                            
+            $this->add_control(
+                'filter_by_meta',
+                [
+                    'type' => Controls_Manager::REPEATER,
+                    'label' => __('Filter By Meta Field', 'elementinvader-addons-for-elementor'),
+                    'fields' => $repeater->get_controls(),
+                    'default' => [
+                    ],
+                    'title_field' => '{{{ key }}}',
+                ]
+            );
+        }
+
         if(true){
             $repeater = new Repeater();
             $repeater->start_controls_tabs( 'custom_posts' );
@@ -1222,6 +1283,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         );
         $this->generate_renders_tabs($selectors, 'styles_carousel_arrows_dynamic', ['margin','color','background','border','border_radius','padding','shadow','transition','font-size','hover_animation']);
 
+
         $this->end_controls_section();
 
         $this->start_controls_section(
@@ -1758,6 +1820,7 @@ class EliBlog_Grid extends Elementinvader_Base {
                     }
 
                     $allposts = array( 
+                        'post_type'           =>  'any',
                         'post__in'  => $post__in,
                         'post_status'		  => 'publish',	
                         'ignore_sticky_posts' => true,
@@ -1823,7 +1886,42 @@ class EliBlog_Grid extends Elementinvader_Base {
              $allposts ['orderby'] = 'meta_value';                 
              $allposts ['order'] = $settings['config_limit_order'];                
         }
-   
+
+        // Inject repeater-based meta filters here
+        if ( ! empty( $settings['filter_by_meta'] ) && is_array( $settings['filter_by_meta'] ) ) {
+            $meta_query = isset( $allposts['meta_query'] ) ? (array) $allposts['meta_query'] : [];
+
+            foreach ( $settings['filter_by_meta'] as $filter ) {
+                if ( empty( $filter['key'] ) ) {
+                    continue;
+                }
+
+                $compare = ! empty( $filter['compare'] ) ? strtoupper( $filter['compare'] ) : '=';
+                $value   = $filter['value'] ?? '';
+
+                if ( in_array( $compare, [ 'IN', 'NOT IN', 'BETWEEN', 'NOT BETWEEN' ], true ) ) {
+                    $value = array_map( 'trim', explode( ',', $value ) );
+                }
+
+                if ( in_array( $compare, [ 'EXISTS', 'NOT EXISTS' ], true ) ) {
+                    $meta_query[] = [
+                        'key'     => $filter['key'],
+                        'compare' => $compare,
+                    ];
+                } else {
+                    $meta_query[] = [
+                        'key'     => $filter['key'],
+                        'value'   => $value,
+                        'compare' => $compare,
+                    ];
+                }
+            }
+
+            if ( ! empty( $meta_query ) ) {
+                $allposts['meta_query'] = $meta_query;
+            }
+        }
+
         $wp_query = new \WP_Query($allposts); 
 
         $object = ['wp_query'=>$wp_query, 'settings'=>$settings,'id_int'=>$id_int];

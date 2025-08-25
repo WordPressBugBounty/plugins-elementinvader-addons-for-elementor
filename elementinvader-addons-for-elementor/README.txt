@@ -5,7 +5,7 @@ Tags: elementor addon, elementor addons, elementor widget, elementor
 Requires at least: 5.2
 Requires PHP: 5.6
 Tested up to: 6.8
-Stable tag: 1.3.6
+Stable tag: 1.3.7
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -87,6 +87,16 @@ There is website where yo ucan found compatible plugin version for your wp / PHP
 4. Simple Newsletter for Elementor, with mailchimp api, email alerts for admin and export msigned maillist option.
 
 == Changelog ==
+
+= 1.3.7 =
+* Element Form, added Hint option for fields
+* Element Form, Field Radio, implement view file
+* Improve Blog Grid, custom posts now support any type post, not only "posts"
+* Solved Conflict Forms with HFE PLugin
+* MailChimp API request updated
+* Card Blog Meta add allow link
+* Security fix
+
 
 = 1.3.6 =
 * Element Blog Grid added carousel support

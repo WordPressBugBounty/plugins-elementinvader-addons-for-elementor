@@ -21,11 +21,11 @@ $eli_helper_button_class .= ' '.$this->get_align_class($settings['button_align_m
                 if(!empty($wdk_listing_page_id))
                     $post_id = $wdk_listing_page_id;
                 
-                if(function_exists('get_hfe_footer_id') && get_hfe_footer_id())  
-                    $post_id = get_hfe_footer_id(); 
-                
-                if(function_exists('hfe_get_before_footer_id') && hfe_get_before_footer_id())  
-                    $post_id = hfe_get_before_footer_id(); 
+            
+               $document = \Elementor\Plugin::$instance->documents->get_current();
+                if ( $document && method_exists( $document, 'get_main_id' ) ) {
+                    $post_id = $document->get_main_id();
+                } 
 
             ?>
             <input type="hidden" name="eli_page_id" value="<?php echo esc_attr($post_id);?>"/>
@@ -68,7 +68,7 @@ $eli_helper_button_class .= ' '.$this->get_align_class($settings['button_align_m
                                 </span>
                             <?php endif; ?>
                             <?php if ( ! empty( $settings['button_text'] ) ) : ?>
-                                    <span class="elementor-button-text"><?php echo $settings['button_text']; ?></span>
+                                    <span class="elementor-button-text"><?php echo esc_html($settings['button_text']); ?></span>
                             <?php endif; ?>
                             <i class="fa fa-spinner fa-spin fa-custom-ajax-indicator ajax-indicator-masking " style="display: none;"></i>
                         </span>
@@ -94,11 +94,11 @@ $eli_helper_button_class .= ' '.$this->get_align_class($settings['button_align_m
 
             <?php if(isset($settings['recaptcha_version_3']) && $settings['recaptcha_version_3'] == 'yes'):?>
                 <input type="hidden" name="g-recaptcha-response" id="recaptcha_called_v3_<?php echo esc_html($this->get_id_int());?>">
-                <script src='https://www.google.com/recaptcha/api.js?render=<?php echo trim($settings['recaptcha_site_key']);?>'></script>
+                <script src='https://www.google.com/recaptcha/api.js?render=<?php echo esc_attr(trim($settings['recaptcha_site_key']));?>'></script>
                 <script>
                 (function(){
                     grecaptcha.ready(function() {
-                        grecaptcha.execute('<?php echo trim($settings['recaptcha_site_key']);?>', {action: 'submit'}).then(function(token) {
+                        grecaptcha.execute('<?php echo esc_attr(trim($settings['recaptcha_site_key']));?>', {action: 'submit'}).then(function(token) {
                             document.getElementById('recaptcha_called_v3_<?php echo esc_html($this->get_id_int());?>').value = token;
                         });
                     });
@@ -106,7 +106,7 @@ $eli_helper_button_class .= ' '.$this->get_align_class($settings['button_align_m
                     // Reload token after form submit
                     document.querySelector('#elementinvader_addons_for_elementor_<?php echo esc_html($this->get_id_int());?> form.elementinvader_addons_for_elementor_f').addEventListener('submit', function(e) {
                         e.preventDefault();
-                        grecaptcha.execute('<?php echo trim($settings['recaptcha_site_key']);?>', {action: 'submit'}).then(function(token) {
+                        grecaptcha.execute('<?php echo esc_attr(trim($settings['recaptcha_site_key']));?>', {action: 'submit'}).then(function(token) {
                             document.getElementById('recaptcha_called_v3_<?php echo esc_html($this->get_id_int());?>').value = token;
                         });
                     });

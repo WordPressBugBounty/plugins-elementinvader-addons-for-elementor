@@ -114,7 +114,7 @@ class EliBlog_Preview_Thumbnail extends Elementinvader_Base {
                 'label'=> esc_html__('Styles', 'wpdirectorykit'),
                 'selector_hide'=>'',
                 'selector'=>'{{WRAPPER}} .eli_blog_preview_thumbnail img',
-                'selector_hover'=>'{{WRAPPER}} .eli_blog_preview_thumbnail img:hover',
+                'selector_hover'=>'{{WRAPPER}} .eli_blog_preview_thumbnail:hover img',
                 'selector_focus'=>'',
                 'options'=>['background','border','border_radius','padding','shadow','transition','image_size_control','image_fit_control','css_filters','background_group'],
             ]

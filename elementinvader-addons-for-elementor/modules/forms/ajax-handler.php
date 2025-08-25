@@ -12,81 +12,123 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 class ThzelGetElementSettings {
 	
 	
-	public function __construct( $postid, $widget_id, $widget_type ) {
-		
-		
+		public $postid = null;
+	public $widget_id = null;
+	public $widget_type = null;
+	public $widget = null;
+	public $widgets = [];
+
+	public function __construct($postid, $widget_id = NULL, $widget_type = NULL, $parse = TRUE)
+	{
 		$this->postid 		= $postid;
 		$this->widget_id 	= $widget_id;
 		$this->widget_type 	= $widget_type;
 		$this->widget 		= null;
 
-		$this->parse();
-		
+		if ($parse)
+			$this->parse();
 	}
-	
-	public function elementor(){
-		
+
+	public function elementor()
+	{
 		return 	\Elementor\Plugin::$instance;
-		
 	}
-	
-	public function get_settings () {
-        if(!$this->widget) return false;
-        return $this->widget;
 
-        /* uncomment if need return field only 
-		$widget = $this->elementor()->elements_manager->create_element_instance( $this->widget );
-		return $widget->get_settings_for_display();*/
-
+	public function get_settings()
+	{
+		if (!$this->widget) return false;
+		return $this->widget;
 	}
-	
-	private function parse() {
-		
+
+	private function parse()
+	{
 		$data = $this->read_data();
-		
 		$this->parse_options($data);
-		
 	}
-	
-	private function read_data () {
 
-		return $this->elementor()->documents->get( $this->postid )->get_elements_data();
-		
+	public function get_widgets()
+	{
+		$this->parse();
+		return $this->widgets;
 	}
-	
-	private function parse_options($data) {
-		
-		if(!is_array($data) || empty($data)){
+
+	private function read_data()
+	{
+		if(is_object($this->elementor()->documents->get($this->postid)))
+			return $this->elementor()->documents->get($this->postid)->get_elements_data();
+	}
+
+	private function parse_options($data)
+	{
+
+		if (!is_array($data) || empty($data)) {
 			return;
-		}		
-		
-		foreach ( $data as $item ) {
-			
-			if(empty($item)){
+		}
+
+		foreach ($data as $item) {
+
+			if (empty($item)) {
 				continue;
 			}
-			
-			if ( 'section' === $item['elType'] || 'column' === $item['elType'] || 'container' === $item['elType']) {
-				
+
+			if ('section' === $item['elType'] || 'column' === $item['elType'] || 'container' === $item['elType']) {
+
 				$this->parse_options($item['elements']);
-				
 			} else {
-				
+
 				$this->parse_options_simple($item);
 			}
 		}
 	}
-	
-	private function parse_options_simple($item) {
+
+	private function parse_options_simple($item)
+	{
 
 		if (
-			
-			$item['id'] === $this->widget_id && 
+
+			(empty($this->widget_id) || $item['id'] === $this->widget_id) &&
 			$item['widgetType'] === $this->widget_type
-			
+
 		) {
 			$this->widget = $item;
+			$this->widgets[] = $item;
 		}
+	}
+
+	public function generate_icon($icon, $attributes = [], $tag = 'i')
+	{
+		if (empty($icon['library'])) {
+			return false;
+		}
+		$output = '';
+
+		// handler SVG Icon
+		if ('svg' === $icon['library']) {
+			$output = \Elementor\Icons_Manager::render_uploaded_svg_icon($icon['value']);
+		} else {
+			$output = $this->render_icon_html($icon, $attributes, $tag);
+		}
+
+		return $output;
+	}
+
+	public function render_icon_html($icon, $attributes = [], $tag = 'i')
+	{
+		$icon_types = \Elementor\Icons_Manager::get_icon_manager_tabs();
+		if (isset($icon_types[$icon['library']]['render_callback']) && is_callable($icon_types[$icon['library']]['render_callback'])) {
+			return call_user_func_array($icon_types[$icon['library']]['render_callback'], [$icon, $attributes, $tag]);
+		}
+
+		if (empty($attributes['class'])) {
+			$attributes['class'] = $icon['value'];
+		} else {
+			if (is_array($attributes['class'])) {
+				$attributes['class'][] = $icon['value'];
+			} else {
+				$attributes['class'] .= ' ' . $icon['value'];
+			}
+		}
+		return '<' . $tag . ' ' . Utils::render_html_attributes($attributes) . '></' . $tag . '>';
 	}
 }
 
@@ -247,7 +289,7 @@ class Ajax_Handler {
             }
 
             do_action('eli/ajax-handler/before', $form_data);
-            
+       
             if(has_filter('eli/ajax-handler/filter_from_data'))
                 $form_data = apply_filters('eli/ajax-handler/filter_from_data', $form_data);
 
@@ -456,7 +498,7 @@ class Ajax_Handler {
                     $this->action_mail_base($post);
                 }
                 if(stripos($post['send_action_type'], 'mailchimp') !== FALSE) {
-                  
+
                     if(!$this->action_mailchimp($post)) {
                         $ret = false;
                     }
@@ -602,6 +644,8 @@ class Ajax_Handler {
                 $form_data = $get_settings->get_settings();
                 $form_data = $form_data['settings'];
             }
+		
+			
 
             $json_object = json_encode($data);
             
@@ -618,40 +662,50 @@ class Ajax_Handler {
             $this->data['parameters'] = sanitize_post($_POST);
             $this->data['success'] = false;
 
+		
+            if(!empty($form_data['send_action_mailchimp_api_key'])) {
+                $form_data['section_send_action_mailchimp_api_key'] = $form_data['send_action_mailchimp_api_key'];
+            }
+
+            if(!empty($form_data['send_action_mailchimp_list_id'])) {
+                $form_data['section_send_action_mailchimp_list_id'] = $form_data['send_action_mailchimp_list_id'];
+            }
+		
             if(empty($form_data['section_send_action_mailchimp_api_key']) || empty($form_data['section_send_action_mailchimp_list_id'])) {
                 $this->data['message'] = esc_html__('Subscribe API not configured, please contact with administrator','elementinvader-addons-for-elementor'); 
             }
             else if( filter_var($email, FILTER_VALIDATE_EMAIL)){
 
-            $data = [
-                'email'     => $email,
-                'status'    => 'subscribed',
-            ];
+				$data = [
+					'email'     => $email,
+					'status'    => 'subscribed',
+				];
 
-            $apiKey = $form_data['section_send_action_mailchimp_api_key'];
-            $listId = $form_data['section_send_action_mailchimp_list_id'];
-            
-            $memberId = md5(strtolower($data['email']));
-            $dataCenter = substr($apiKey,strpos($apiKey,'-')+1);
-            $url = 'https://' . $dataCenter . '.api.mailchimp.com/3.0/lists/' . $listId . '/members/' . $memberId;
+				$apiKey = $form_data['section_send_action_mailchimp_api_key'];
+				$listId = $form_data['section_send_action_mailchimp_list_id'];
 
-            $json = json_encode([
-                'apikey' => $apiKey,
-                'email_address' => $data['email'],
-                'status'        => $data['status'], // "subscribed","unsubscribed","cleaned","pending"
-            ]);
+				$memberId = md5(strtolower($data['email']));
+				$dataCenter = substr($apiKey,strpos($apiKey,'-')+1);
+				$url = 'https://' . $dataCenter . '.api.mailchimp.com/3.0/lists/' . $listId . '/members/' . $memberId;
 
-            $httpCode=0;
-            $result = $this->sw_mailchimp_post($url, $apiKey, $httpCode, $json);
-            if($httpCode == 200) {
-                $this->data['success'] = true;
-                $this->data['message'] = esc_html__('Your e-mail','elementinvader-addons-for-elementor').' '. sanitize_text_field($_POST['subscriber_email']) .' '.__(' has been added to our mailing list!','elementinvader-addons-for-elementor'); 
+				$json = json_encode([
+					'apikey' => $apiKey,
+					'email_address' => $data['email'],
+					'status'        => $data['status'], // "subscribed","unsubscribed","cleaned","pending"
+				]);
+
+				$httpCode=0;
+				$result = $this->sw_mailchimp_post($url, $apiKey, $httpCode, $json);
+
+				if($httpCode == 200) {
+					$this->data['success'] = true;
+					$this->data['message'] = esc_html__('Your e-mail','elementinvader-addons-for-elementor').' '. sanitize_text_field($email) .' '.__(' has been added to our mailing list!','elementinvader-addons-for-elementor'); 
+				} else {
+					 $this->data['message'] = esc_html__('Please check mailchimp settings','elementinvader-addons-for-elementor').' '.$email; 
+				}
+
             } else {
-                 $this->data['message'] = esc_html__('Please check mailchimp settings','elementinvader-addons-for-elementor').' '.$this->data['parameters']['subscriber_email']; 
-            }
-
-            } else {
-               $this->data['message'] = esc_html__('There was a problem with your e-mail','elementinvader-addons-for-elementor').' '.$this->data['parameters']['subscriber_email']; 
+               $this->data['message'] = esc_html__('There was a problem with your e-mail','elementinvader-addons-for-elementor').' '.$email; 
             }
 
             $ajax_output['success'] = $this->data['success'];
@@ -663,21 +717,31 @@ class Ajax_Handler {
     }
     
     
-    function sw_mailchimp_post($url, $apiKey, &$httpCode, $json)
-    {
-        $args = array(
-                'headers' => array(
-                        'Authorization' => 'Basic ' . base64_encode( 'user:'. $apiKey )
-                )
-        );
+function sw_mailchimp_post($url, $apiKey, &$httpCode, $json)
+{
+    $args = array(
+        'method'  => 'PUT',
+        'headers' => array(
+            'Authorization' => 'Basic ' . base64_encode('user:' . $apiKey),
+            'Content-Type'  => 'application/json',
+        ),
+        'body' => $json,
+    );
 
-        $response = wp_remote_get( $url, $args );
-        $result = json_decode( $response['body'] );
-        $httpCode = $response['response']['code'];
-        
-        return $result;
+    $response = wp_remote_request($url, $args);
+
+    if (is_wp_error($response)) {
+        $httpCode = 0;
+        return (object)[
+            'title' => 'Request Failed',
+            'detail' => $response->get_error_message(),
+        ];
     }
-    
+
+    $httpCode = wp_remote_retrieve_response_code($response);
+    return json_decode(wp_remote_retrieve_body($response));
+}
+	
     function replace_smart_data($string = '', $post = array()) {
         // Match all occurrences of the pattern
         if (preg_match_all('/\{([^}]+)\}/', $string, $matches)) {

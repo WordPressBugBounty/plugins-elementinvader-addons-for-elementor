@@ -161,6 +161,28 @@ class EliContact_Form extends Elementinvader_Base {
         );
 
         $repeater->add_control(
+                'field_hint',
+                [
+                    'label' => esc_html__('Field Hint', 'elementinvader-addons-for-elementor'),
+                    'type' => Controls_Manager::TEXT,
+                    'default' => '',
+                    'separator' => 'before',
+                    'conditions' => [
+                        'terms' => [
+                            [
+                                'name' => 'field_type',
+                                'operator' => '!in',
+                                'value' => [
+                                    'recaptcha',
+                                    'recaptcha_v3',
+                                ],
+                            ],
+                        ],
+                    ],
+                ]
+        );
+
+        $repeater->add_control(
                 'field_id',
                 [
                     'label' => esc_html__('Field ID', 'elementinvader-addons-for-elementor'),
