@@ -269,6 +269,13 @@ class Ajax_Handler {
                 'message'=>'',
                 'success'=>false,
             ];
+
+            // Check nonce for security
+            if ( ! isset( $_POST['eli_nonce'] ) || ! wp_verify_nonce( sanitize_text_field($_POST['eli_nonce']), 'eli_forms_send_form' ) ) {
+                $ajax_output['code'] = self::INVALID_FORM;
+                $ajax_output['message'] = $this->generate_alert( esc_html__( 'Security check failed. Please reload the page and try again.', 'elementinvader-addons-for-elementor' ), 'elementinvader_addons_for_elementor_alert-danger' );
+                $this->output( $ajax_output );
+            }
             
             $post = sanitize_post($_POST);
             if(!isset($post['element_id']) || empty($post['element_id'])){
