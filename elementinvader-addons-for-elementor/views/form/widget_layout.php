@@ -8,6 +8,7 @@ $eli_helper_button_class .= ' '.$this->get_align_class($settings['button_align_m
     <div class="elementinvader_addons_for_elementor-container">
         <form class="elementinvader_addons_for_elementor_f" <?php if(isset($settings['disable_scroll_to_form']) && $settings['disable_scroll_to_form'] == 'yes'):?> scroll-disabled="disabled"<?php endif;?>>
             <input type="hidden" name="element_id" value="<?php echo esc_attr($this->get_id_int());?>"/>
+            
             <?php
             // Add a nonce field for AJAX security
             wp_nonce_field( 'eli_forms_send_form', 'eli_nonce' );

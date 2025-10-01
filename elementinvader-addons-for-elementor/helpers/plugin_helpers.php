@@ -329,3 +329,44 @@ if(!function_exists('eli_user_in_role')){
         return eli_is_user_in_role( $current_user, $role  );
     }
 }
+
+/**
+ * Encrypt string (e.g. email) using AES-256-CBC and AUTH_KEY.
+ *
+ * @param string $string
+ * @return string|false  Base64-encoded encrypted string or false on failure
+ */
+function eli_encrypt($string = '')
+{
+    $key = defined('AUTH_KEY') ? AUTH_KEY : 'change_this_secret';
+    $iv  = openssl_random_pseudo_bytes(16);
+
+    $ciphertext = openssl_encrypt($string, 'AES-256-CBC', $key, OPENSSL_RAW_DATA, $iv);
+    if ($ciphertext === false) {
+        return false;
+    }
+
+    return base64_encode($iv . $ciphertext);
+}
+
+/**
+ * Decrypt string (e.g. email) using AES-256-CBC and AUTH_KEY.
+ *
+ * @param string $encrypted
+ * @return string|false  Decrypted string or false on failure
+ */
+function eli_decrypt($encrypted = '')
+{
+    $key = defined('AUTH_KEY') ? AUTH_KEY : 'change_this_secret';
+
+    $decoded = base64_decode($encrypted, true);
+    if ($decoded === false || strlen($decoded) < 17) {
+        return false;
+    }
+
+    $iv         = substr($decoded, 0, 16);
+    $ciphertext = substr($decoded, 16);
+
+    $decrypted = openssl_decrypt($ciphertext, 'AES-256-CBC', $key, OPENSSL_RAW_DATA, $iv);
+    return $decrypted !== false ? $decrypted : false;
+}

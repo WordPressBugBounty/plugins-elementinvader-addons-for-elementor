@@ -290,6 +290,12 @@ class Ajax_Handler {
             $form_data = array(); 
             if(isset($post['shortcode']) && !empty($post['shortcode'])){
                 $form_data = array('settings' => $_POST);
+
+                foreach (['mail_data_to_email','mail_data_from_email','mail_data_from_name'] as $field_key) {
+                    if(!empty($form_data['settings'][$field_key])){
+                        $form_data['settings'][$field_key] = eli_decrypt(sanitize_text_field($form_data['settings'][$field_key]));
+                    }
+                }
             } else {
                 $get_settings	= new ThzelGetElementSettings($post['eli_page_id'],$post['eli_id'],$post['eli_type']); 
                 $form_data = $get_settings->get_settings();

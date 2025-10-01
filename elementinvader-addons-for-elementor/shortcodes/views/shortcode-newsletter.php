@@ -4,6 +4,11 @@
             <div class="config" data-url="<?php echo esc_url(admin_url('admin-ajax.php')); ?>"></div>
             <input type="hidden" name="element_id" value="1">
             <input type="hidden" name="shortcode" value="1">
+            <?php
+            // Add a nonce field for AJAX security
+            wp_nonce_field( 'eli_forms_send_form', 'eli_nonce' );
+            ?>
+            
             <?php foreach($settings as $key => $value):?>
                 <?php if(empty($value)) continue;?>
                 <input type="hidden" name="<?php echo esc_attr($key);?>" value="<?php echo esc_attr($value);?>">

@@ -35,9 +35,17 @@ function eli_shortcode_newsletter($atts, $content){
     ), $atts);
     $data = array();
 
+    
+
     /* settings from atts */
     $data['settings'] = $atts;
     $data['id_element'] = '';
+
+
+    /* protect */ 
+    $data['settings']['mail_data_to_email'] = eli_encrypt($data['settings']['mail_data_to_email']);
+    $data['settings']['mail_data_from_email'] = eli_encrypt($data['settings']['mail_data_from_email']);
+    $data['settings']['mail_data_from_name'] = eli_encrypt($data['settings']['mail_data_from_name']);
 
     /* load css/js */
 
