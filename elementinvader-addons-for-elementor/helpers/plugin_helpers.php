@@ -370,3 +370,30 @@ function eli_decrypt($encrypted = '')
     $decrypted = openssl_decrypt($ciphertext, 'AES-256-CBC', $key, OPENSSL_RAW_DATA, $iv);
     return $decrypted !== false ? $decrypted : false;
 }
+
+function eli_generate_form_token() {
+    $token = wp_generate_password(32, false, false);
+
+    $context = eli_get_request_context();
+    set_transient('eli_form_token_' . $token, $context, 30 * MINUTE_IN_SECONDS);
+
+    return $token;
+}
+
+function eli_verify_form_token($token) {
+    $context = eli_get_request_context();
+    $stored  = get_transient('eli_form_token_' . $token);
+
+    if ($stored && hash_equals($stored, $context)) {
+        delete_transient('eli_form_token_' . $token); // одноразовый
+        return true;
+    }
+    return false;
+}
+
+function eli_get_request_context() {
+    $ip    = $_SERVER['REMOTE_ADDR'] ?? '';
+    $agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+
+    return hash('sha256', $ip . '|' . $agent);
+}

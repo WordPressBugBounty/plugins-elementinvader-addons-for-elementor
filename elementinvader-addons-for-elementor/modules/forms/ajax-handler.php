@@ -276,6 +276,13 @@ class Ajax_Handler {
                 $ajax_output['message'] = $this->generate_alert( esc_html__( 'Security check failed. Please reload the page and try again.', 'elementinvader-addons-for-elementor' ), 'elementinvader_addons_for_elementor_alert-danger' );
                 $this->output( $ajax_output );
             }
+
+            if (empty($_POST['eli_token']) || !eli_verify_form_token($_POST['eli_token'])) {
+                $ajax_output['code'] = self::INVALID_FORM;
+                $ajax_output['message'] = $this->generate_alert( esc_html__( 'Security check failed. Please reload the page and try again.(Token)', 'elementinvader-addons-for-elementor' ), 'elementinvader_addons_for_elementor_alert-danger' );
+                $this->output( $ajax_output );
+            }
+
             
             $post = sanitize_post($_POST);
             if(!isset($post['element_id']) || empty($post['element_id'])){
@@ -289,6 +296,24 @@ class Ajax_Handler {
 
             $form_data = array(); 
             if(isset($post['shortcode']) && !empty($post['shortcode'])){
+                
+                $allowed_fields = [
+                    'mail_data_to_email',
+                    'mail_data_from_email',
+                    'mail_data_from_name',
+                    'Email',
+                    'email',
+                    'custom_class',
+                    'disable_mail_send',
+                    'mail_data_subject',
+                    'recaptcha_site_key',
+                    'recaptcha_secret_key',
+                    'section_send_action_mailchimp_api_key',
+                    'section_send_action_mailchimp_list_id',
+                    'send_action_type',
+                ];
+                $_POST = array_intersect_key($_POST, array_flip($allowed_fields));
+
                 $form_data = array('settings' => $_POST);
 
                 foreach (['mail_data_to_email','mail_data_from_email','mail_data_from_name'] as $field_key) {
@@ -296,6 +321,8 @@ class Ajax_Handler {
                         $form_data['settings'][$field_key] = eli_decrypt(sanitize_text_field($form_data['settings'][$field_key]));
                     }
                 }
+
+                
             } else {
                 $get_settings	= new ThzelGetElementSettings($post['eli_page_id'],$post['eli_id'],$post['eli_type']); 
                 $form_data = $get_settings->get_settings();
@@ -377,7 +404,9 @@ class Ajax_Handler {
                     if(empty($value)) continue;
 
                     if($key=='element_id') continue;
-                    if(in_array($key, array('eli_id', 'eli_type','ID','filter','action','send_action_type', 'g-recaptcha-response'))) continue;
+                    if(in_array($key, array('eli_id', 'eli_type','ID','filter','action','send_action_type', 'g-recaptcha-response','eli_nonce','eli_token','_wp_http_referer','mail_data_to_email',
+                    'mail_data_from_email',
+                    'mail_data_from_name','shortcode'))) continue;
 
                     if($key  == 'eli_page_id'){
                         $value = get_permalink($value);
@@ -478,7 +507,9 @@ class Ajax_Handler {
                         if($key=='element_id') continue;
                         if(empty($value)) continue;
 
-                        if(in_array($key, array('eli_id', 'eli_type','ID','filter','action', 'send_action_type', 'g-recaptcha-response'))) continue;
+                        if(in_array($key, array('eli_id', 'eli_type','ID','filter','action', 'send_action_type', 'g-recaptcha-response','eli_nonce','eli_token','_wp_http_referer','mail_data_to_email',
+                        'mail_data_from_email',
+                        'mail_data_from_name','shortcode'))) continue;
 
                         if($key  == 'eli_page_id'){
                             $value = get_permalink($value);
