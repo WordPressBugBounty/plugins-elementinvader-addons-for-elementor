@@ -33,16 +33,16 @@ class Eli_MailBase_List_Table extends WP_List_Table
     // configuration
     $columns = array('id', 'date', 'email');
     // Fetch parameters
-    $start = eli_xss_clean(eli_ch($_POST['start'], 0));
-    $length = eli_xss_clean(eli_ch($_POST['length'], 9999));
-    $search = eli_xss_clean(eli_ch($_POST['s'], false));
+    $start = eli_xss_clean(sanitize_text_field(eli_ch($_POST['start'], 0)));
+    $length = eli_xss_clean(sanitize_text_field(eli_ch($_POST['length'], 15)));
+    $search = eli_xss_clean(sanitize_text_field(eli_ch($_POST['s'], false)));
 
     global $wpdb;
     $table = "{$wpdb->prefix}eli_newsletters";
     $where = 'WHERE 1=1';
 
     if (!empty($search))
-      $where .= " AND (id LIKE '%" . $search . "%' OR email LIKE '%" . $search . "%') ";
+      $where .= " AND (id LIKE '%" . esc_sql($search) . "%' OR email LIKE '%" . esc_sql($search) . "%') ";
 
     $results = $wpdb->get_results("SELECT * FROM $table $where LIMIT $start, $length", ARRAY_A);
     return $results;
@@ -173,7 +173,7 @@ class Eli_MailBase_List_Table extends WP_List_Table
     $this->_column_headers = array($columns, $hidden, $sortable);
     usort($this->results, array(&$this, 'sort_data'));
 
-    $per_page = 5;
+    $per_page = 10;
     $current_page = $this->get_pagenum();
 
     $total_items = count($this->results);

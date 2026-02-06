@@ -4,7 +4,7 @@
  * Plugin Name: ElementInvader Addons for Elementor
  * Description: Ready to use Elementor Addon Elements like Menu, Forms, Maps, Newsletter with many styling options
  * Plugin URI:  https://elementinvader.com
- * Version:     1.4.0
+ * Version:     1.4.3
  * Author:      ElementInvader
  * Author URI:  https://elementinvader.com
  * Text Domain: elementinvader-addons-for-elementor
@@ -24,6 +24,9 @@ define('ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_URL', plugin_dir_url(__FILE__));
 $elementinvader_addons_for_elementor_server_prtc = wp_get_server_protocol();
 $ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PROTOCOL = stripos($elementinvader_addons_for_elementor_server_prtc, 'https') !== false ? 'https://' : 'http://';
 define('ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PROTOCOL', $ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PROTOCOL);
+
+
+
 /**
  * Elementor Blocks
  *
@@ -31,7 +34,8 @@ define('ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PROTOCOL', $ELEMENTINVADER_ADDONS_FO
  *
  * @since 1.0.0
  */
-function ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_load()
+
+ add_action('init', function ()
 {
 
     // Load wlistingation file
@@ -76,6 +80,33 @@ function ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_load()
             },
             'notice notice-warning'
         );
+        return;
+    }
+});
+
+
+
+/**
+ * Elementor Blocks
+ *
+ * Load the plugin after Elementor (and other plugins) are loaded.
+ *
+ * @since 1.0.0
+ */
+function ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_load()
+{
+
+    // Load wlistingation file
+    load_plugin_textdomain('elementinvader-addons-for-elementor', false, basename(dirname(__FILE__)) . '/locale');
+
+    // Notice if the Elementor is not active
+    if (! did_action('elementor/loaded')) {
+        return;
+    }
+
+    // Check required version
+    $elementor_version_required = '1.8.0';
+    if (! version_compare(ELEMENTOR_VERSION, $elementor_version_required, '>=')) {
         return;
     }
 

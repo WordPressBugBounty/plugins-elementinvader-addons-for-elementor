@@ -4,8 +4,8 @@ Donate link: elementinvader.com
 Tags: elementor addon, elementor addons, elementor widget, elementor
 Requires at least: 5.2
 Requires PHP: 5.6
-Tested up to: 6.8
-Stable tag: 1.4.0
+Tested up to: 6.9
+Stable tag: 1.4.3
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -88,7 +88,17 @@ There is website where yo ucan found compatible plugin version for your wp / PHP
 
 == Changelog ==
 
-= 1.3.10 =
+= 1.4.3 =
+* Security fix
+
+= 1.4.2 =
+* Security fix
+
+= 1.4.1 =
+* Disable retrieved in form email / name from
+* _load_textdomain_just_in_time issue
+
+= 1.4.0 =
 * Form Poc Protect with Token
 
 = 1.3.9 =

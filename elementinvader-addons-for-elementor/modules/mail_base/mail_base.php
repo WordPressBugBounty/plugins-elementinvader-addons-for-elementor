@@ -17,119 +17,6 @@ function eli_mails() {
     include_once (ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PATH."pages/mail_base/index.php");
 }
 
-// Called from ajax
-// json for datatables
-function eli_mails_datatable()
-{
-    //$this->enable_error_reporting();
-   // remove_action( 'shutdown', 'wp_ob_end_flush_all', 1 );
-
-    // configuration
-    $columns = array('id', 'date', 'email');
-    // 
-
-    // Fetch parameters
-    $parameters = eli_xss_clean($_POST);
-    $draw = eli_xss_clean($_POST['draw']);
-    $start = eli_xss_clean($_POST['start']);
-    $length = eli_xss_clean($_POST['length']);
-    $search = eli_xss_clean($_POST['search']);
-
-    
-    global $wpdb; 
-    $table = "{$wpdb->prefix}eli_newsletters";
-
-    $where = 'WHERE 1=1';    
-    foreach ($_POST['columns'] as $column) {
-        if (in_array($column['data'], $column)) {
-            $gen_search = $column['search']['value'];
-            $col_name = $column['data'];
-            if(!empty($gen_search))
-                if(substr_count($column['data'], 'date') > 0)
-                {
-                    // DATE VALUES
-                    $detect_date = strtotime($gen_search);
-                    if(is_numeric($detect_date) && $detect_date > 1000)
-                    {
-                        $gen_search = date('Y-m-d H:i:s', $detect_date);
-                        $where.=" AND ".$col_name." > '".$gen_search."' ";
-                    }
-                    else
-                    {
-                        $where.=" AND ".$col_name." LIKE '%".$gen_search."%' ";
-                    }
-                } else {
-                    $where.=" AND ".$col_name." LIKE '%".$gen_search."%' ";
-                }
-        }
-    }
-
-    if(!empty($search['value']))
-        $where.=" AND (id LIKE '%".$search['value']."%' OR email LIKE '%".$search['value']."%' ";
-
-    $recordsTotal = eli_count($wpdb->get_results( "SELECT * FROM $table", OBJECT ));
-
-    $data = $wpdb->get_results( "SELECT * FROM $table $where LIMIT $start, $length", OBJECT );
-    $recordsFiltered = eli_count($data);
-    $query = $wpdb->last_query;
-    // Add buttons
-    foreach($data as $key=>$row)
-    {
-        $row = eli_xss_clean_object($row);
-
-        foreach($columns as $val)
-        {
-            if(isset($row->$val))
-            {
-                
-            }
-            elseif(isset($row->json_object))
-            {
-                $json = json_decode($row->json_object);
-                if(isset($json->$val))
-                {
-                    $row->$val = $json->$val;
-                }
-                else
-                {
-                    $row->$val = '-';
-                }
-            }
-            else
-            {
-                $row->$val = '-';
-            }
-        }
-        $row->remove = eli_btn_open(admin_url("admin.php?page=wal_reports&function=report_edit&id=".$row->{"id"}), '');
-        $row->checkbox = '';
-    }
-
-    //format array is optional
-    $json = array(
-            "parameters" => $parameters,
-            "query" => $query,
-            "draw" => $draw,
-            "recordsTotal" => $recordsTotal,
-            "recordsFiltered" => $recordsFiltered,
-            "data" => $data
-            );
-
-    if(TRUE)
-    {
-        ob_clean();
-        ob_start();
-    }
-    //$length = strlen(json_encode($data));
-    header('Pragma: no-cache');
-    header('Cache-Control: no-store, no-cache');
-    header('Content-Type: application/json; charset=utf8');
-    //header('Content-Length: '.$length);
-    echo json_encode($json);
-    
-    exit();
-}
-add_filter('admin_action_eli_mails_datatable', 'eli_mails_datatable');
-
 function eli_export_email_base() {
         $csv=array();
         /* special field */
@@ -197,7 +84,12 @@ add_filter('admin_action_eli_export_email_base', 'eli_export_email_base');
 // json for datatables
 function eli_mails_bulk_remove()
 {
-
+    if ( ! current_user_can( 'administrator' ) ) {
+        exit();
+    }
+    
+    check_ajax_referer('eli_secure_ajax', 'eli_secure');
+    
     $ids= eli_xss_clean($_POST['ids']);
 
 

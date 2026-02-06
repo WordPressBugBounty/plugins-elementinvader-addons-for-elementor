@@ -290,17 +290,21 @@ class Ajax_Handler {
                 $ajax_output['message'] = $this->generate_alert(esc_html__( 'Element id not found.', 'elementinvader-addons-for-elementor' ),'elementinvader_addons_for_elementor_alert-danger');
                 $this->output($ajax_output);
             }
+            
+            $post = sanitize_post($_POST);
+            if(isset($post['mail_data_from_email']) || isset($post['mail_data_from_name'])){
+                $ajax_output['code'] = self::INVALID_FORM;
+                $ajax_output['message'] = $this->generate_alert( esc_html__( 'Security check failed. Please disable fields "mail_data_from_email,mail_data_from_name"', 'elementinvader-addons-for-elementor' ), 'elementinvader_addons_for_elementor_alert-danger' );
+                $this->output( $ajax_output );
+            }
             $element_id = $post['element_id'];
             /* deprecated */
             //$form_data = get_option('elementinvader_addons_for_elementor_form_'.$element_id);
 
             $form_data = array(); 
             if(isset($post['shortcode']) && !empty($post['shortcode'])){
-                
                 $allowed_fields = [
                     'mail_data_to_email',
-                    'mail_data_from_email',
-                    'mail_data_from_name',
                     'Email',
                     'email',
                     'custom_class',
@@ -322,7 +326,9 @@ class Ajax_Handler {
                     }
                 }
 
-                
+                $form_data['settings']['mail_data_from_email'] = get_bloginfo('admin_email');
+                $form_data['settings']['mail_data_from_name'] = get_bloginfo('admin_email');
+
             } else {
                 $get_settings	= new ThzelGetElementSettings($post['eli_page_id'],$post['eli_id'],$post['eli_type']); 
                 $form_data = $get_settings->get_settings();
@@ -547,6 +553,10 @@ class Ajax_Handler {
                         $ret = false;
                     }
                 }            
+            }
+
+            if($email && !empty($form_data['send_action_brevo_api_key']) && !empty($form_data['send_action_brevo_list_id'])) {
+                $this->bravo($form_data['send_action_brevo_api_key'], $form_data['send_action_brevo_list_id'], 'create_add', $email);
             }
             /* end action after send */
             
@@ -802,5 +812,118 @@ function sw_mailchimp_post($url, $apiKey, &$httpCode, $json)
             }
         }
         return $string;
+    }
+
+    
+    /**
+	 * Bravo Api https://developers.brevo.com/
+	 * @param  string  $apiKey  Date in string
+	 * @param  string  $listid  Number of list id (if need add contact into list)
+	 * @param  string  $action  create|add|create_add  (create - add new contact, add - add into list, create_add - create contact and add into list)
+	 * @param  string  $email  email of contact is required field
+     * 
+	 * @return string true or contact id
+	*/
+
+    public function bravo($apiKey = null, $listid = null, $action = 'create', $email = '') {
+        if(empty($apiKey)) return false;
+        if(empty($email)) return false;
+
+        switch ($action) {
+            case 'create':
+                return ($this->_bravo_create ($apiKey, $email)) ? true : false;
+                break;
+            case 'add':
+                if(empty($listid)) return false;
+                return ($this->_bravo_add_to_list ($apiKey, $listid, $email)) ? true : false;
+                break;
+            case 'create_add':
+                if(empty($listid)) return false;
+
+                $this->_bravo_create ($apiKey, $email);
+                if(true) {
+                    return ($this->_bravo_add_to_list ($apiKey, $listid, $email)) ? true : false;
+                }
+
+                return false;
+                break;
+        }
+
+        return false;
+
+    }
+
+    /*
+    * https://developers.brevo.com/reference/addcontacttolist-1
+    */
+    private function _bravo_add_to_list ($apiKey = null, $listid = null, $email = '') {
+        // Replace these values with your actual data
+        $brevoApiUrl = 'https://api.brevo.com/v3/contacts/lists/' . $listid . '/contacts/add';
+        $brevoApiHeaders = array(
+            'Accept'       => 'application/json',
+            'Content-Type' => 'application/json',
+            'api-key' => $apiKey,
+        );
+        
+        $brevoApiData = array(
+            'emails' => array(
+                $email,
+            ),
+        );
+        
+        $response = wp_remote_post(
+            $brevoApiUrl,
+            array(
+                'headers' => $brevoApiHeaders,
+                'body'    => wp_json_encode($brevoApiData),
+            )
+        );
+        
+        if (is_wp_error($response)) {
+            return false;
+        } else {
+            $body = wp_remote_retrieve_body($response);
+            if(stripos($body, 'success') !== FALSE) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    /*
+    * https://developers.brevo.com/reference/createcontact
+    */
+    private function _bravo_create ($apiKey = null, $email = '') {
+        // Replace these values with your actual data
+
+        $brevoApiUrl = 'https://api.brevo.com/v3/contacts';
+        $brevoApiHeaders = array(
+            'Accept'       => 'application/json',
+            'Content-Type' => 'application/json',
+            'api-key' => $apiKey,
+        );
+        
+        $brevoApiData = array(
+            "updateEnabled" => true,
+            "email" => $email
+        );
+        
+        $response = wp_remote_post(
+            $brevoApiUrl,
+            array(
+                'headers' => $brevoApiHeaders,
+                'body'    => wp_json_encode($brevoApiData),
+            )
+        );
+        
+        if (is_wp_error($response)) {
+            return false;
+        } else {
+            $body = wp_remote_retrieve_body($response);
+            $data = json_decode($body);
+            return true;
+        }
+
+        return false;
     }
 }

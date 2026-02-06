@@ -24,8 +24,6 @@ function eli_shortcode_newsletter($atts, $content){
         'custom_class'=>'',
         'disable_mail_send'=>'',
         'mail_data_subject'=>esc_html__('Newsletter', 'elementinvader-addons-for-elementor'),
-        'mail_data_from_email'=>get_bloginfo('admin_email'),
-        'mail_data_from_name'=>get_bloginfo('admin_email'),
         'mail_data_to_email'=>get_bloginfo('admin_email'),
         'recaptcha_site_key'=>'',
         'recaptcha_secret_key'=>'',
@@ -41,14 +39,10 @@ function eli_shortcode_newsletter($atts, $content){
     $data['settings'] = $atts;
     $data['id_element'] = '';
 
-
     /* protect */ 
     $data['settings']['mail_data_to_email'] = eli_encrypt($data['settings']['mail_data_to_email']);
-    $data['settings']['mail_data_from_email'] = eli_encrypt($data['settings']['mail_data_from_email']);
-    $data['settings']['mail_data_from_name'] = eli_encrypt($data['settings']['mail_data_from_name']);
 
     /* load css/js */
-
     return eli_shortcodes_view('shortcode-newsletter', $data);
 }
 

@@ -366,8 +366,7 @@ class EliBlog_Grid extends Elementinvader_Base {
                 ],
 			]
 		);
-
-        
+		        
         if(true){
             $repeater = new Repeater();
             $repeater->start_controls_tabs( 'custom_meta' );
@@ -427,6 +426,8 @@ class EliBlog_Grid extends Elementinvader_Base {
                 ]
             );
         }
+
+		
 
         if(true){
             $repeater = new Repeater();
@@ -1283,7 +1284,6 @@ class EliBlog_Grid extends Elementinvader_Base {
         );
         $this->generate_renders_tabs($selectors, 'styles_carousel_arrows_dynamic', ['margin','color','background','border','border_radius','padding','shadow','transition','font-size','hover_animation']);
 
-
         $this->end_controls_section();
 
         $this->start_controls_section(
@@ -1875,20 +1875,48 @@ class EliBlog_Grid extends Elementinvader_Base {
             }
         }
 
-        
-        if($settings['config_limit_order_by'] == 'custom_field' && !empty($settings['config_limit_order_by_custom'])) {
-            $allposts ['meta_query'] = [
-                                            [
-                                                'key' => $settings['config_limit_order_by_custom'],
-                                            ],
-                                    ];
-             $allposts ['meta_key'] = $settings['config_limit_order_by_custom'];                 
-             $allposts ['orderby'] = 'meta_value';                 
-             $allposts ['order'] = $settings['config_limit_order'];                
-        }
 
-        // Inject repeater-based meta filters here
-        if ( ! empty( $settings['filter_by_meta'] ) && is_array( $settings['filter_by_meta'] ) ) {
+		if ($settings['config_limit_order_by'] == 'custom_field' && !empty($settings['config_limit_order_by_custom'])) {
+
+			$order_string = $settings['config_limit_order_by_custom']; 
+			// "is_featured DESC, length, region ASC"
+			 $allposts ['orderby'] = 'meta_value';    
+			$order_parts = array_map('trim', explode(',', $order_string));
+
+			$meta_query = [];
+			$orderby    = [];
+
+			foreach ($order_parts as $part) {
+				$field     = $part;
+				$direction = strtoupper($settings['config_limit_order']);
+
+
+				if (preg_match('/\s+(ASC|DESC)$/i', $part, $matches)) {
+					$direction = strtoupper($matches[1]);
+					$field     = trim(preg_replace('/\s+(ASC|DESC)$/i', '', $part));
+				}
+
+		
+				$alias = "{$field}_clause";
+
+				$meta_query[$alias] = [
+					'key'     => $field,
+					'type'    => 'NUMERIC',
+					'compare' => 'EXISTS',  
+
+				];
+
+				$orderby[$alias] = $direction;
+			}
+
+				$allposts['meta_query'] = $meta_query;
+			$allposts['orderby']    = $orderby;
+		}
+		
+		
+		
+    // Inject repeater-based meta filters here
+        if (! empty( $settings['filter_by_meta'] ) && is_array( $settings['filter_by_meta'] ) ) {
             $meta_query = isset( $allposts['meta_query'] ) ? (array) $allposts['meta_query'] : [];
 
             foreach ( $settings['filter_by_meta'] as $filter ) {
@@ -1921,6 +1949,11 @@ class EliBlog_Grid extends Elementinvader_Base {
                 $allposts['meta_query'] = $meta_query;
             }
         }
+		
+		if(isset($_GET['test'])) {
+			dump($allposts);
+		}
+	
 
         $wp_query = new \WP_Query($allposts); 
 
