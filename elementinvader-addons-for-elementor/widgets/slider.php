@@ -1,8 +1,8 @@
 <?php
 
-namespace ElementinvaderAddonsForElementor\Widgets;
+namespace ELI\Widgets;
 
-use ElementinvaderAddonsForElementor\Core\Elementinvader_Base;
+use ELI\Core\Elementinvader_Base;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Utils;
@@ -13,7 +13,7 @@ use Elementor\Icons_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
-use ElementinvaderAddonsForElementor\Modules\Forms\Ajax_Handler;
+use ELI\Modules\Forms\Ajax_Handler;
 
 if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
@@ -49,9 +49,9 @@ class EliSlider extends Elementinvader_Base {
         );
 
 
-        wp_enqueue_style('slick', plugins_url('/assets/libs/slick/slick.css', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__));
-        wp_enqueue_style('slick-theme', plugins_url('/assets/libs/slick/slick-theme.css', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__));
-        wp_enqueue_script('slick', plugins_url('/assets/libs/slick/slick.min.js', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__));
+        wp_enqueue_style('slick', plugins_url('/assets/libs/slick/slick.css', ELI_FILE__));
+        wp_enqueue_style('slick-theme', plugins_url('/assets/libs/slick/slick-theme.css', ELI_FILE__));
+        wp_enqueue_script('slick', plugins_url('/assets/libs/slick/slick.min.js', ELI_FILE__));
         parent::__construct($data, $args);
     }
 
@@ -1132,8 +1132,8 @@ class EliSlider extends Elementinvader_Base {
             while ($wp_query->have_posts()) { $wp_query->the_post();
                 $row = [];
                 $row ['thumbnail'] = get_the_post_thumbnail_url(get_the_ID(), 'full');
-                $row ['title'] = strip_tags(get_the_title());
-                $row ['description'] = strip_tags(get_the_excerpt());
+                $row ['title'] = wp_strip_all_tags(get_the_title());
+                $row ['description'] = wp_strip_all_tags(get_the_excerpt());
                 $row ['link'] = get_permalink();
                 $row ['ID'] = get_the_ID();
                 $results[]=$row;
@@ -1143,7 +1143,7 @@ class EliSlider extends Elementinvader_Base {
             if(!empty($settings['t_settings_sec_basic_sliders']))
                 foreach($settings['t_settings_sec_basic_sliders'] as $item) {
                     $row = [];
-                    $row ['thumbnail'] = $this->_ch($item['slider_image']['url'], ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_URL.'/assets/img/placeholder.jpg');
+                    $row ['thumbnail'] = $this->_ch($item['slider_image']['url'], ELI_URL.'/assets/img/placeholder.jpg');
                     $row ['title'] = $item['slider_title'];
                     $row ['description'] = $item['slider_description'];
                     $row ['_id'] = $item['_id'];
@@ -1161,7 +1161,7 @@ class EliSlider extends Elementinvader_Base {
         if(Plugin::$instance->editor->is_edit_mode())
             $object['is_edit_mode'] = true;
       
-        echo $this->view('widget_layout', $object); 
+        $this->view('widget_layout', $object, true); 
     }
 
 	public static function ma_el_get_post_types()

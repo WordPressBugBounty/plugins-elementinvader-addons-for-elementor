@@ -1,8 +1,8 @@
 <?php
 
-namespace ElementinvaderAddonsForElementor\Widgets;
+namespace ELI\Widgets;
 
-use ElementinvaderAddonsForElementor\Core\Elementinvader_Base;
+use ELI\Core\Elementinvader_Base;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Utils;
@@ -13,7 +13,7 @@ use Elementor\Icons_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
-use ElementinvaderAddonsForElementor\Modules\Forms\Ajax_Handler;
+use ELI\Modules\Forms\Ajax_Handler;
 
 if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
@@ -29,7 +29,7 @@ class EliBlog_Post_Counter extends Elementinvader_Base {
     public $items_num = 0;
 
     public function __construct($data = array(), $args = null) {
-        wp_enqueue_style('eli-main', plugins_url('/assets/css/main.css', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__));
+        wp_enqueue_style('eli-main', plugins_url('/assets/css/main.css', ELI_FILE__));
         parent::__construct($data, $args);
     }
 
@@ -210,7 +210,7 @@ class EliBlog_Post_Counter extends Elementinvader_Base {
             $repeater->add_control(
                 'post_id',
                 [
-                    'label' => esc_html__('Post ID', 'wpdirectorykit'),
+                    'label' => esc_html__('Post ID', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::NUMBER,
                 ]
             );
@@ -244,7 +244,7 @@ class EliBlog_Post_Counter extends Elementinvader_Base {
             [
                 'label' => '',
                 'type' => \Elementor\Controls_Manager::RAW_HTML,
-                'raw' => sprintf(__( 'Manager Posts <a href="%1$s" target="_blank"> open </a>', 'elementinvader-addons-for-elementor' ), admin_url('edit.php')),
+                'raw' => sprintf( /* translators: 1: Link to manager posts. */__( 'Manager Posts <a href="%1$s" target="_blank"> open </a>', 'elementinvader-addons-for-elementor' ), admin_url('edit.php')),
                 'content_classes' => 'eli_elementor_hint',
                 'separator' => 'after',
             ]
@@ -257,7 +257,7 @@ class EliBlog_Post_Counter extends Elementinvader_Base {
         $items = [
             [
                 'key'=>'counter_el',
-                'label'=> esc_html__('Counter', 'wpdirectorykit'),
+                'label'=> esc_html__('Counter', 'elementinvader-addons-for-elementor'),
                 'selector_hide'=>'',
                 'selector'=>'{{WRAPPER}} .eli_blog_post_counter',
                 'selector_hover'=>'',
@@ -279,10 +279,10 @@ class EliBlog_Post_Counter extends Elementinvader_Base {
                 $this->add_responsive_control(
                     $item['key'].'_hide',
                     [
-                        'label' => esc_html__( 'Hide Element', 'wdk-svg-map' ),
+                        'label' => esc_html__( 'Hide Element', 'elementinvader-addons-for-elementor' ),
                         'type' => Controls_Manager::SWITCHER,
-                        'none' => esc_html__( 'Hide', 'wdk-svg-map' ),
-                        'block' => esc_html__( 'Show', 'wdk-svg-map' ),
+                        'none' => esc_html__( 'Hide', 'elementinvader-addons-for-elementor' ),
+                        'block' => esc_html__( 'Show', 'elementinvader-addons-for-elementor' ),
                         'return_value' =>  'none',
                         'default' => ($item['key'] == 'field_button_reset' ) ? 'none':'',
                         'selectors' => [
@@ -377,40 +377,40 @@ class EliBlog_Post_Counter extends Elementinvader_Base {
 
 
         }
-
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended
         if(is_string($allposts)){
             $allposts .= '&posts_per_page='.$settings['config_limit'];
             if(isset($_GET['s']))
-                $allposts .= '&s='.sanitize_text_field($_GET['s']);
+                $allposts .= '&s='.esc_attr(sanitize_text_field(wp_unslash($_GET['s'])));
             if(isset($_GET['search']))
-                $allposts .= '&s='.sanitize_text_field($_GET['search']);
+                $allposts .= '&s='.esc_attr(sanitize_text_field(wp_unslash($_GET['search'])));
 
         }elseif((is_array($allposts))) {
             if(isset($_GET['s'])) {
-                $allposts ['s'] = sanitize_text_field($_GET['s']);
+                $allposts ['s'] = esc_attr(sanitize_text_field(wp_unslash($_GET['s'])));
             }
             if(isset($_GET['search'])) {
-                $allposts ['s'] = sanitize_text_field($_GET['search']);
+                $allposts ['s'] = esc_attr(sanitize_text_field(wp_unslash($_GET['search'])));
             }
         }
 
         if(isset($_GET['cat'])) {
             if(is_string($allposts)){
-                $allposts .= '&category_name='.sanitize_text_field($_GET['cat']);
+                $allposts .= '&category_name='.esc_attr(sanitize_text_field(wp_unslash($_GET['cat'])));
             }elseif((is_array($allposts))) {
-                $allposts['category_name'] = sanitize_text_field($_GET['cat']);
+                $allposts['category_name'] = esc_attr(sanitize_text_field(wp_unslash($_GET['cat'])));
             }
         }
 
         if(isset($_GET['tag'])) {
             if(is_string($allposts)){
-                $allposts .= '&tag='.sanitize_text_field($_GET['tag']);
+                $allposts .= '&tag='.esc_attr(sanitize_text_field(wp_unslash($_GET['tag'])));
             }elseif((is_array($allposts))) {
 
-                $allposts['tag'] = sanitize_text_field($_GET['tag']);
+                $allposts['tag'] = esc_attr(sanitize_text_field(wp_unslash($_GET['tag'])));
             }
         }
-
+    // phpcs:enable WordPress.Security.NonceVerification.Recommended
         
         $wp_query = new \WP_Query($allposts); 
 
@@ -425,7 +425,7 @@ class EliBlog_Post_Counter extends Elementinvader_Base {
         if(Plugin::$instance->editor->is_edit_mode())
             $object['is_edit_mode'] = true;
       
-        echo $this->view('widget_layout', $object); 
+        $this->view('widget_layout', $object, true); 
     }
 
 	public static function ma_el_get_post_types()

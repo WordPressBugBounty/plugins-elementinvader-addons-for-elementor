@@ -1,3 +1,4 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <?php
 $output ='';
 $styles ='';
@@ -5,7 +6,7 @@ $helper_classes ='';
 $value = '';
 $required = '';
 $required_icon = '';
-$field_id = $this->_ch($element['custom_id'],'elementinvader_addons_for_elementor_f_field_id_'.$element['_id']).strtolower(str_replace(' ', '_', $element['field_label']));
+$field_id = $this->_ch($element['custom_id'],'eli_f_field_id_'.$element['_id']).strtolower(str_replace(' ', '_', $element['field_label']));
 $value = $this->_ch($element['field_value']);
 $this->add_field_css($element);
 $field_tyle = 'text';
@@ -69,32 +70,55 @@ if(empty($field_name)) {
 if(empty($field_name)) {
     $field_name = 'field_id_'.$element['_id'];
 } 
+?>
 
-if($field_tyle =='hidden'){
+<?php if ($field_tyle === 'hidden') : ?>
 
-    $output .='<input name="'.esc_attr($element['field_label']).'" id="'.esc_attr($field_id).'" type="'.esc_attr($field_tyle).'" class="elementinvader_addons_for_elementor_f_field" '.esc_attr($required).' value="'.esc_attr($value).'" placeholder="'.esc_attr($element['placeholder']).'" >';
-} else {
-$output .='<div class="elementinvader_addons_for_elementor_f_group '.$field_tyle.' elementinvader_addons_for_elementor_f_group_el_'.esc_attr($element['_id']).' '.esc_attr($helper_classes).'" style="'.wp_kses_post($styles).'">';
-if($element['show_label'])
-    $output .='<label for="'.esc_attr($field_id).'">'.esc_html($element['field_label']).esc_html($required_icon).'</label>';
+    <input
+        name="<?php echo esc_attr($element['field_label']); ?>"
+        id="<?php echo esc_attr($field_id); ?>"
+        type="hidden"
+        class="eli_f_field"
+        <?php echo wp_kses_post($required); ?>
+        value="<?php echo esc_attr($value); ?>"
+    >
 
-    if(!empty($element['field_hint']))
-        $output .='<i class="hint">'.esc_html($element['field_hint']).'</i>';
+<?php else : ?>
 
-            $output .='
-                <input ';
+    <div class="eli_f_group <?php echo esc_attr($field_tyle); ?> eli_f_group_el_<?php echo esc_attr($element['_id']); ?> <?php echo esc_attr($helper_classes); ?>"
+         style="<?php echo esc_attr($styles); ?>">
 
-                if(!empty($element['custom_validation_message'])) {
-                    $output .='oninvalid="this.setCustomValidity(\''.esc_attr($element['custom_validation_message']).'\')" ';
-                }
+        <?php if (!empty($element['show_label'])) : ?>
+            <label for="<?php echo esc_attr($field_id); ?>">
+                <?php echo esc_html($element['field_label']); ?>
+                <?php echo esc_html($required_icon); ?>
+            </label>
+        <?php endif; ?>
 
-                if($element['field_type'] == 'subject' ) {
-                    $element['field_label'] = 'custom_subject';
-                }
-             
-            $output .='    
-                name="'.esc_attr($field_name).'" id="'.esc_attr($field_id).'" type="'.esc_attr($field_tyle).'" class="elementinvader_addons_for_elementor_f_field" '.wp_kses_post($required).' value="'.esc_attr($value).'" placeholder="'.esc_attr($element['placeholder']).'" >
-            </div>';
-}
+        <?php if (!empty($element['field_hint'])) : ?>
+            <i class="hint"><?php echo esc_html($element['field_hint']); ?></i>
+        <?php endif; ?>
 
-echo ($output);
+        <input
+            <?php if (!empty($element['custom_validation_message'])) : ?>
+                oninvalid="this.setCustomValidity('<?php echo esc_js($element['custom_validation_message']); ?>')"
+            <?php endif; ?>
+
+            <?php
+            if (!empty($element['field_type']) && $element['field_type'] === 'subject') {
+                $element['field_label'] = 'custom_subject';
+            }
+            ?>
+
+            name="<?php echo esc_attr($field_name); ?>"
+            id="<?php echo esc_attr($field_id); ?>"
+            type="<?php echo esc_attr($field_tyle); ?>"
+            class="eli_f_field"
+            <?php echo wp_kses_post($required); ?>
+            value="<?php echo esc_attr($value); ?>"
+            placeholder="<?php echo esc_attr($element['placeholder']); ?>"
+        >
+
+    </div>
+
+<?php endif; ?>

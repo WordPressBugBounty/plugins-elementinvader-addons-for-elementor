@@ -1,8 +1,8 @@
 <?php
 
-namespace ElementinvaderAddonsForElementor\Widgets;
+namespace ELI\Widgets;
 
-use ElementinvaderAddonsForElementor\Core\Elementinvader_Base;
+use ELI\Core\Elementinvader_Base;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Utils;
@@ -13,7 +13,7 @@ use Elementor\Icons_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
-use ElementinvaderAddonsForElementor\Modules\Forms\Ajax_Handler;
+use ELI\Modules\Forms\Ajax_Handler;
 
 if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
@@ -101,7 +101,7 @@ class EliCurrentDate extends Elementinvader_Base {
                 'label' => __( 'Date Format', 'elementinvader-addons-for-elementor' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => 'Y',
-                'description' => '<span class="eli_control_get_pro">'.sprintf(esc_html__(' %1$sExample Date Format%2$s','elementinvader-addons-for-elementor'),'<a href="https://www.php.net/manual/en/datetime.format.php" target="_blank">','</a>').'</span>'
+                'description' => '<span class="eli_control_get_pro">'.sprintf(/* translators: 1: Link tag before, 2: Link Tag After. */esc_html__(' %1$sExample Date Format%2$s','elementinvader-addons-for-elementor'),'<a href="https://www.php.net/manual/en/datetime.format.php" target="_blank">','</a>').'</span>'
             ]
         );
 
@@ -110,7 +110,7 @@ class EliCurrentDate extends Elementinvader_Base {
             [
                 'label' => __( 'Custom baseTimestamp', 'elementinvader-addons-for-elementor' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
-                'description' => '<span class="eli_control_get_pro">'.sprintf(esc_html__(' %1$sGet Examples%2$s','elementinvader-addons-for-elementor'),'<a href="https://www.php.net/manual/ru/function.strtotime.php" target="_blank">','</a>').'
+                'description' => '<span class="eli_control_get_pro">'.sprintf(/* translators: 1: Link tag before, 2: Link Tag After. */esc_html__(' %1$sGet Examples%2$s','elementinvader-addons-for-elementor'),'<a href="https://www.php.net/manual/ru/function.strtotime.php" target="_blank">','</a>').'
                                  <br><br><b>'.esc_html__('Examples','elementinvader-addons-for-elementor').': </b>
                                  <br><b> +1 day </b> - '.esc_html__('Date +1 day','elementinvader-addons-for-elementor').'
                                  <br><b> +1 week </b> - '.esc_html__('Date +1 week','elementinvader-addons-for-elementor').'
@@ -201,7 +201,7 @@ class EliCurrentDate extends Elementinvader_Base {
             $object['baseTimestamp'] = strtotime($settings['baseTimestamp']);
         }
 
-        echo $this->view('widget_layout', $object); 
+        $this->view('widget_layout', $object, true); 
     }
 
 }

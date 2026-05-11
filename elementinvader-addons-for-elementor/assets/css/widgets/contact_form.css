@@ -11,12 +11,15 @@
     content: '\f430';
 }
 
+/* Support both .eli_ and .elementinvader_addons_for_elementor_ prefixes */
+.elementinvader_contact_form  .eli_f,
 .elementinvader_contact_form  .elementinvader_addons_for_elementor_f {
     padding:0;
     margin:0;
     color: #212529;
 }
 
+.elementinvader_contact_form  .eli_f .eli_f_container,
 .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_container {
     display: -webkit-flex;
     display: -webkit-box;
@@ -28,6 +31,7 @@
     margin: 0 -15px;
 }
 
+.elementinvader_contact_form  .eli_f .eli_f_group,
 .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group {
     margin-bottom: 15px;
     -webkit-box-flex: 0;
@@ -38,7 +42,7 @@
     padding: 0 15px;
 }
 
-
+.elementinvader_contact_form  .eli_f .eli_f_group,
 .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group {
     display: -webkit-flex;
     display: -webkit-box;
@@ -58,6 +62,7 @@
             justify-content: center;
 }
 
+.elementinvader_contact_form  .eli_f .eli_f_group.inline,
 .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.inline {
     -webkit-flex-direction: row;
     -webkit-box-orient: horizontal;
@@ -69,6 +74,7 @@
         flex-wrap: initial;
 }
 
+.elementinvader_contact_form  .eli_f .eli_f_group.file .eli_f_field,
 .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.file .elementinvader_addons_for_elementor_f_field {
     border-color: initial !important;
     border: 0 !important;
@@ -79,10 +85,12 @@
     height: initial !important;
 }
 
+.elementinvader_contact_form  .eli_f .eli_f_group.inline label,
 .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.inline label {
     width: 130px;
 }
 
+.elementinvader_contact_form  .eli_f .eli_f_group label,
 .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group label {
     display: inline-block;
     margin-bottom: .5rem;
@@ -92,6 +100,7 @@
     cursor: pointer;
 }
 
+.elementinvader_contact_form  .eli_f .eli_f_group .eli_f_field,
 .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group .elementinvader_addons_for_elementor_f_field {
     display: block;
     width: 100%;
@@ -111,6 +120,7 @@
     transition: border-color .15s ease-in-out,box-shadow .15s ease-in-out,-webkit-box-shadow .15s ease-in-out;
 }
 
+.elementinvader_contact_form  .eli_f .eli_f_group.checkbox label,
 .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.checkbox label {
     display: -webkit-flex;
     display: -webkit-box;
@@ -134,11 +144,12 @@
             align-items: center;
 }
 
-
+.elementinvader_contact_form .eli_f .eli_f_group.checkbox label input,
 .elementinvader_contact_form .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.checkbox label input {
     margin-right: 10px;
 }
 
+.elementinvader_contact_form .eli_f .eli_f_group.checkbox label .accept_link,
 .elementinvader_contact_form .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.checkbox label .accept_link {
     margin-left: 5px;
     display: inline-block;
@@ -146,15 +157,18 @@
     transition: all .15s;
 }
 
+.elementinvader_contact_form .eli_f .eli_f_group.checkbox label .accept_link:hover,
 .elementinvader_contact_form .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.checkbox label .accept_link:hover {
     text-decoration: underline;
 }
 
+.elementinvader_contact_form .eli_f .eli_f_group textarea.eli_f_field,
 .elementinvader_contact_form .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group textarea.elementinvader_addons_for_elementor_f_field {
     padding: 1rem .75rem;
     height: initial;
 }
 
+.elementinvader_contact_form .eli_f .eli_f_group .eli_f_field,
 .elementinvader_contact_form .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group .elementinvader_addons_for_elementor_f_field {
     height: 60px;
     display: -webkit-box;
@@ -167,11 +181,13 @@
     -webkit-justify-content: center;
 }
 
+.elementinvader_contact_form .eli_f .eli_f_group select.eli_f_field,
 .elementinvader_contact_form .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group select.elementinvader_addons_for_elementor_f_field {
     padding-top: 0 !important;
     padding-bottom: 0 !important;
 }
 
+.elementinvader_contact_form  .eli_f button,
 .elementinvader_contact_form  .elementinvader_addons_for_elementor_f button {
     background: #075AC9;
     outline: none;
@@ -188,15 +204,18 @@
     position: relative;
 }
 
+.elementinvader_contact_form .eli_f button .fa-custom-ajax-indicator,
 .elementinvader_contact_form .elementinvader_addons_for_elementor_f button .fa-custom-ajax-indicator {
     top: 50%;
     margin-top: -7px !important;
 }
 
+.elementinvader_contact_form  .eli_f button:hover,
 .elementinvader_contact_form  .elementinvader_addons_for_elementor_f button:hover {
     background: #0448A2;
 }
 
+.elementinvader_contact_form  .eli_f .eli_f_group.right,
 .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.right {
     -webkit-align-items: flex-end;
     -webkit-box-align: end;
@@ -204,6 +223,7 @@
             align-items: flex-end;
 }
 
+.elementinvader_contact_form  .eli_f .eli_f_group.left,
 .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.left {
     -webkit-align-items: flex-start;
     -webkit-box-align: start;
@@ -211,6 +231,7 @@
             align-items: flex-start;
 }
 
+.elementinvader_contact_form  .eli_f .eli_f_group.center,
 .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.center {
     -webkit-align-items: center;
     -webkit-box-align: center;
@@ -218,6 +239,7 @@
             align-items: center;
 }
 
+.elementinvader_contact_form  .eli_f .eli_f_group.justify,
 .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.justify {
     -webkit-align-items: stretch;
     -webkit-box-align: stretch;
@@ -229,8 +251,8 @@
     overflow: hidden;
 }
 
-
 @media(max-width:991px){
+    .elementinvader_contact_form  .eli_f .eli_f_group.tablet_right,
     .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.tablet_right {
         -webkit-align-items: flex-end;
         -webkit-box-align: end;
@@ -238,6 +260,7 @@
                 align-items: flex-end;
     }
 
+    .elementinvader_contact_form  .eli_f .eli_f_group.tablet_left,
     .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.tablet_left {
         -webkit-align-items: flex-start;
         -webkit-box-align: start;
@@ -245,6 +268,7 @@
                 align-items: flex-start;
     }
 
+    .elementinvader_contact_form  .eli_f .eli_f_group.tablet_center,
     .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.tablet_center {
         -webkit-align-items: center;
         -webkit-box-align: center;
@@ -252,6 +276,7 @@
                 align-items: center;
     }
 
+    .elementinvader_contact_form  .eli_f .eli_f_group.tablet_justify,
     .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.tablet_justify {
         -webkit-align-items: stretch;
         -webkit-box-align: stretch;
@@ -261,6 +286,7 @@
 }
 
 @media(max-width:768px){
+    .elementinvader_contact_form  .eli_f .eli_f_group.phone_right,
     .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.phone_right {
         -webkit-align-items: flex-end;
         -webkit-box-align: end;
@@ -268,6 +294,7 @@
                 align-items: flex-end;
     }
 
+    .elementinvader_contact_form  .eli_f .eli_f_group.phone_left,
     .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.phone_left {
         -webkit-align-items: flex-start;
         -webkit-box-align: start;
@@ -275,6 +302,7 @@
                 align-items: flex-start;
     }
 
+    .elementinvader_contact_form  .eli_f .eli_f_group.phone_center,
     .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.phone_center {
         -webkit-align-items: center;
         -webkit-box-align: center;
@@ -282,6 +310,7 @@
                 align-items: center;
     }
 
+    .elementinvader_contact_form  .eli_f .eli_f_group.phone_justify,
     .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.phone_justify {
         -webkit-align-items: stretch;
         -webkit-box-align: stretch;

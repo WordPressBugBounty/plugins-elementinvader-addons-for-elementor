@@ -1,3 +1,4 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <?php 
 add_action('admin_menu', 'eli_mail_base');
 
@@ -7,14 +8,21 @@ function eli_mail_base() {
 }
 
 function eli_mails() {
-    wp_enqueue_style( 'font-awesome', plugins_url( 'assets/admin/css/font-awesome.min.css',ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__), false, '1.0.0' );
-    wp_enqueue_style( 'eli-wrapper-admin',plugins_url( 'assets/admin/css/eli-wrapper.css',ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__), false, false); 
+    wp_enqueue_style( 'font-awesome', plugins_url( 'assets/admin/css/font-awesome.min.css',ELI_FILE__), false, '1.0.0' );
+    wp_enqueue_style( 'eli-wrapper-admin',plugins_url( 'assets/admin/css/eli-wrapper.css',ELI_FILE__), false, false); 
 
     global $wpdb; 
     $table = "{$wpdb->prefix}eli_newsletters";
-    $results = $wpdb->get_results( "SELECT * FROM $table", ARRAY_A  );
+    $eli_cache_key = 'eli_newsletters_all_results';
+    $results = wp_cache_get( $eli_cache_key, 'db' );
 
-    include_once (ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PATH."pages/mail_base/index.php");
+    if ( false === $results ) {
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+        $results = $wpdb->get_results( $wpdb->prepare( "SELECT * FROM %i", $table ), ARRAY_A );
+        wp_cache_set( $eli_cache_key, $results, 'db' );
+    }
+
+    include_once (ELI_PATH."pages/mail_base/index.php");
 }
 
 function eli_export_email_base() {
@@ -31,7 +39,13 @@ function eli_export_email_base() {
         
         
         global $wpdb;
-        $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}eli_newsletters", OBJECT );
+        $eli_cache_key = 'eli_newsletters_export_all_results';
+        $results = wp_cache_get( $eli_cache_key, 'eli_newsletters' );
+        if ( false === $results ) {
+            $results = $wpdb->get_results( "SELECT * FROM {$wpdb->prefix}eli_newsletters", OBJECT ); // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+            wp_cache_set( $eli_cache_key, $results, 'eli_newsletters', 300 ); // Cache for 5 minutes
+        }
+   
         foreach ($results as $key => $value) {
             $csv_t[$key]['email'] =  '"'.$value->email.'"';
             $csv_t[$key]['date'] =  '"'.$value->date.'"';
@@ -51,11 +65,12 @@ function eli_export_email_base() {
         array_unshift($csv, implode(';', $csv_header));
         $csv=implode(PHP_EOL, $csv);
         
-        $date = date('Y-m-d');
+        $date = gmdatedate('Y-m-d');
         $filename = 'export_'.$date.'.csv';
         
         // Generate the server headers
-        if (strpos($_SERVER['HTTP_USER_AGENT'], "MSIE") !== FALSE)
+        if (isset($_SERVER['HTTP_USER_AGENT']) && strpos(sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'])), "MSIE") !== FALSE)
+   
         {
                 header('Content-Type: "text/csv"');
                 header('Content-Disposition: attachment; filename="'.$filename.'"');
@@ -75,7 +90,7 @@ function eli_export_email_base() {
                 header("Content-Length: ".strlen($csv));
         }
 
-        exit($csv);
+        exit(wp_kses_post($csv));
 }
 
 add_filter('admin_action_eli_export_email_base', 'eli_export_email_base');
@@ -90,7 +105,25 @@ function eli_mails_bulk_remove()
     
     check_ajax_referer('eli_secure_ajax', 'eli_secure');
     
-    $ids= eli_xss_clean($_POST['ids']);
+    $ids = array();
+    if ( isset( $_POST['ids'] ) ) {
+        $ids = array();
+        $raw_ids = isset( $_POST['ids'] ) ? map_deep( wp_unslash( $_POST['ids'] ), 'sanitize_text_field' ) : [];
+        if (is_array($raw_ids)) {
+            foreach ($raw_ids as $id) {
+                $sanitized_id = sanitize_text_field($id);
+                if (is_numeric($sanitized_id)) {
+                    $ids[] = $sanitized_id;
+                }
+            }
+        } else {
+            $sanitized_id = sanitize_text_field($raw_ids);
+            if (is_numeric($sanitized_id)) {
+                $ids[] = $sanitized_id;
+            }
+        }
+   
+    }
 
 
     $json = array(
@@ -99,8 +132,14 @@ function eli_mails_bulk_remove()
     global $wpdb;
     foreach($ids as $id)
     {
-        if(is_numeric($id))
-            $wpdb->delete( "{$wpdb->prefix}eli_newsletters", [ 'id' => $id ] );
+        if(is_numeric($id)) {
+            // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+            $result = $wpdb->delete( "{$wpdb->prefix}eli_newsletters", [ 'id' => $id ] );
+            if ( $result !== false ) {
+                // Remove cached object (if using object cache for rows or table)
+                wp_cache_delete( $id, "{$wpdb->prefix}eli_newsletters" );
+            }
+        }
     }
 
     if(TRUE)

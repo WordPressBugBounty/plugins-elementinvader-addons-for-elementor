@@ -1,8 +1,8 @@
 <?php
 
-namespace ElementinvaderAddonsForElementor\Widgets;
+namespace ELI\Widgets;
 
-use ElementinvaderAddonsForElementor\Core\Elementinvader_Base;
+use ELI\Core\Elementinvader_Base;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Utils;
@@ -13,7 +13,7 @@ use Elementor\Icons_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
-use ElementinvaderAddonsForElementor\Modules\Forms\Ajax_Handler;
+use ELI\Modules\Forms\Ajax_Handler;
 
 if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
@@ -29,7 +29,7 @@ class EliBlog_Preview_Button_Custom extends Elementinvader_Base {
     public $items_num = 0;
 
     public function __construct($data = array(), $args = null) {
-        wp_enqueue_style('eli-main', plugins_url('/assets/css/main.css', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__));
+        wp_enqueue_style('eli-main', plugins_url('/assets/css/main.css', ELI_FILE__));
         parent::__construct($data, $args);
     }
 
@@ -106,7 +106,7 @@ class EliBlog_Preview_Button_Custom extends Elementinvader_Base {
         $this->add_responsive_control(
             'view_btn_text',
             [
-                'label' => esc_html__('Button Text', 'able-elements'),
+                'label' => esc_html__('Button Text', 'elementinvader-addons-for-elementor'),
                 'type' => Controls_Manager::TEXT,
                 'label_block' => true,
                 'default' => 'View',
@@ -116,11 +116,11 @@ class EliBlog_Preview_Button_Custom extends Elementinvader_Base {
         $this->add_control(
             'link_icon_position',
             [
-                'label' => esc_html__('icon Position', 'wdk-save-search'),
+                'label' => esc_html__('icon Position', 'elementinvader-addons-for-elementor'),
                 'type' => Controls_Manager::SELECT,
                 'options' => [
-                    'left' => esc_html__('Left', 'wdk-save-search'),
-                    'right' => esc_html__('Right', 'wdk-save-search'),
+                    'left' => esc_html__('Left', 'elementinvader-addons-for-elementor'),
+                    'right' => esc_html__('Right', 'elementinvader-addons-for-elementor'),
                 ],
                 'default' => 'right',
             ]
@@ -129,7 +129,7 @@ class EliBlog_Preview_Button_Custom extends Elementinvader_Base {
         $this->add_control(
             'btn_icon',
             [
-                'label' => esc_html__('Icon', 'wpdirectorykit'),
+                'label' => esc_html__('Icon', 'elementinvader-addons-for-elementor'),
                 'type' => Controls_Manager::ICONS,
                 'label_block' => true,
                 'default' => [
@@ -143,7 +143,7 @@ class EliBlog_Preview_Button_Custom extends Elementinvader_Base {
             'btn_icon_spacing_left',
             [
 
-				'label' => esc_html__( 'Icon Spocing', 'textdomain' ),
+				'label' => esc_html__( 'Icon Spocing', 'elementinvader-addons-for-elementor' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'range' => [
@@ -180,7 +180,7 @@ class EliBlog_Preview_Button_Custom extends Elementinvader_Base {
             'btn_icon_spacing_right',
             [
 
-				'label' => esc_html__( 'Icon Spacing', 'textdomain' ),
+				'label' => esc_html__( 'Icon Spacing', 'elementinvader-addons-for-elementor' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'range' => [
@@ -217,7 +217,7 @@ class EliBlog_Preview_Button_Custom extends Elementinvader_Base {
             'btn_icon_size',
             [
 
-				'label' => esc_html__( 'Icon Size', 'textdomain' ),
+				'label' => esc_html__( 'Icon Size', 'elementinvader-addons-for-elementor' ),
 				'type' => \Elementor\Controls_Manager::SLIDER,
 				'size_units' => [ 'px', '%', 'em', 'rem', 'custom' ],
 				'range' => [
@@ -250,7 +250,7 @@ class EliBlog_Preview_Button_Custom extends Elementinvader_Base {
         $items = [
             [
                 'key'=>'styles_button',
-                'label'=> esc_html__('Styles', 'wpdirectorykit'),
+                'label'=> esc_html__('Styles', 'elementinvader-addons-for-elementor'),
                 'selector_hide'=>'',
                 'selector'=>'{{WRAPPER}} .eli_blog_preview_button .eli_blog_preview_button--btn',
                 'selector_hover'=>'{{WRAPPER}} .eli_blog_preview_button .eli_blog_preview_button--btn:hover',
@@ -272,10 +272,10 @@ class EliBlog_Preview_Button_Custom extends Elementinvader_Base {
                 $this->add_responsive_control(
                     $item['key'].'_hide',
                     [
-                        'label' => esc_html__( 'Hide Element', 'wdk-svg-map' ),
+                        'label' => esc_html__( 'Hide Element', 'elementinvader-addons-for-elementor' ),
                         'type' => Controls_Manager::SWITCHER,
-                        'none' => esc_html__( 'Hide', 'wdk-svg-map' ),
-                        'block' => esc_html__( 'Show', 'wdk-svg-map' ),
+                        'none' => esc_html__( 'Hide', 'elementinvader-addons-for-elementor' ),
+                        'block' => esc_html__( 'Show', 'elementinvader-addons-for-elementor' ),
                         'return_value' =>  'none',
                         'default' => ($item['key'] == 'field_button_reset' ) ? 'none':'',
                         'selectors' => [
@@ -327,7 +327,7 @@ class EliBlog_Preview_Button_Custom extends Elementinvader_Base {
         if(Plugin::$instance->editor->is_edit_mode())
             $object['is_edit_mode'] = true;
 
-        echo $this->view('button-custom', $object); 
+        $this->view('button-custom', $object, true); 
     }
 
 

@@ -1,3 +1,5 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
+
 <?php
 
 if (!class_exists('WP_List_Table')) {
@@ -12,9 +14,9 @@ class Eli_MailBase_List_Table extends WP_List_Table
     global $status, $page;
     $this->results = $this->generate_data();
     parent::__construct(array(
-      'singular'  => __('id', 'elementinvader-addons-for-elementor'),     //singular name of the listed records
-      'plural'    => __('mails', 'elementinvader-addons-for-elementor'),   //plural name of the listed records
-      'ajax'      => false        //does this table support ajax?
+      'singular'  => __('id', 'elementinvader-addons-for-elementor'), 
+      'plural'    => __('mails', 'elementinvader-addons-for-elementor'),
+      'ajax'      => false 
     ));
     add_action('admin_head', array(&$this, 'admin_header'));
   }
@@ -32,25 +34,41 @@ class Eli_MailBase_List_Table extends WP_List_Table
   {
     // configuration
     $columns = array('id', 'date', 'email');
+
     // Fetch parameters
-    $start = eli_xss_clean(sanitize_text_field(eli_ch($_POST['start'], 0)));
-    $length = eli_xss_clean(sanitize_text_field(eli_ch($_POST['length'], 15)));
-    $search = eli_xss_clean(sanitize_text_field(eli_ch($_POST['s'], false)));
+    $start = isset($_GET['start']) ? sanitize_text_field(wp_unslash($_GET['start']))  : 0;   // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only search parameter.
+    $length = isset($_GET['length']) ? sanitize_text_field(wp_unslash($_GET['length'])) : 15; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only search parameter.
+    $search =  isset($_GET['s']) ? sanitize_text_field(wp_unslash($_GET['s']))  : '';  // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only search parameter.
 
     global $wpdb;
-    $table = "{$wpdb->prefix}eli_newsletters";
+    $table = $wpdb->prefix . 'eli_newsletters';
     $where = 'WHERE 1=1';
 
-    if (!empty($search))
-      $where .= " AND (id LIKE '%" . esc_sql($search) . "%' OR email LIKE '%" . esc_sql($search) . "%') ";
+    if (!empty($search)) {
+        $like_search = '%' . $wpdb->esc_like($search) . '%';
+        $where .= " AND (id LIKE {$like_search} OR email LIKE {$like_search})";
+    }
 
-    $results = $wpdb->get_results("SELECT * FROM $table $where LIMIT $start, $length", ARRAY_A);
+    // Use a cache key based on start, length, and possible search parameters
+    $eli_cache_key = 'eli_mailbase_results_' . md5( serialize( array( $table, $start, $length, $search ) ) );
+    $results = wp_cache_get( $eli_cache_key, 'eli_mailbase' );
+
+    if ( false === $results ) {
+        // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+        $results = $wpdb->get_results($wpdb->prepare(
+            "SELECT * FROM %i LIMIT %d, %d",
+            $table,
+            $start,
+            $length
+        ), ARRAY_A);
+        wp_cache_set( $eli_cache_key, $results, 'eli_mailbase', 300 ); // Cache for 5 minutes
+    }
     return $results;
   }
 
   function admin_header()
   {
-    $page = (isset($_GET['page'])) ? esc_attr($_GET['page']) : false;
+    $page = (isset($_GET['page'])) ? sanitize_text_field(wp_unslash($_GET['page'])) : false; // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only search parameter.
     if ('my_list_test' != $page)
       return;
     echo '<style type="text/css">';
@@ -63,7 +81,7 @@ class Eli_MailBase_List_Table extends WP_List_Table
 
   function no_items()
   {
-    _e('Not found Emails');
+    esc_html_e('Not found Emails', 'elementinvader-addons-for-elementor');
   }
 
   function column_default($item, $column_name)
@@ -72,9 +90,9 @@ class Eli_MailBase_List_Table extends WP_List_Table
       case 'id':
       case 'date':
       case 'email':
-        return $item[$column_name];
+        return esc_html($item[$column_name]);
       default:
-        return print_r($item, true); //Show the whole array for troubleshooting purposes
+        return esc_html($item[$column_name]);
     }
   }
 
@@ -103,12 +121,12 @@ class Eli_MailBase_List_Table extends WP_List_Table
     $orderby = 'date';
     $order = 'desc';
     // If orderby is set, use this as the sort column
-    if (!empty($_GET['orderby'])) {
-      $orderby = sanitize_text_field($_GET['orderby']);
+    if (!empty($_GET['orderby'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only search parameter.
+      $orderby = sanitize_text_field(wp_unslash($_GET['orderby'])); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only search parameter.
     }
     // If order is set use this as the order
-    if (!empty($_GET['order'])) {
-      $order = sanitize_text_field($_GET['order']);
+    if (!empty($_GET['order'])) { // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only search parameter.
+      $order = sanitize_text_field(wp_unslash($_GET['order'])); // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only search parameter.
     }
     $result = strcmp($a[$orderby], $b[$orderby]);
     if ($order === 'asc') {
@@ -120,8 +138,6 @@ class Eli_MailBase_List_Table extends WP_List_Table
   function column_id($item)
   {
     $actions = array(
-      /*'edit'      => sprintf('<a href="?page=%s&action=%s&id=%s">Edit</a>',$_REQUEST['page'],'edit',$item['id']),*/
-      'delete'    => sprintf('<a href="?page=%s&action=%s&id=%s">Delete</a>', $_REQUEST['page'], 'delete', $item['id']),
     );
 
     return sprintf('%1$s %2$s', $item['id'], $this->row_actions($actions));
@@ -137,24 +153,7 @@ class Eli_MailBase_List_Table extends WP_List_Table
 
   public function process_bulk_action()
   {
-    //Detect when a bulk action is being triggered...
-    if ('delete' === $this->current_action()) {
-      if ((isset($_POST['action']) && $_POST['action'] == 'delete')
-        || (isset($_POST['action2']) && $_POST['action2'] == 'delete')
-      ) {
-        $delete_ids = esc_sql($_POST['bulk-delete']);
-        // loop over the array of record IDs and delete them
-        foreach ($delete_ids as $id) {
-          $this->delete($id);
-        }
-        wp_redirect(admin_url("tools.php?page=eli-mails"));
-        exit;
-      } else {
-        $this->delete(absint($_GET['id']));
-        wp_redirect(admin_url("tools.php?page=eli-mails"));
-        exit;
-      }
-    }
+    return false;
   }
 
   function column_cb($item)
@@ -196,11 +195,19 @@ class Eli_MailBase_List_Table extends WP_List_Table
   public static function delete($id)
   {
     global $wpdb;
-    $wpdb->delete(
+    // Delete row from DB, then delete row/object from object cache if present
+    // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+    $result = $wpdb->delete(
       "{$wpdb->prefix}eli_newsletters",
       ['id' => $id],
       ['%d']
     );
+    if ( $result !== false ) {
+      // Remove from object cache if present (per-row key and main export/all-results cache)
+      wp_cache_delete( $id, "{$wpdb->prefix}eli_newsletters" );
+      wp_cache_delete( 'eli_newsletters_all_results', 'db' );
+      wp_cache_delete( 'eli_newsletters_export_all_results', 'eli_newsletters' );
+    }
   }
 }
 ?>
@@ -210,12 +217,12 @@ class Eli_MailBase_List_Table extends WP_List_Table
   </br>
 
   <?php if (eli_count($results)) : ?>
-    <a href="<?php echo admin_url('tools.php?action=eli_export_email_base'); ?>" class="button button-primary"><?php echo esc_html__('Export csv All', 'elementinvader-addons-for-elementor'); ?></a>
+    <a href="<?php echo esc_url(admin_url('tools.php?action=eli_export_email_base')); ?>" class="button button-primary"><?php echo esc_html__('Export csv All', 'elementinvader-addons-for-elementor'); ?></a>
     </br>
   <?php else : ?>
     <div class="bootstrap-wrapper">
       <div class="alert alert-info alert-dismissible" role="alert" style="margin-bottom: -10px">
-        <?php echo __('No emails for export', 'elementinvader-addons-for-elementor'); ?>
+        <?php echo esc_html__('No emails for export', 'elementinvader-addons-for-elementor'); ?>
       </div>
     </div>
   <?php endif ?>

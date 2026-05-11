@@ -1,12 +1,13 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <?php
 $eli_helper_button_class = '';
 $eli_helper_button_class .= ' '.$this->get_align_class($settings['button_align']);
 $eli_helper_button_class .= ' '.$this->get_align_class($settings['button_align_tablet'],'tablet_');
 $eli_helper_button_class .= ' '.$this->get_align_class($settings['button_align_mobile'],'phone_');
 ?>
-<div class="widget-elementinvader_addons_for_elementor elementinvader_contact_form contact-form" id="elementinvader_addons_for_elementor_<?php echo esc_html($this->get_id_int());?>">
-    <div class="elementinvader_addons_for_elementor-container">
-        <form class="elementinvader_addons_for_elementor_f" <?php if(isset($settings['disable_scroll_to_form']) && $settings['disable_scroll_to_form'] == 'yes'):?> scroll-disabled="disabled"<?php endif;?>>
+<div class="widget-elementinvader_addons_for_elementor elementinvader_contact_form contact-form" id="eli_<?php echo esc_html($this->get_id_int());?>">
+    <div class="eli-container elementinvader_addons_for_elementor-container">
+        <form class="eli_f eli_f_container elementinvader_addons_for_elementor_f" <?php if(isset($settings['disable_scroll_to_form']) && $settings['disable_scroll_to_form'] == 'yes'):?> scroll-disabled="disabled"<?php endif;?>>
             <input type="hidden" name="element_id" value="<?php echo esc_attr($this->get_id_int());?>"/>
             <input type="hidden" name="eli_token" value="<?php echo esc_attr(eli_generate_form_token()); ?>">
             
@@ -46,30 +47,31 @@ $eli_helper_button_class .= ' '.$this->get_align_class($settings['button_align_m
             <div class="config" data-url="<?php echo esc_url(admin_url('admin-ajax.php')); ?>"></div>
             <?php if(!isset($settings['alert_box_bellow_form']) || (isset($settings['alert_box_bellow_form']) && $settings['alert_box_bellow_form'] != 'yes')):?>
                 <?php if($settings['show_alerts_example']):?>
-                <div class="elementinvader_addons_for_elementor_f_box_alert">
-                    <div class="elementinvader_addons_for_elementor_alert elementinvader_addons_for_elementor_alert-primary" role="alert">
+                <div class="eli_f_box_alert">
+                    <div class="eli_alert eli_alert-primary" role="alert">
                       <?php esc_html_e( 'This is a primary alert—check it out!', 'elementinvader-addons-for-elementor' );?>
                     </div>
-                    <div class="elementinvader_addons_for_elementor_alert elementinvader_addons_for_elementor_alert-success" role="alert">
+                    <div class="eli_alert eli_alert-success" role="alert">
                       <?php esc_html_e( 'This is a success alert—check it out!', 'elementinvader-addons-for-elementor' );?>
                     </div>
-                    <div class="elementinvader_addons_for_elementor_alert elementinvader_addons_for_elementor_alert-danger" role="alert">
+                    <div class="eli_alert eli_alert-danger" role="alert">
                       <?php esc_html_e( 'This is a danger alert—check it out!', 'elementinvader-addons-for-elementor' );?>
                     </div>
                 </div>
                 <?php endif;?>
-                <div class="elementinvader_addons_for_elementor_f_box_alert"></div>
+                <div class="eli_f_box_alert"></div>
             <?php endif;?>
-            <div class="elementinvader_addons_for_elementor_f_container">
-                <?php echo $smart_data['wlisting_fields'];?>
-                <div class="elementinvader_addons_for_elementor_f_group elementinvader_addons_for_elementor_f_group_el_button <?php echo esc_html($eli_helper_button_class);?>" <?php echo $this->get_render_attribute_string( 'submit-group' ); ?>>
-                    <button type="submit" <?php echo $this->get_render_attribute_string( 'button' ); ?>>
-                        <span <?php echo $this->get_render_attribute_string( 'content-wrapper' ); ?>>
+            <div class="eli_f_container elementinvader_addons_for_elementor_f_container">
+                <?php // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped -- HTML is generated internally and already sanitized.
+                echo $smart_data['wlisting_fields'];?>
+                <div class="eli_f_group eli_f_group_el_button <?php echo esc_html($eli_helper_button_class);?>" <?php echo esc_attr($this->get_render_attribute_string( 'submit-group' )); ?>>
+                    <button type="submit" <?php echo esc_attr($this->get_render_attribute_string( 'button' )); ?>>
+                        <span <?php echo esc_attr($this->get_render_attribute_string( 'content-wrapper' )); ?>>
                             <?php if ( ! empty( $settings['selected_button_icon'] ) ) : ?>
-                                <span <?php echo $this->get_render_attribute_string( 'icon-align' ); ?>>
+                                <span <?php echo esc_attr($this->get_render_attribute_string( 'icon-align' )); ?>>
                                     <?php $this->el_icon_with_fallback( $settings ); ?>
                                     <?php if ( empty( $settings['button_text'] ) ) : ?>
-                                        <span class="elementor-screen-only"><?php _e( 'Submit', 'elementinvader-addons-for-elementor' ); ?></span>
+                                        <span class="elementor-screen-only"><?php esc_html_e( 'Submit', 'elementinvader-addons-for-elementor' ); ?></span>
                                     <?php endif; ?>
                                 </span>
                             <?php endif; ?>
@@ -83,24 +85,36 @@ $eli_helper_button_class .= ' '.$this->get_align_class($settings['button_align_m
             </div>
             <?php if(isset($settings['alert_box_bellow_form']) && $settings['alert_box_bellow_form'] == 'yes'):?>
                 <?php if($settings['show_alerts_example']):?>
-                <div class="elementinvader_addons_for_elementor_f_box_alert">
-                    <div class="elementinvader_addons_for_elementor_alert elementinvader_addons_for_elementor_alert-primary" role="alert">
+                <div class="eli_f_box_alert">
+                    <div class="eli_alert eli_alert-primary" role="alert">
                       <?php esc_html_e( 'This is a primary alert—check it out!', 'elementinvader-addons-for-elementor' );?>
                     </div>
-                    <div class="elementinvader_addons_for_elementor_alert elementinvader_addons_for_elementor_alert-success" role="alert">
+                    <div class="eli_alert eli_alert-success" role="alert">
                       <?php esc_html_e( 'This is a success alert—check it out!', 'elementinvader-addons-for-elementor' );?>
                     </div>
-                    <div class="elementinvader_addons_for_elementor_alert elementinvader_addons_for_elementor_alert-danger" role="alert">
+                    <div class="eli_alert eli_alert-danger" role="alert">
                       <?php esc_html_e( 'This is a danger alert—check it out!', 'elementinvader-addons-for-elementor' );?>
                     </div>
                 </div>
                 <?php endif;?>
-                <div class="elementinvader_addons_for_elementor_f_box_alert"></div>
+                <div class="eli_f_box_alert"></div>
             <?php endif;?>
 
             <?php if(isset($settings['recaptcha_version_3']) && $settings['recaptcha_version_3'] == 'yes'):?>
                 <input type="hidden" name="g-recaptcha-response" id="recaptcha_called_v3_<?php echo esc_html($this->get_id_int());?>">
-                <script src='https://www.google.com/recaptcha/api.js?render=<?php echo esc_attr(trim($settings['recaptcha_site_key']));?>'></script>
+                <?php
+                // Enqueue Google reCAPTCHA v3 script only once
+                if (!wp_script_is('google-recaptcha-v3', 'enqueued')) {
+                    wp_enqueue_script(
+                        'google-recaptcha-v3',
+                        'https://www.google.com/recaptcha/api.js?render=' . esc_attr(trim($settings['recaptcha_site_key'])),
+                        array(),
+                        null,
+                        true
+                    );
+                }
+                ?>
+      
                 <script>
                 (function(){
                     grecaptcha.ready(function() {
@@ -110,7 +124,7 @@ $eli_helper_button_class .= ' '.$this->get_align_class($settings['button_align_m
                     });
 
                     // Reload token after form submit
-                    document.querySelector('#elementinvader_addons_for_elementor_<?php echo esc_html($this->get_id_int());?> form.elementinvader_addons_for_elementor_f').addEventListener('submit', function(e) {
+                    document.querySelector('#eli_<?php echo esc_html($this->get_id_int());?> form.eli_f').addEventListener('submit', function(e) {
                         e.preventDefault();
                         grecaptcha.execute('<?php echo esc_attr(trim($settings['recaptcha_site_key']));?>', {action: 'submit'}).then(function(token) {
                             document.getElementById('recaptcha_called_v3_<?php echo esc_html($this->get_id_int());?>').value = token;

@@ -1,3 +1,4 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <?php
     $eli_zoom_index = (int) $settings['zoom_index']['size'];
     $eli_center_lat = $eli_lat = (float) $settings['gps_lat'];
@@ -10,10 +11,10 @@
     $eli_enable_map_move_by_finger_mobile = false;
 ?>
 <?php if ($settings['map_type'] == 'open_street'): ?>
-    <div id="elementinvader_addons_for_elementor_<?php echo esc_html($this->get_id_int()); ?>" style="height:<?php echo $settings['map_height']['size'];?>px" data-zoom_index="<?php echo esc_attr($eli_zoom_index); ?>" class="sw_map_box elementor-custom-embed elementor-clickable"></div>
+    <div id="eli_<?php echo esc_html($this->get_id_int()); ?>" style="height:<?php echo esc_attr($settings['map_height']['size']);?>px" data-zoom_index="<?php echo esc_attr($eli_zoom_index); ?>" class="sw_map_box elementor-custom-embed elementor-clickable"></div>
 <?php endif; ?>
 <?php if ($settings['map_type'] == 'google' && $settings['google_map_styes'] != ''): ?>
-    <div id="elementinvader_addons_for_elementor_<?php echo esc_html($this->get_id_int()); ?>" data-zoom_index="<?php echo esc_attr($eli_zoom_index); ?>" class="sw_map_box elementor-custom-embed elementor-clickable"></div>
+    <div id="eli_<?php echo esc_html($this->get_id_int()); ?>" data-zoom_index="<?php echo esc_attr($eli_zoom_index); ?>" class="sw_map_box elementor-custom-embed elementor-clickable"></div>
     <?php wp_enqueue_script('google-markerclusterers'); ?>
     <?php wp_enqueue_script('wlistings-custom-marker'); ?>
 <?php endif; ?>
@@ -48,7 +49,7 @@ if(!function_exists('eli_get_position_marker')) {
 
 ?>
 <style>
-    #elementinvader_addons_for_elementor_<?php echo esc_html($this->get_id_int()); ?> .wl_marker-container {
+    #eli_<?php echo esc_html($this->get_id_int()); ?> .wl_marker-container {
         height: <?php echo esc_attr($this->_ch($settings['marker_size']['size'], 60));?>px !important;
         width: <?php echo esc_attr($this->_ch($settings['marker_size']['size'], 60));?>px !important;
     } 
@@ -78,7 +79,7 @@ if(!function_exists('eli_get_position_marker')) {
             if(eli_clusters=='')
                 eli_clusters = L.markerClusterGroup({spiderfyOnMaxZoom: true, showCoverageOnHover: false, zoomToBoundsOnClick: true});
 
-                eli_map = L.map('elementinvader_addons_for_elementor_" . $this->get_id_int() . "', {
+                eli_map = L.map('eli_" . $this->get_id_int() . "', {
                     center: [" . esc_html($eli_lat) . "," . esc_html($eli_lng) . "],
                     zoom: " . $eli_zoom_index . ",
                     scrollWheelZoom: false,
@@ -251,7 +252,7 @@ if(!function_exists('eli_get_position_marker')) {
             var myLatlng = {lat: " . esc_html($eli_center_lat) . ", lng: " . esc_html($eli_center_lng) . "};
             
             eli_geocoder = new google.maps.Geocoder();
-            eli_map = new google.maps.Map(document.getElementById('elementinvader_addons_for_elementor_" . esc_html($this->get_id_int()) . "'), {
+            eli_map = new google.maps.Map(document.getElementById('eli_" . esc_html($this->get_id_int()) . "'), {
               zoom: " . $eli_zoom_index . ",
               center: myLatlng,";
 
@@ -357,14 +358,28 @@ if(!function_exists('eli_get_position_marker')) {
         }
     endif;
 
-    echo '<script>' . ($custom_js) . '</script>';
-
     if (isset($is_edit_mode)) {
         $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http';
         ?>
-        <script src="<?php echo esc_html($protocol); ?>://maps.google.com/maps/api/js?libraries=places%2Cgeometry&amp;key=<?php echo esc_attr($settings['google_map_key']); ?>&amp;ver=5.6" id="el_wl_maps-google-api-js-js"></script>
+        <?php
+        // Properly enqueue Google Maps Script instead of direct <script> output
+        $google_maps_handle = 'el_wl_maps-google-api-js-js';
+        $google_maps_src = $protocol.'://maps.google.com/maps/api/js?libraries=places,geometry&key='.esc_attr($settings['google_map_key']).'&ver=5.6';
+        if ( ! wp_script_is( $google_maps_handle, 'enqueued' ) ) {
+            wp_enqueue_script(
+                $google_maps_handle,
+                $google_maps_src,
+                array(),
+                null,
+                true
+            );
+        }
+        ?>
+
         <?php
     } else {
-        //wp_add_inline_script( 'wlistings-main', $custom_js );
+        wp_register_script('eli-custom', false);
+        wp_enqueue_script('eli-custom');
+        wp_add_inline_script( 'eli-custom', $custom_js );
     }
 ?>

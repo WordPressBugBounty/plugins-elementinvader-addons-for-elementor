@@ -1,8 +1,8 @@
 <?php
 
-namespace ElementinvaderAddonsForElementor\Widgets;
+namespace ELI\Widgets;
 
-use ElementinvaderAddonsForElementor\Core\Elementinvader_Base;
+use ELI\Core\Elementinvader_Base;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Utils;
@@ -13,7 +13,7 @@ use Elementor\Icons_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
-use ElementinvaderAddonsForElementor\Modules\Forms\Ajax_Handler;
+use ELI\Modules\Forms\Ajax_Handler;
 
 if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
@@ -103,7 +103,7 @@ class EliLogo extends Elementinvader_Base {
         [
             'label' => '',
             'type' => \Elementor\Controls_Manager::RAW_HTML,
-            'raw' => sprintf(__( 'Change WP default Logos <a href="%1$s" target="_blank"> open </a>', 'elementinvader-addons-for-elementor' ), add_query_arg(['autofocus[section]'=>'title_tagline', 'page_id'=>intval($post_id)], admin_url( 'customize.php' )))
+            'raw' => sprintf(/* translators: 1: Link to customize.php. */__( 'Change WP default Logos <a href="%1$s" target="_blank"> open </a>', 'elementinvader-addons-for-elementor' ), add_query_arg(['autofocus[section]'=>'title_tagline', 'page_id'=>intval($post_id)], admin_url( 'customize.php' )))
                     .'<br/><br/>'.__( '1. Go to Appearance >> Customizer.', 'elementinvader-addons-for-elementor' )
                     .'<br/>'.__( '2. Expand the Site Identity section by clicking on it.', 'elementinvader-addons-for-elementor' )
                     .'<br/>'.__( '3. Upload your logo image file (gif, jpeg or png).', 'elementinvader-addons-for-elementor' )
@@ -130,7 +130,7 @@ class EliLogo extends Elementinvader_Base {
         [
             'label' => '',
             'type' => \Elementor\Controls_Manager::RAW_HTML,
-            'raw' => sprintf(__( 'Change WP default Site Title <a href="%1$s" target="_blank"> open </a>', 'elementinvader-addons-for-elementor' ), add_query_arg(['autofocus[section]'=>'title_tagline', 'page_id'=>intval($post_id)], admin_url( 'customize.php' ))),
+            'raw' => sprintf(/* translators: 1: Link to customize.php. */__( 'Change WP default Site Title <a href="%1$s" target="_blank"> open </a>', 'elementinvader-addons-for-elementor' ), add_query_arg(['autofocus[section]'=>'title_tagline', 'page_id'=>intval($post_id)], admin_url( 'customize.php' ))),
             'content_classes' => 'elo_elementor_hint',
         ]
     );
@@ -258,7 +258,7 @@ class EliLogo extends Elementinvader_Base {
             $object['baseTimestamp'] = strtotime($settings['baseTimestamp']);
         }
 
-        echo $this->view('widget_layout', $object); 
+        $this->view('widget_layout', $object, true); 
     }
 
 }

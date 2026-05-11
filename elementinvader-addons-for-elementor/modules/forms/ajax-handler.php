@@ -1,5 +1,5 @@
 <?php
-namespace ElementinvaderAddonsForElementor\Modules\Forms;
+namespace ELI\Modules\Forms;
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
 /**
@@ -12,7 +12,7 @@ if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 class ThzelGetElementSettings {
 	
 	
-		public $postid = null;
+    public $postid = null;
 	public $widget_id = null;
 	public $widget_type = null;
 	public $widget = null;
@@ -185,7 +185,7 @@ class ThzelGetElementSettings {
     Example code: 
     add_filter( 'eli/ajax-handler/filter_output', function($filter_output){
         // custom message
-        $filter_output['message'] = '<div class="elementinvader_addons_for_elementor_alert elementinvader_addons_for_elementor_alert-danger" role="alert">'.esc_html__('Date not available', 'elementinvader-addons-for-elementor').'</div>';
+        $filter_output['message'] = '<div class="eli_alert eli_alert-danger" role="alert">'.esc_html__('Date not available', 'elementinvader-addons-for-elementor').'</div>';
         
         // disable reset form
         $filter_output['no_clear_from'] = true;
@@ -221,7 +221,10 @@ class Ajax_Handler {
 	const SUBSCRIBER_ALREADY_EXISTS = 'subscriber_already_exists';
 
 	public static function is_form_submitted() {
-		return wp_doing_ajax() && sanitize_text_field( $_POST['action'] ) && 'elementinvader_addons_for_elementor_forms_send_form' === sanitize_text_field($_POST['action']);
+		return wp_doing_ajax()
+			&& isset($_POST['action'], $_POST['eli_nonce'])
+			&& 'eli_forms_send_form' === sanitize_text_field( wp_unslash( $_POST['action'] ) )
+			&& wp_verify_nonce( sanitize_text_field( wp_unslash($_POST['eli_nonce']) ), 'eli_forms_send_form' );
 	}
 
 	public static function get_default_messages() {
@@ -269,37 +272,38 @@ class Ajax_Handler {
                 'message'=>'',
                 'success'=>false,
             ];
+            $post = wp_unslash($_POST);
+            $post = map_deep($post, function($value) {
+                if (is_string($value)) {
+                    return sanitize_text_field($value);
+                }
+                return $value;
+            });
+
 
             // Check nonce for security
-            if ( ! isset( $_POST['eli_nonce'] ) || ! wp_verify_nonce( sanitize_text_field($_POST['eli_nonce']), 'eli_forms_send_form' ) ) {
+            if ( ! isset( $post['eli_nonce'] ) || ! wp_verify_nonce( sanitize_text_field($post['eli_nonce']), 'eli_forms_send_form' ) ) {
                 $ajax_output['code'] = self::INVALID_FORM;
-                $ajax_output['message'] = $this->generate_alert( esc_html__( 'Security check failed. Please reload the page and try again.', 'elementinvader-addons-for-elementor' ), 'elementinvader_addons_for_elementor_alert-danger' );
+                $ajax_output['message'] = $this->generate_alert( esc_html__( 'Security check failed. Please reload the page and try again.', 'elementinvader-addons-for-elementor' ), 'eli_alert-danger' );
                 $this->output( $ajax_output );
             }
 
-            if (empty($_POST['eli_token']) || !eli_verify_form_token($_POST['eli_token'])) {
-                $ajax_output['code'] = self::INVALID_FORM;
-                $ajax_output['message'] = $this->generate_alert( esc_html__( 'Security check failed. Please reload the page and try again.(Token)', 'elementinvader-addons-for-elementor' ), 'elementinvader_addons_for_elementor_alert-danger' );
-                $this->output( $ajax_output );
-            }
-
-            
-            $post = sanitize_post($_POST);
             if(!isset($post['element_id']) || empty($post['element_id'])){
                 $ajax_output['code'] = self::INVALID_FORM;
-                $ajax_output['message'] = $this->generate_alert(esc_html__( 'Element id not found.', 'elementinvader-addons-for-elementor' ),'elementinvader_addons_for_elementor_alert-danger');
+                $ajax_output['message'] = $this->generate_alert(esc_html__( 'Element id not found.', 'elementinvader-addons-for-elementor' ),'eli_alert-danger');
                 $this->output($ajax_output);
             }
             
-            $post = sanitize_post($_POST);
+
             if(isset($post['mail_data_from_email']) || isset($post['mail_data_from_name'])){
                 $ajax_output['code'] = self::INVALID_FORM;
-                $ajax_output['message'] = $this->generate_alert( esc_html__( 'Security check failed. Please disable fields "mail_data_from_email,mail_data_from_name"', 'elementinvader-addons-for-elementor' ), 'elementinvader_addons_for_elementor_alert-danger' );
+                $ajax_output['message'] = $this->generate_alert( esc_html__( 'Security check failed. Please disable fields "mail_data_from_email,mail_data_from_name"', 'elementinvader-addons-for-elementor' ), 'eli_alert-danger' );
                 $this->output( $ajax_output );
             }
+
             $element_id = $post['element_id'];
             /* deprecated */
-            //$form_data = get_option('elementinvader_addons_for_elementor_form_'.$element_id);
+            //$form_data = get_option('eli_form_'.$element_id);
 
             $form_data = array(); 
             if(isset($post['shortcode']) && !empty($post['shortcode'])){
@@ -316,15 +320,23 @@ class Ajax_Handler {
                     'section_send_action_mailchimp_list_id',
                     'send_action_type',
                 ];
-                $_POST = array_intersect_key($_POST, array_flip($allowed_fields));
+                $post = array_intersect_key($post, array_flip($allowed_fields));
 
-                $form_data = array('settings' => $_POST);
+                $form_data = array('settings' => $post);
 
                 foreach (['mail_data_to_email','mail_data_from_email','mail_data_from_name'] as $field_key) {
                     if(!empty($form_data['settings'][$field_key])){
                         $form_data['settings'][$field_key] = eli_decrypt(sanitize_text_field($form_data['settings'][$field_key]));
                     }
                 }
+
+                $email = $post['email'] ?? $post['Email'] ?? '';
+
+                if(empty($email) || filter_var($email, FILTER_VALIDATE_EMAIL) === false){
+                    $ajax_output['code'] = self::INVALID_FORM;
+                    $ajax_output['message'] = $this->generate_alert( esc_html__( 'Email is not valid', 'elementinvader-addons-for-elementor' ), 'eli_alert-danger' );
+                    $this->output( $ajax_output );
+                } 
 
                 $form_data['settings']['mail_data_from_email'] = get_bloginfo('admin_email');
                 $form_data['settings']['mail_data_from_name'] = get_bloginfo('admin_email');
@@ -341,7 +353,7 @@ class Ajax_Handler {
 
             if(!$form_data){
                 $ajax_output['code'] = self::INVALID_FORM;
-                $ajax_output['message'] = $this->generate_alert($this->get_default_message( self::INVALID_FORM, $form_data ),'elementinvader_addons_for_elementor_alert-danger');
+                $ajax_output['message'] = $this->generate_alert($this->get_default_message( self::INVALID_FORM, $form_data ),'eli_alert-danger');
                 $this->output($ajax_output);
             }
             $form_data = $form_data['settings'];
@@ -359,7 +371,7 @@ class Ajax_Handler {
                 else
                 {
                     $ajax_output['code'] = self::RECAPTCHA_ERROR;
-                    $ajax_output['message'] = $this->generate_alert($this->get_default_message( self::RECAPTCHA_ERROR, $form_data ),'elementinvader_addons_for_elementor_alert-danger');
+                    $ajax_output['message'] = $this->generate_alert($this->get_default_message( self::RECAPTCHA_ERROR, $form_data ),'eli_alert-danger');
                     $this->output($ajax_output);
                 }
             /* end recaptcha */
@@ -420,9 +432,9 @@ class Ajax_Handler {
                     }
                     
                     if(filter_var($value, FILTER_VALIDATE_URL ) || strpos( $value, 'http' ) !== FALSE) {
-                        $data_mess []= '<p><strong>'.str_replace('_',' ', ucfirst($key)).':</strong> <a href="'.esc_url($value).'">'.$value.'</a></p>';
+                        $data_mess []= '<p><strong>'.str_replace('_',' ', ucfirst($key)).':</strong> <a href="'.esc_url($value).'">'.wp_kses_post($value).'</a></p>';
                     } else {
-                        $data_mess []= '<p><strong>'.str_replace('_',' ', ucfirst($key)).':</strong> '.$value.'</p>';
+                        $data_mess []= '<p><strong>'.str_replace('_',' ', ucfirst($key)).':</strong> '.wp_kses_post($value).'</p>';
                     }
 
                     if(stripos($key,'custom_subject') !== FALSE)
@@ -435,7 +447,7 @@ class Ajax_Handler {
                 $data_mess = implode('', $data_mess);
                 $message = str_replace('{dynamic_values}', $data_mess, $message);
 
-                $email_address = $this->_ch($form_data['mail_data_to_email']);
+                $email_address = sanitize_email($this->_ch($form_data['mail_data_to_email']));
 
                 if(empty($email_address)) {
                     $form_data['mail_data_from_email'] = $email_address = get_bloginfo('admin_email');
@@ -468,7 +480,7 @@ class Ajax_Handler {
             $email = false;
             foreach ($post as $key => $value) {
                 if(stripos($key,'mail') !== FALSE || filter_var($value, FILTER_VALIDATE_EMAIL))
-                    $email = $value;
+                    $email = sanitize_email($value);
             }
 
             if(!isset($form_data['disable_mail_send']) || empty($form_data['disable_mail_send'])){
@@ -523,9 +535,9 @@ class Ajax_Handler {
                         }
                         
                         if(filter_var($value, FILTER_VALIDATE_URL ) || strpos( $value, 'http' ) !== FALSE) {
-                            $data_mess []= '<p><strong>'.str_replace('_',' ', ucfirst($key)).':</strong> <a href="'.esc_url($value).'">'.$value.'</a></p>';
+                            $data_mess []= '<p><strong>'.str_replace('_',' ', ucfirst($key)).':</strong> <a href="'.esc_url($value).'">'.wp_kses_post($value).'</a></p>';
                         } else {
-                            $data_mess []= '<p><strong>'.str_replace('_',' ', ucfirst($key)).':</strong> '.$value.'</p>';
+                            $data_mess []= '<p><strong>'.str_replace('_',' ', ucfirst($key)).':</strong> '.wp_kses_post($value).'</p>';
                         }
                     }
 
@@ -568,12 +580,12 @@ class Ajax_Handler {
                 if($this->custom_message) {
                     $ajax_output['message'] = $this->custom_message;
                 } else {
-                    $ajax_output['message'] = $this->generate_alert($this->get_default_message( self::SUCCESS, $form_data ),'elementinvader_addons_for_elementor_alert-primary');
+                    $ajax_output['message'] = $this->generate_alert($this->get_default_message( self::SUCCESS, $form_data ),'eli_alert-primary');
                 }
             
             } else {
                 $ajax_output['code'] = self::SERVER_ERROR;
-                $ajax_output['message'] = $this->generate_alert($this->get_default_message( self::SERVER_ERROR, $form_data ),'elementinvader_addons_for_elementor_alert-danger');
+                $ajax_output['message'] = $this->generate_alert($this->get_default_message( self::SERVER_ERROR, $form_data ),'eli_alert-danger');
             }
     
             if(has_filter('eli/ajax-handler/filter_output'))
@@ -587,19 +599,19 @@ class Ajax_Handler {
             header('Pragma: no-cache');
             header('Cache-Control: no-store, no-cache');
             header('Content-Type: application/json; charset=utf8');
-            //header('Content-Length: '.$length); // special characters causing troubles
 
+            // phpcs:ignore WordPress.Security.EscapeOutput.OutputNotEscaped
             echo $json_output;
             exit();
         }
         
-	public function generate_alert($message = '', $class='elementinvader_addons_for_elementor_alert-primary' ) {
-		return '<div class="elementinvader_addons_for_elementor_alert '.$class.'" role="alert">'.$message.'</div>';
+	public function generate_alert($message = '', $class='eli_alert-primary' ) {
+		return '<div class="eli_alert '.$class.'" role="alert">'.$message.'</div>';
 	}
 
 	public function __construct() {
-            add_action( 'wp_ajax_elementinvader_addons_for_elementor_forms_send_form', [ $this, 'ajax_send_form' ] );
-            add_action( 'wp_ajax_nopriv_elementinvader_addons_for_elementor_forms_send_form', [ $this, 'ajax_send_form' ] );
+            add_action( 'wp_ajax_eli_forms_send_form', [ $this, 'ajax_send_form' ] );
+            add_action( 'wp_ajax_nopriv_eli_forms_send_form', [ $this, 'ajax_send_form' ] );
 	}
         
         public function _ch(&$var, $empty = '')
@@ -630,7 +642,8 @@ class Ajax_Handler {
                     'body'        => array(
                         'secret' => $recaptcha_secret_key,
                         'response' => $g_recaptcha_response,
-                        'remoteip' => $_SERVER['REMOTE_ADDR']
+                        'remoteip' => isset($_SERVER['REMOTE_ADDR']) ? sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR'])) : '',
+                   
                     ),
                     'cookies'     => array()
             );
@@ -648,6 +661,8 @@ class Ajax_Handler {
                 
         public function action_mail_base($data)
         {
+            $data = map_deep($data, 'sanitize_text_field');
+
             $element_id =$data['element_id'];
             if(isset($data['shortcode']) && !empty($data['shortcode'])){
                 $form_data = $data;
@@ -657,28 +672,51 @@ class Ajax_Handler {
                 $form_data = $form_data['settings'];
             }
 
-            $json_object = json_encode($data);
+            $json_object = wp_json_encode($data);
             
             $email = false;
             foreach ($data as $key => $value) {
                 if(stripos($key,'mail') !== FALSE || filter_var($value, FILTER_VALIDATE_EMAIL))
-                    $email = $value;
+                    $email = sanitize_email($value);
             }
             
             if(!$email) return false;
             
             global $wpdb;
-            $table_name = $wpdb->prefix . "eli_newsletters";
+            $eli_table_name = esc_sql($wpdb->prefix . "eli_newsletters");
             $res = false;
-            $checkIfExists = $wpdb->get_var("SELECT id FROM $table_name WHERE email = '$email'");
-            if ($checkIfExists == NULL) {
-                $res = $wpdb->insert($table_name, array(
+
+            // Use a cache key based on email to help avoid direct DB query on repeated requests
+            $eli_cache_key = 'eli_newsletters_email_' . md5( $email );
+            $checkIfExists = wp_cache_get( $eli_cache_key, 'eli_newsletters' );
+
+            if ( false === $checkIfExists ) {global $wpdb;
+
+                $table = esc_sql( $eli_table_name );
+                $email = sanitize_email( $email );
+                
+                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+                $checkIfExists = $wpdb->get_var( $wpdb->prepare(
+                    "SELECT id FROM %i WHERE email = %s LIMIT 1", $table,
+                    $email
+                ) );
+                // Cache result for future lookups
+                wp_cache_set( $eli_cache_key, $checkIfExists, 'eli_newsletters', 300 ); // Cache for 5 minutes
+            }
+
+            if ( is_null( $checkIfExists ) ) {
+                // phpcs:ignore WordPress.DB.DirectDatabaseQuery.DirectQuery
+                $res = $wpdb->insert($eli_table_name, array(
                     'form_id' => $element_id,
                     'email' => $email,
                     'website' => get_site_url(),
                     'json_object' => $json_object,
-                    'date' => date('Y-m-d H:i:s')
+                    'date' => gmdate('Y-m-d H:i:s')
                 ));
+                if ( $res ) {
+                    // Remove cached value since new email was added
+                    wp_cache_delete( $eli_cache_key, 'eli_newsletters' );
+                }
             } else {
                 $this->custom_message = $this->generate_alert(esc_html__('Email already added', 'elementinvader-addons-for-elementor'));
             }
@@ -689,6 +727,8 @@ class Ajax_Handler {
                 
     public function action_mailchimp($data)
         {
+            $data = map_deep($data, 'sanitize_text_field');
+            
             $element_id =$data['element_id'];
                                    
             if(isset($data['shortcode']) && !empty($data['shortcode'])){
@@ -701,19 +741,19 @@ class Ajax_Handler {
 		
 			
 
-            $json_object = json_encode($data);
+            $json_object = wp_json_encode($data);
             
             $email = false;
             foreach ($data as $key => $value) {
                 if(stripos($key,'mail') !== FALSE || filter_var($value, FILTER_VALIDATE_EMAIL))
-                    $email = $value;
+                    $email = sanitize_email($value);
             }
 
             if(!$email) return false;
             
             $ajax_output = array();
             $this->data['message'] = esc_html__('No message returned!', 'elementinvader-addons-for-elementor');
-            $this->data['parameters'] = sanitize_post($_POST);
+            $this->data['parameters'] = sanitize_post($post);
             $this->data['success'] = false;
 
 		

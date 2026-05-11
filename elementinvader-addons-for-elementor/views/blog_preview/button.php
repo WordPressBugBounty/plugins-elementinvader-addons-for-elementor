@@ -1,3 +1,4 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <div class="widget-eli eli_blog_preview_button" id="eli_<?php echo esc_html($this->get_id_int());?>">
     <a href="<?php echo esc_url(get_permalink($eli_post_id)); ?>" class="eli_blog_preview_button--btn">
         <?php if ($settings['link_icon_position'] == 'left') : ?>

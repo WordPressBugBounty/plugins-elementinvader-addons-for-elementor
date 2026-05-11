@@ -1,3 +1,4 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <?php
 
 // Shortcodes
@@ -18,9 +19,9 @@ function eli_shortcodes_view($view_file = '', $element = '', $print = false)
     {
         $file = get_template_directory().'/elementor-elementinvader_addons_for_elementor/shortcodes/views/'.$view_file.'.php';
     }
-    elseif(file_exists(ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PATH.'shortcodes/views/'.$view_file.'.php'))
+    elseif(file_exists(ELI_PATH.'shortcodes/views/'.$view_file.'.php'))
     {
-        $file = ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PATH.'shortcodes/views/'.$view_file.'.php';
+        $file = ELI_PATH.'shortcodes/views/'.$view_file.'.php';
     }
 
     if($file)
@@ -37,9 +38,9 @@ function eli_shortcodes_view($view_file = '', $element = '', $print = false)
     else
     {
         if($print) {
-            echo 'View file not found in: '.esc_html(ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PATH.'shortcodes/views/'.$view_file.'.php');
+            echo 'View file not found in: '.esc_html(ELI_PATH.'shortcodes/views/'.$view_file.'.php');
         } else {
-            return 'View file not found in: '.esc_html(ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PATH.'shortcodes/views/'.$view_file.'.php');
+            return 'View file not found in: '.esc_html(ELI_PATH.'shortcodes/views/'.$view_file.'.php');
         } 
     }
 }

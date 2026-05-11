@@ -1,18 +1,18 @@
 jQuery('document').ready(function($){
     
     /* mail send */
-    $('.elementinvader_addons_for_elementor_f').on('submit', function(e){
+    $('.eli_f').on('submit', function(e){
         e.preventDefault();
         var this_form = $(this);
         var $config = this_form.find('.config');
         var conf_link = $config.attr('data-url') || 0;
         var load_indicator = this_form.find('.ajax-indicator-masking');
-        var box_alert = this_form.find('.elementinvader_addons_for_elementor_f_box_alert').html('');
+        var box_alert = this_form.find('.eli_f_box_alert').html('');
         load_indicator.css('display', 'inline-block');
         
         var data = this_form.serializeArray();
         if(typeof data['action'] == 'undefined')
-        data.push({ name: 'action', value: "elementinvader_addons_for_elementor_forms_send_form" });
+        data.push({ name: 'action', value: "eli_forms_send_form" });
         
             $.post(conf_link, data, 
                 function(data){
@@ -78,20 +78,20 @@ jQuery('document').ready(function($){
     
     /* Start menu dropdown */
     var _w = $(window);
-    $('.elementinvader-addons-for-elementor .wl-nav-menu--dropdown .menu-item-has-children > a').each(function() {
+    $('.eli .wl-nav-menu--dropdown .menu-item-has-children > a').each(function() {
         $(this).append('<span class="eli-caret"></span>');
     });
     /* End menu dropdown */
     
-    $('.elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu .menu-item > a').on('mouseover focus', function(e){
+    $('.eli .wl-nav-menu--main .wl-nav-menu .menu-item > a').on('mouseover focus', function(e){
         e.preventDefault();
         e.stopPropagation();
         if(!$(this).parent().hasClass('active')) {
             $(this).parent().siblings().removeClass('active').find('.menu-item').removeClass('active');
             $(this).parent().toggleClass('active');
-            var eli_el = $(this).closest('.elementinvader-addons-for-elementor');
+            var eli_el = $(this).closest('.eli');
             $(document).unbind('mouseout').on('mouseout', function(e){
-                if(!$(e.target).closest('.elementinvader-addons-for-elementor').length) {
+                if(!$(e.target).closest('.eli').length) {
                     eli_el.find('.menu-item').removeClass('active');
                     $(document).unbind('mouseout');
                 }
@@ -100,15 +100,15 @@ jQuery('document').ready(function($){
     })
         
     $("html").on("click", function(){
-        $('.elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu .menu-item-has-children').removeClass("active");
+        $('.eli .wl-nav-menu--main .wl-nav-menu .menu-item-has-children').removeClass("active");
     });
     
-    $('.elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu .menu-item-has-children > a').on("mouseover", function(e) {
+    $('.eli .wl-nav-menu--main .wl-nav-menu .menu-item-has-children > a').on("mouseover", function(e) {
         e.stopPropagation();
     });
 
     var eli_menu_is_focus = false;
-    $('.elementinvader-addons-for-elementor .wl-nav-menu--dropdown .menu-item.menu-item-has-children>a .eli-caret').on('click', function(e){
+    $('.eli .wl-nav-menu--dropdown .menu-item.menu-item-has-children>a .eli-caret').on('click', function(e){
         e.preventDefault();
         if(!eli_menu_is_focus){
             $('.wl-nav-menu .menu-item-has-children').not($(this).parent().parent()).removeClass('active');
@@ -116,11 +116,11 @@ jQuery('document').ready(function($){
         }
     })
     
-    $('.elementinvader-addons-for-elementor .wl-nav-menu--dropdown .menu-item.menu-item-has-children>a .eli-caret').on('click', function(e){
+    $('.eli .wl-nav-menu--dropdown .menu-item.menu-item-has-children>a .eli-caret').on('click', function(e){
         e.stopPropagation();
     });
 
-    $('.elementinvader-addons-for-elementor .wl-nav-menu--dropdown .menu-item.menu-item-has-children>a').on('keydown', function(e){
+    $('.eli .wl-nav-menu--dropdown .menu-item.menu-item-has-children>a').on('keydown', function(e){
         var keyCode = e.keyCode || e.which; 
 
         if (!e.shiftKey && keyCode == 9) {
@@ -136,7 +136,7 @@ jQuery('document').ready(function($){
         }
     })
 
-    $('.elementinvader-addons-for-elementor .wl-nav-menu--dropdown .menu-item.menu-item-has-children>a').on('click', function(e){
+    $('.eli .wl-nav-menu--dropdown .menu-item.menu-item-has-children>a').on('click', function(e){
         if($(this).parent().hasClass('active')  &&  ($(this).attr('href') != '' &&  $(this).attr('href') != '#')){
             /* open link */
 
@@ -147,7 +147,7 @@ jQuery('document').ready(function($){
         }
     })
     
-    $('.eli-menu .wl-menu-toggle,.wl_close-menu,.elementinvader-addons-for-elementor .wl_nav_mask').on('click', function (e) {
+    $('.eli-menu .wl-menu-toggle,.wl_close-menu,.eli .wl_nav_mask').on('click', function (e) {
         e.preventDefault();
      
         var menu_widg = $(this).closest('.elementor-widget-eli-menu');
@@ -163,13 +163,13 @@ jQuery('document').ready(function($){
 
             
             setTimeout (function(){
-                jQuery(".elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container ul.wl-nav-menu > li").first().find('a').eq(0).attr('tabindex', -1).trigger('focus');
+                jQuery(".eli .wl-nav-menu--dropdown.wl-nav-menu__container ul.wl-nav-menu > li").first().find('a').eq(0).attr('tabindex', -1).trigger('focus');
             },500);
                 
         }
                 
         if (keyCode == 9 && !jQuery(".wl_nav_show").length) {
-            var current_link = jQuery(".elementinvader-addons-for-elementor .wl-nav-menu--dropdown a").last()[0];
+            var current_link = jQuery(".eli .wl-nav-menu--dropdown a").last()[0];
             var flag = false;
             jQuery('a').each(function () {
                 if (flag) {
@@ -183,7 +183,7 @@ jQuery('document').ready(function($){
         }
     });
     
-    jQuery(".elementinvader-addons-for-elementor.wl-nav-menu--dropdown a").last().on('keydown', function(e) { 
+    jQuery(".eli.wl-nav-menu--dropdown a").last().on('keydown', function(e) { 
         var keyCode = e.keyCode || e.which; 
         if (keyCode == 9) { 
           e.preventDefault(); 
@@ -192,7 +192,7 @@ jQuery('document').ready(function($){
     });
 
     /* first menu item, when nav pre element, trigger to close btn */
-    jQuery(".elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container ul.wl-nav-menu > li").first().find('a').on('keydown', function(e) { 
+    jQuery(".eli .wl-nav-menu--dropdown.wl-nav-menu__container ul.wl-nav-menu > li").first().find('a').on('keydown', function(e) { 
         var keyCode = e.keyCode || e.which; 
         if(e.shiftKey && keyCode == 9) { 
             //shift was down when tab was pressed
@@ -203,7 +203,7 @@ jQuery('document').ready(function($){
 
     
     /* first menu item, when nav next element, trigger to close btn */
-    jQuery(".elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container ul.wl-nav-menu a").last().on('keydown', function(e) { 
+    jQuery(".eli .wl-nav-menu--dropdown.wl-nav-menu__container ul.wl-nav-menu a").last().on('keydown', function(e) { 
         var keyCode = e.keyCode || e.which; 
         if (!e.shiftKey && keyCode == 9) { 
             e.preventDefault(); 
@@ -212,20 +212,20 @@ jQuery('document').ready(function($){
     });
     
     /* keyboard nav from close btn, trigger to first/last menu element */
-    jQuery(".elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container a.wl_close-menu").on('keydown', function(e) { 
+    jQuery(".eli .wl-nav-menu--dropdown.wl-nav-menu__container a.wl_close-menu").on('keydown', function(e) { 
         var keyCode = e.keyCode || e.which; 
         if (!e.shiftKey && keyCode == 9) { 
             e.preventDefault(); 
-            jQuery(".elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container ul.wl-nav-menu > li").first().find('a').eq(0).attr('tabindex', -1).trigger('focus');
+            jQuery(".eli .wl-nav-menu--dropdown.wl-nav-menu__container ul.wl-nav-menu > li").first().find('a').eq(0).attr('tabindex', -1).trigger('focus');
         } else if(e.shiftKey && keyCode == 9) {
             e.preventDefault(); 
-            jQuery(".elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container ul.wl-nav-menu > li").last().find('a').eq(0).attr('tabindex', -1).trigger('focus');
+            jQuery(".eli .wl-nav-menu--dropdown.wl-nav-menu__container ul.wl-nav-menu > li").last().find('a').eq(0).attr('tabindex', -1).trigger('focus');
         }
     });
     
     /* End menu dropdown */
 
-    $('.elementinvader-addons-for-elementor .wl-nav-menu--dropdown .menu-item.current-menu-parent').addClass('active');
+    $('.eli .wl-nav-menu--dropdown .menu-item.current-menu-parent').addClass('active');
 
     /* live edit elementor custom css */
     if(typeof elementor != 'undefined'){

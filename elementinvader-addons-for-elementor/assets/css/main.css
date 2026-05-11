@@ -1,5 +1,7 @@
 /* alerts css */
 
+/* Support both .eli_alert and .elementinvader_addons_for_elementor_alert (and all alert types) */
+.eli_alert,
 .elementinvader_addons_for_elementor_alert {
     position: relative;
     padding: .75rem 1.25rem;
@@ -8,41 +10,49 @@
     border-radius: .25rem;
 }
 
+.eli_alert-primary,
 .elementinvader_addons_for_elementor_alert-primary {
     color: #004085;
     background-color: #cce5ff;
     border-color: #b8daff;
 }
+.eli_alert-secondary,
 .elementinvader_addons_for_elementor_alert-secondary {
     color: #383d41;
     background-color: #e2e3e5;
     border-color: #d6d8db;
 }
+.eli_alert-success,
 .elementinvader_addons_for_elementor_alert-success {
     color: #155724;
     background-color: #d4edda;
     border-color: #c3e6cb;
 }
+.eli_alert-danger,
 .elementinvader_addons_for_elementor_alert-danger {
     color: #721c24;
     background-color: #f8d7da;
     border-color: #f5c6cb;
 }
+.eli_alert-warning,
 .elementinvader_addons_for_elementor_alert-warning {
     color: #856404;
     background-color: #fff3cd;
     border-color: #ffeeba;
 }
+.eli_alert-info,
 .elementinvader_addons_for_elementor_alert-info {
     color: #0c5460;
     background-color: #d1ecf1;
     border-color: #bee5eb;
 }
+.eli_alert-light,
 .elementinvader_addons_for_elementor_alert-light {
     color: #818182;
     background-color: #fefefe;
     border-color: #fdfdfe;
 }
+.eli_alert-dark,
 .elementinvader_addons_for_elementor_alert-dark {
     color: #1b1e21;
     background-color: #d6d8d9;
@@ -55,8 +65,17 @@
 
 /* reset */
 
-.widget.widget-elementinvader_addons_for_elementor a,.widget.widget-elementinvader_addons_for_elementor a:hover,
-.entry-content .widget-elementinvader_addons_for_elementor a img, .comment-contenta img, .widget .widget-elementinvader_addons_for_elementor  a img, .widget.widget-elementinvader_addons_for_elementor  a img {
+.widget.widget-elementinvader_addons_for_elementor a,
+.widget.widget-elementinvader_addons_for_elementor a:hover,
+.widget.widget_elementinvader_addons_for_elementor a,
+.widget.widget_elementinvader_addons_for_elementor a:hover,
+.entry-content .widget-elementinvader_addons_for_elementor a img,
+.entry-content .widget_elementinvader_addons_for_elementor a img,
+.comment-contenta img,
+.widget .widget-elementinvader_addons_for_elementor a img,
+.widget .widget_elementinvader_addons_for_elementor a img,
+.widget.widget-elementinvader_addons_for_elementor a img,
+.widget.widget_elementinvader_addons_for_elementor a img {
     -webkit-box-shadow: initial;
     box-shadow: initial;
 }
@@ -67,19 +86,20 @@
     display: none;
 }
 
-.elementinvader_addons_for_elementor_hidden {
+.eli_hidden {
     display: none !important;
 }
 
-.widget-elementinvader_addons_for_elementor {
+.widget-elementinvader_addons_for_elementor,
+.widget_elementinvader_addons_for_elementor {
     font-family: "Montserrat", sans-serif;
 }
 
-.elementinvader_addons_for_elementor_complete_box {
+.eli_complete_box {
     position: relative;
 }
 
-.elementinvader_addons_for_elementor_complete_box .elementinvader_addons_for_elementor_conplete_box_hover {
+.eli_complete_box .eli_conplete_box_hover {
     position: absolute;
     z-index: 100;
     top:0;
@@ -114,18 +134,20 @@
 }
 
 /* elementor fix */
-.elementor-widget-image .elementor-image > a, .elementor-widget-image .elementor-image figure > a {
+.elementor-widget-image .elementor-image > a,
+.elementor-widget-image .elementor-image figure > a {
     width: 100%;
 }
 
-.elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_button button .fa-custom-ajax-indicator  {
+.elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_button button .fa-custom-ajax-indicator  {
     position: absolute;
     margin-top: 4px;
     margin-left: 5px;
     font: normal normal normal 14px/1 FontAwesome !important;
 }
 
-.widget-elementinvader_addons_for_elementor select {
+.widget-elementinvader_addons_for_elementor select,
+.widget_elementinvader_addons_for_elementor select {
     -webkit-appearance: none;
     background: #fff url("data:image/svg+xml;charset=US-ASCII,%3Csvg%20width%3D%2220%22%20height%3D%2220%22%20xmlns%3D%22http%3A%2F%2Fwww.w3.org%2F2000%2Fsvg%22%3E%3Cpath%20d%3D%22M5%206l5%205%205-5%202%201-7%207-7-7%202-1z%22%20fill%3D%22%23555%22%2F%3E%3C%2Fsvg%3E") no-repeat right 15px top 55%;
     background-size: auto;
@@ -156,11 +178,11 @@
 
 /* end masonry */
 
-.elementinvader-addons-for-elementor .eli-container .wl-nav-menu--dropdown.wl-nav-menu__container {
+.eli .eli-container .wl-nav-menu--dropdown.wl-nav-menu__container {
     padding-bottom: 50px;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container {
+.eli .wl-nav-menu--dropdown.wl-nav-menu__container {
     -webkit-overflow-scrolling: touch;
 }
 

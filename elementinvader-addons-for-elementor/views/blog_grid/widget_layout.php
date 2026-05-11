@@ -1,9 +1,10 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <div class="widget-eli eli_blog" id="eli_<?php echo esc_html($this->get_id_int());?>">
     <?php if($wp_query->have_posts()):?>
    
         
         <?php if($settings['carousel_enable'] == 'yes'):?>
-            <div class="eli_blog_carousel <?php echo esc_attr($this->_ch($settings['layout_carousel_animation_style'])).'_animation';?> <?php echo $this->_ch($settings['styles_carousel_dots_position_style']);?> <?php echo $this->_ch($settings['styles_carousel_arrows_position']);?>">
+            <div class="eli_blog_carousel <?php echo esc_attr($this->_ch($settings['layout_carousel_animation_style'])).'_animation';?> <?php echo esc_attr($this->_ch($settings['styles_carousel_dots_position_style']));?> <?php echo esc_attr($this->_ch($settings['styles_carousel_arrows_position']));?>">
             <div class="eli_blog_carousel_body">
             <div class="eli_blog_carousel_ini">
         <?php else:?>
@@ -45,7 +46,7 @@
                         }
                     }
                     if($is_edit_mode) {
-                        echo ($content);
+                        echo wp_kses_post($content);
                     } else { 
                         echo wp_kses_post($content);
                     }
@@ -69,24 +70,24 @@
                 >
                 <div class="eliblog-card-content">
                     <div class="eliblog-card-title-box">
-                        <h2 class="eliblog-card-title"><a href="<?php echo esc_url( get_permalink() ); ?>" title="<?php the_title(); ?>"><?php echo $this->set_dinamic_field(get_the_ID(), $settings['config_fields_title'], get_the_title()); ?></a></h2>
+                        <h2 class="eliblog-card-title"><a href="<?php echo esc_url( get_permalink() ); ?>" title="<?php the_title(); ?>"><?php echo esc_html($this->set_dinamic_field(get_the_ID(), $settings['config_fields_title'], get_the_title())); ?></a></h2>
                     </div>
                     <div class="eliblog-card-subtitle-box">
                         <span class="eliblog-card-subtitle">
                             <?php
                                 // If we have a single page and the author bio exists, display it
-                                echo $this->set_dinamic_field(get_the_ID(), $settings['config_fields_subtitle']);
+                                echo esc_html($this->set_dinamic_field(get_the_ID(), $settings['config_fields_subtitle']));
                             ?>
                         </span>
                     </div>
                     <div class="eliblog-card-date-box">
                         <span class="eliblog-card-date">
-                            <?php echo get_the_date( '', get_the_ID() ); ?>
+                            <?php echo esc_html(get_the_date( '', get_the_ID() )); ?>
                         </span>
                     </div>
                     <div class="eliblog-card-meta-box">
                         <ul class="eli-post-meta">
-                            <li class="calendar"><i class="fa fa-calendar"></i><?php echo get_the_date($date_format) ?></li>
+                            <li class="calendar"><i class="fa fa-calendar"></i><?php echo esc_html(get_the_date($date_format)); ?></li>
                             <?php if(have_comments()):?>
                                 <li class="comment"><i class="fa fa-comment-o"></i><a href="<?php the_permalink(); ?>#comment-form" title="<?php echo esc_attr__('Comment', 'elementinvader-addons-for-elementor'); ?>"><?php comments_number(); ?></a></li>
                             <?php endif;?>
@@ -126,8 +127,8 @@
                     <div class="eliblog-card-text-box">
                         <?php
                         $content = get_the_excerpt();
-                        $content = strip_tags(strip_shortcodes($content));
-                        echo (wp_strip_all_tags(html_entity_decode(wp_trim_words(htmlentities(wpautop($content)), $settings['text_limit'], '...'))));
+                        $content = wp_strip_all_tags(strip_shortcodes($content));
+                        echo esc_html(wp_strip_all_tags(html_entity_decode(wp_trim_words(htmlentities(wpautop($content)), $settings['text_limit'], '...'))));
                         ?>
                     </div>
                     <div class="eliblog-card-btn-box"><a href="<?php echo esc_url( get_permalink() ); ?>" class="eliblog-card-view">
@@ -164,7 +165,7 @@
                             ?>
                         </a>
                     <?php else: ?>
-                        <img src="<?php echo ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_URL;?>/assets/img/placeholder.jpg" alt="">
+                        <img src="<?php echo esc_url(ELI_URL);?>/assets/img/placeholder.jpg" alt="">
                     <?php endif; ?>
 
                     <a href="<?php echo esc_url( get_permalink() ); ?>" class="hover_link  elementor-clickable"
@@ -213,7 +214,7 @@
                                 }
                             }
                                 if($is_edit_mode) {
-                                    echo ($content);
+                                    echo wp_kses_post($content);
                                 } else { 
                                     echo wp_kses_post($content);
                                 }
@@ -221,7 +222,7 @@
                         }
                     ?>
                     <?php else: ?>
-                        <div class="elementinvader_addons_for_elementor_alert elementinvader_addons_for_elementor_alert-danger" role="alert">
+                        <div class="eli_alert eli_alert-danger" role="alert">
                             <?php esc_html_e( 'Please create Layout and attache in elementor option Popup Layout', 'elementinvader-addons-for-elementor' );?>
                         </div>
                     <?php endif; ?>
@@ -238,10 +239,10 @@
         <?php if($settings['carousel_enable'] == 'yes'):?>
         </div>
             <div class="eli_slider_arrows">
-                <a title="<?php echo esc_attr__('prev slider', 'wpdirectorykit');?>" href="#" class="eli-slider-prev eli_blog_slider_arrow">
+                <a title="<?php echo esc_attr__('prev slider', 'elementinvader-addons-for-elementor');?>" href="#" class="eli-slider-prev eli_blog_slider_arrow">
                     <?php \Elementor\Icons_Manager::render_icon( $settings['styles_carousel_arrows_icon_left'], [ 'aria-hidden' => 'true' ] ); ?>
                 </a>
-                <a title="<?php echo esc_attr__('next slider', 'wpdirectorykit');?>" href="#" class="eli-slider-next eli_blog_slider_arrow">
+                <a title="<?php echo esc_attr__('next slider', 'elementinvader-addons-for-elementor');?>" href="#" class="eli-slider-next eli_blog_slider_arrow">
                     <?php \Elementor\Icons_Manager::render_icon( $settings['styles_carousel_arrows_icon_right'], [ 'aria-hidden' => 'true' ] ); ?>
                 </a>
             </div>
@@ -257,14 +258,14 @@
             <nav class="navigation pagination eli-pagination" role="navigation">
                 <div class="nav-links">
                 <?php
-                    echo paginate_links( array(
+                    echo wp_kses_post(paginate_links( array(
                             'base'         => str_replace( 999999999, '%#%', esc_url( get_pagenum_link( 999999999 ) ) ),
                             'total'        => $wp_query->max_num_pages,
                             'current'      => max( 1, get_query_var( 'paged' ) ),
                             'format'       => '?paged=%#%',
                             'prev_text' => '<<',
                             'next_text' => '>>'
-                    ) );
+                    ) ));
                 ?>
                 </div>
             </nav>
@@ -272,7 +273,7 @@
     </div>
     <?php endif;?>
     <?php else:?>
-        <div class="elementinvader_addons_for_elementor_alert elementinvader_addons_for_elementor_alert-danger" role="alert">
+        <div class="eli_alert eli_alert-danger" role="alert">
             <?php esc_html_e( 'Posts not found', 'elementinvader-addons-for-elementor' );?>
         </div>
     <?php endif;?>
@@ -294,15 +295,15 @@
                 arrows: true,
                 rtl: localStorage.getItem('siteDirection') == "rtl" ? true : false,
                 <?php if(!empty(wmvc_show_data('layout_carousel_is_centerMode', $settings))):?>
-                centerMode: <?php echo wmvc_show_data('layout_carousel_is_centerMode', $settings, 'true');?>,
+                centerMode: <?php echo esc_attr(wmvc_show_data('layout_carousel_is_centerMode', $settings, 'true'));?>,
                 <?php endif;?>
-                slidesToShow: <?php echo (!empty(trim(wmvc_show_data('layout_carousel_columns', $settings, '3')))) ? wmvc_show_data('layout_carousel_columns', $settings, '3') : 3;?>,
-                slidesToScroll: <?php echo (!empty(trim(wmvc_show_data('layout_carousel_columns', $settings, '3')))) ? wmvc_show_data('layout_carousel_columns', $settings, '3') : 3;?>,
+                slidesToShow: <?php echo (!empty(trim(wmvc_show_data('layout_carousel_columns', $settings, '3')))) ? esc_attr(wmvc_show_data('layout_carousel_columns', $settings, '3')) : 3;?>,
+                slidesToScroll: <?php echo (!empty(trim(wmvc_show_data('layout_carousel_columns', $settings, '3')))) ? esc_attr(wmvc_show_data('layout_carousel_columns', $settings, '3')) : 3;?>,
                 <?php if(!empty(wmvc_show_data('layout_carousel_is_infinite', $settings))):?>
-                infinite: <?php echo wmvc_show_data('layout_carousel_is_infinite', $settings, 'true');?>,
+                infinite: <?php echo esc_attr(wmvc_show_data('layout_carousel_is_infinite', $settings, 'true'));?>,
                 <?php endif;?>
                 <?php if(!empty(wmvc_show_data('layout_carousel_is_autoplay', $settings))):?>
-                autoplay: <?php echo wmvc_show_data('layout_carousel_is_autoplay', $settings, 'false');?>,
+                autoplay: <?php echo esc_attr(wmvc_show_data('layout_carousel_is_autoplay', $settings, 'false'));?>,
                 <?php endif;?>
                 nextArrow: $('#eli_<?php echo esc_html($this->get_id_int());?> .eli_slider_arrows .eli-slider-next'),
                 prevArrow: $('#eli_<?php echo esc_html($this->get_id_int());?> .eli_slider_arrows .eli-slider-prev'),
@@ -314,15 +315,15 @@
                     {
                         breakpoint: 991,
                         settings: {
-                            slidesToShow: <?php echo (!empty(trim(wmvc_show_data('layout_carousel_columns_tablet', $settings, '2')))) ? wmvc_show_data('layout_carousel_columns_tablet', $settings, '2') : 2;?>,
-                            slidesToScroll: <?php echo (!empty(trim(wmvc_show_data('layout_carousel_columns_tablet', $settings, '2')))) ? wmvc_show_data('layout_carousel_columns_tablet', $settings, '2') : 2;?>,
+                            slidesToShow: <?php echo (!empty(trim(wmvc_show_data('layout_carousel_columns_tablet', $settings, '2')))) ? esc_attr(wmvc_show_data('layout_carousel_columns_tablet', $settings, '2')) : 2;?>,
+                            slidesToScroll: <?php echo (!empty(trim(wmvc_show_data('layout_carousel_columns_tablet', $settings, '2')))) ? esc_attr(wmvc_show_data('layout_carousel_columns_tablet', $settings, '2')) : 2;?>,
                         }
                     },
                     {
                         breakpoint: 768,
                         settings: {
-                            slidesToShow: <?php echo (!empty(trim(wmvc_show_data('layout_carousel_columns_mobile', $settings, '1')))) ? wmvc_show_data('layout_carousel_columns_mobile', $settings, '1') : 1;?>,
-                            slidesToScroll: <?php echo (!empty(trim(wmvc_show_data('layout_carousel_columns_mobile', $settings, '1')))) ? wmvc_show_data('layout_carousel_columns_mobile', $settings, '1') : 1;?>,
+                            slidesToShow: <?php echo (!empty(trim(wmvc_show_data('layout_carousel_columns_mobile', $settings, '1')))) ? esc_attr(wmvc_show_data('layout_carousel_columns_mobile', $settings, '1')) : 1;?>,
+                            slidesToScroll: <?php echo (!empty(trim(wmvc_show_data('layout_carousel_columns_mobile', $settings, '1')))) ? esc_attr(wmvc_show_data('layout_carousel_columns_mobile', $settings, '1')) : 1;?>,
                         }
                     },
                 ]

@@ -1,3 +1,4 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <div class="widget-eli eli_blog_preview_title" id="eli_<?php echo esc_html($this->get_id_int());?>">
     <?php if(!empty($settings['link_enabled'])):?>
     <a href="<?php echo esc_url(get_permalink($eli_post_id)); ?>">

@@ -1,6 +1,6 @@
 <?php
 
-namespace ElementinvaderAddonsForElementor\Core;
+namespace ELI\Core;
 
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
@@ -12,7 +12,7 @@ use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
 
-use ElementinvaderAddonsForElementor\Modules\Forms\Ajax_Handler;
+use ELI\Modules\Forms\Ajax_Handler;
 
 if ( ! defined( 'ABSPATH' ) ) exit; // Exit if accessed directly
 
@@ -198,9 +198,9 @@ class Elementinvader_Base extends Widget_Base {
             {
                 $file = get_template_directory().'/elementor-elementinvader_addons_for_elementor/views/'.$this->view_folder.'/'.($view_file).'.php';
             }
-            elseif(file_exists(ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PATH.'views/'.$this->view_folder.'/'.($view_file_org).'.php'))
+            elseif(file_exists(ELI_PATH.'views/'.$this->view_folder.'/'.($view_file_org).'.php'))
             {
-                $file = ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PATH.'views/'.$this->view_folder.'/'.($view_file_org).'.php';
+                $file = ELI_PATH.'views/'.$this->view_folder.'/'.($view_file_org).'.php';
             }
 
             if($file)
@@ -217,9 +217,9 @@ class Elementinvader_Base extends Widget_Base {
             else
             {
                 if($print) {
-                    echo 'View file not found in: '.esc_html(ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PATH.'views/'.$this->view_folder.'/'.sanitize_file_name($view_file).'.php');
+                    echo 'View file not found in: '.esc_html(ELI_PATH.'views/'.$this->view_folder.'/'.sanitize_file_name($view_file).'.php');
                 } else {
-                    return 'View file not found in: '.esc_html(ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_PATH.'views/'.$this->view_folder.'/'.sanitize_file_name($view_file).'.php');
+                    return 'View file not found in: '.esc_html(ELI_PATH.'views/'.$this->view_folder.'/'.sanitize_file_name($view_file).'.php');
                 } 
             }
         }
@@ -436,7 +436,7 @@ class Elementinvader_Base extends Widget_Base {
                 $this->add_responsive_control(
                         $type.'_width'.$prefix,
                         [
-                                'label' => esc_html__( 'Width', 'wpdirectorykit' ),
+                                'label' => esc_html__( 'Width', 'elementinvader-addons-for-elementor' ),
                                 'type' => Controls_Manager::SLIDER,
                                 'range' => [
                                         'px' => [
@@ -454,7 +454,7 @@ class Elementinvader_Base extends Widget_Base {
                 $this->add_responsive_control(
                         $type.'_height'.$prefix,
                         [
-                                'label' => esc_html__( 'height', 'wpdirectorykit' ),
+                                'label' => esc_html__( 'height', 'elementinvader-addons-for-elementor' ),
                                 'type' => Controls_Manager::SLIDER,
                                 'range' => [
                                         'px' => [
@@ -472,7 +472,7 @@ class Elementinvader_Base extends Widget_Base {
                 $this->add_responsive_control(
                         $type.'_font_size'.$prefix,
                         [
-                                'label' => esc_html__( 'Font Size', 'wpdirectorykit' ),
+                                'label' => esc_html__( 'Font Size', 'elementinvader-addons-for-elementor' ),
                                 'type' => Controls_Manager::SLIDER,
                                 'size_units' => [ 'px', 'em', '%' ],
                                 'range' => [
@@ -501,15 +501,15 @@ class Elementinvader_Base extends Widget_Base {
                     $this->add_control(
                             $type.'_image_fit_control'.$prefix,
                             [
-                                    'label' => esc_html__( 'Fit', 'textdomain' ),
+                                    'label' => esc_html__( 'Fit', 'elementinvader-addons-for-elementor' ),
                                     'type' => \Elementor\Controls_Manager::SELECT,
                                     'options' => [
-                                            '' => esc_html__( 'Default', 'textdomain' ),
-                                            'fill' => esc_html__( 'Fill', 'textdomain' ),
-                                            'contain'  => esc_html__( 'Contain', 'textdomain' ),
-                                            'cover' => esc_html__( 'Cover', 'textdomain' ),
-                                            'none' => esc_html__( 'None', 'textdomain' ),
-                                            'scale-down' => esc_html__( 'Scale down', 'textdomain' ),
+                                            '' => esc_html__( 'Default', 'elementinvader-addons-for-elementor' ),
+                                            'fill' => esc_html__( 'Fill', 'elementinvader-addons-for-elementor' ),
+                                            'contain'  => esc_html__( 'Contain', 'elementinvader-addons-for-elementor' ),
+                                            'cover' => esc_html__( 'Cover', 'elementinvader-addons-for-elementor' ),
+                                            'none' => esc_html__( 'None', 'elementinvader-addons-for-elementor' ),
+                                            'scale-down' => esc_html__( 'Scale down', 'elementinvader-addons-for-elementor' ),
                                     ],
                                     'selectors' => [
                                             $selector => 'object-fit: {{VALUE}};',
@@ -519,15 +519,15 @@ class Elementinvader_Base extends Widget_Base {
                     $this->add_control(
                             $type.'_image_fit_control_position'.$prefix,
                             [
-                                    'label' => esc_html__( 'Fit Position', 'textdomain' ),
+                                    'label' => esc_html__( 'Fit Position', 'elementinvader-addons-for-elementor' ),
                                     'type' => \Elementor\Controls_Manager::SELECT,
                                     'options' => [
-                                            '' => esc_html__( 'Default', 'textdomain' ),
-                                            'top' => esc_html__( 'Top', 'textdomain' ),
-                                            'bottom'  => esc_html__( 'Bottom', 'textdomain' ),
-                                            'left' => esc_html__( 'Left', 'textdomain' ),
-                                            'right' => esc_html__( 'Right', 'textdomain' ),
-                                            'center' => esc_html__( 'Center', 'textdomain' ),
+                                            '' => esc_html__( 'Default', 'elementinvader-addons-for-elementor' ),
+                                            'top' => esc_html__( 'Top', 'elementinvader-addons-for-elementor' ),
+                                            'bottom'  => esc_html__( 'Bottom', 'elementinvader-addons-for-elementor' ),
+                                            'left' => esc_html__( 'Left', 'elementinvader-addons-for-elementor' ),
+                                            'right' => esc_html__( 'Right', 'elementinvader-addons-for-elementor' ),
+                                            'center' => esc_html__( 'Center', 'elementinvader-addons-for-elementor' ),
                                     ],
                                     'selectors' => [
                                             $selector => 'object-position: {{VALUE}};',
@@ -552,7 +552,7 @@ class Elementinvader_Base extends Widget_Base {
                         \Elementor\Group_Control_Background::get_type(),
                         [
                                 'name' => $type.'_background_group'.$prefix,
-                                'label' => esc_html__( 'Background group', 'wpdirectorykit' ),
+                                'label' => esc_html__( 'Background group', 'elementinvader-addons-for-elementor' ),
                                 'types' => [ 'classic', 'gradient', 'video' ],
                                 'selector' => $selector,
                         ]
@@ -569,37 +569,37 @@ class Elementinvader_Base extends Widget_Base {
                 $this->add_control(
                         $type.'_hover_animation'.$prefix,
                         [
-                                'label' => esc_html__( 'Hover Animation', 'wpdirectorykit' ),
+                                'label' => esc_html__( 'Hover Animation', 'elementinvader-addons-for-elementor' ),
                                 'type' => \Elementor\Controls_Manager::SELECT2,
                                 'multiple' => false,
                                 'options' => [
-                                        'grow'  => esc_html__( 'Grow', 'wpdirectorykit' ),
-                                        'shrink'  => esc_html__( 'Shrink', 'wpdirectorykit' ),
-                                        'pulse'  => esc_html__( 'Pulse', 'wpdirectorykit' ),
-                                        'pulse-grow'  => esc_html__( 'Pulse Grow', 'wpdirectorykit' ),
-                                        'pulse-shrink'  => esc_html__( 'Pulse Shrink', 'wpdirectorykit' ),
-                                        'push'  => esc_html__( 'Push', 'wpdirectorykit' ),
-                                        'pop'  => esc_html__( 'Pop', 'wpdirectorykit' ),
-                                        'bounce-in'  => esc_html__( 'Bounce In', 'wpdirectorykit' ),
-                                        'bounce-out'  => esc_html__( 'Bounce Out', 'wpdirectorykit' ),
-                                        'rotate'  => esc_html__( 'Rotate', 'wpdirectorykit' ),
-                                        'grow-rotate'  => esc_html__( 'Grow Rotate', 'wpdirectorykit' ),
-                                        'float'  => esc_html__( 'Float', 'wpdirectorykit' ),
-                                        'sink'  => esc_html__( 'Sink', 'wpdirectorykit' ),
-                                        'bob'  => esc_html__( 'Bob', 'wpdirectorykit' ),
-                                        'hang'  => esc_html__( 'Hang', 'wpdirectorykit' ),
-                                        'skew'  => esc_html__( 'Skew', 'wpdirectorykit' ),
-                                        'skew-forward'  => esc_html__( 'Skew Forward', 'wpdirectorykit' ),
-                                        'skew-backward'  => esc_html__( 'Skew Backward', 'wpdirectorykit' ),
-                                        'wobble-vertical'  => esc_html__( 'Wobble Vertical', 'wpdirectorykit' ),
-                                        'wobble-horizontal'  => esc_html__( 'wobble Horizontal', 'wpdirectorykit' ),
-                                        'wobble-to-bottom-right'  => esc_html__( 'Wobble To Bottom Right', 'wpdirectorykit' ),
-                                        'wobble-to-top-right'  => esc_html__( 'Wobble To Top Eight', 'wpdirectorykit' ),
-                                        'wobble-top'  => esc_html__( 'Wobble Top', 'wpdirectorykit' ),
-                                        'wobble-bottom'  => esc_html__( 'Wobble Bottom', 'wpdirectorykit' ),
-                                        'wobble-skew'  => esc_html__( 'Wobble Skew', 'wpdirectorykit' ),
-                                        'buzz'  => esc_html__( 'Buzz', 'wpdirectorykit' ),
-                                        'buzz-out'  => esc_html__( 'Buzz Out', 'wpdirectorykit' ),
+                                        'grow'  => esc_html__( 'Grow', 'elementinvader-addons-for-elementor' ),
+                                        'shrink'  => esc_html__( 'Shrink', 'elementinvader-addons-for-elementor' ),
+                                        'pulse'  => esc_html__( 'Pulse', 'elementinvader-addons-for-elementor' ),
+                                        'pulse-grow'  => esc_html__( 'Pulse Grow', 'elementinvader-addons-for-elementor' ),
+                                        'pulse-shrink'  => esc_html__( 'Pulse Shrink', 'elementinvader-addons-for-elementor' ),
+                                        'push'  => esc_html__( 'Push', 'elementinvader-addons-for-elementor' ),
+                                        'pop'  => esc_html__( 'Pop', 'elementinvader-addons-for-elementor' ),
+                                        'bounce-in'  => esc_html__( 'Bounce In', 'elementinvader-addons-for-elementor' ),
+                                        'bounce-out'  => esc_html__( 'Bounce Out', 'elementinvader-addons-for-elementor' ),
+                                        'rotate'  => esc_html__( 'Rotate', 'elementinvader-addons-for-elementor' ),
+                                        'grow-rotate'  => esc_html__( 'Grow Rotate', 'elementinvader-addons-for-elementor' ),
+                                        'float'  => esc_html__( 'Float', 'elementinvader-addons-for-elementor' ),
+                                        'sink'  => esc_html__( 'Sink', 'elementinvader-addons-for-elementor' ),
+                                        'bob'  => esc_html__( 'Bob', 'elementinvader-addons-for-elementor' ),
+                                        'hang'  => esc_html__( 'Hang', 'elementinvader-addons-for-elementor' ),
+                                        'skew'  => esc_html__( 'Skew', 'elementinvader-addons-for-elementor' ),
+                                        'skew-forward'  => esc_html__( 'Skew Forward', 'elementinvader-addons-for-elementor' ),
+                                        'skew-backward'  => esc_html__( 'Skew Backward', 'elementinvader-addons-for-elementor' ),
+                                        'wobble-vertical'  => esc_html__( 'Wobble Vertical', 'elementinvader-addons-for-elementor' ),
+                                        'wobble-horizontal'  => esc_html__( 'wobble Horizontal', 'elementinvader-addons-for-elementor' ),
+                                        'wobble-to-bottom-right'  => esc_html__( 'Wobble To Bottom Right', 'elementinvader-addons-for-elementor' ),
+                                        'wobble-to-top-right'  => esc_html__( 'Wobble To Top Eight', 'elementinvader-addons-for-elementor' ),
+                                        'wobble-top'  => esc_html__( 'Wobble Top', 'elementinvader-addons-for-elementor' ),
+                                        'wobble-bottom'  => esc_html__( 'Wobble Bottom', 'elementinvader-addons-for-elementor' ),
+                                        'wobble-skew'  => esc_html__( 'Wobble Skew', 'elementinvader-addons-for-elementor' ),
+                                        'buzz'  => esc_html__( 'Buzz', 'elementinvader-addons-for-elementor' ),
+                                        'buzz-out'  => esc_html__( 'Buzz Out', 'elementinvader-addons-for-elementor' ),
                                 ],
                                 'selectors_dictionary' => [
                                         'grow'  => 'animation-name: eli-hover-animation-grow;animation-duration: 0.3s;animation-timing-function: linear;animation-iteration-count: 1;',
@@ -643,7 +643,7 @@ class Elementinvader_Base extends Widget_Base {
                         $this->add_responsive_control(
                              $type.'_image_size_control_max_heigth'.$prefix,
                             [
-                                'label' => esc_html__('Max Height', 'wpdirectorykit'),
+                                'label' => esc_html__('Max Height', 'elementinvader-addons-for-elementor'),
                                 'type' => Controls_Manager::SLIDER,
                                 'range' => [
                                     'px' => [
@@ -670,7 +670,7 @@ class Elementinvader_Base extends Widget_Base {
                         $this->add_responsive_control(
                              $type.'_image_size_control_max_width'.$prefix,
                             [
-                                'label' => esc_html__('Max Width', 'wpdirectorykit'),
+                                'label' => esc_html__('Max Width', 'elementinvader-addons-for-elementor'),
                                 'type' => Controls_Manager::SLIDER,
                                 'range' => [
                                     'px' => [
@@ -697,7 +697,7 @@ class Elementinvader_Base extends Widget_Base {
                         $this->add_responsive_control(
                              $type.'_image_size_control_heigth'.$prefix,
                             [
-                                'label' => esc_html__('Height', 'wpdirectorykit'),
+                                'label' => esc_html__('Height', 'elementinvader-addons-for-elementor'),
                                 'type' => Controls_Manager::SLIDER,
                                 'range' => [
                                     'px' => [
@@ -724,7 +724,7 @@ class Elementinvader_Base extends Widget_Base {
                         $this->add_responsive_control(
                              $type.'_image_size_control_width'.$prefix,
                             [
-                                'label' => esc_html__('Width', 'wpdirectorykit'),
+                                'label' => esc_html__('Width', 'elementinvader-addons-for-elementor'),
                                 'type' => Controls_Manager::SLIDER,
                                 'range' => [
                                     'px' => [
@@ -771,12 +771,12 @@ class Elementinvader_Base extends Widget_Base {
                 
 		// Add a css comment
 		$custom_css_file = '/* Start custom CSS for page-settings */' . 
-                        str_replace( 'selector', '#elementinvader_addons_for_elementor_' . $this->get_id_int(), $custom_css ) . 
+                        str_replace( 'selector', '#eli_' . $this->get_id_int(), $custom_css ) . 
                         str_replace( 'selector', '#eli_' . $this->get_id_int(), $custom_css ).
                         str_replace( 'selector', '.elementor-element.elementor-element-' . $this->get_id(), $custom_css ).
                     '/* End custom CSS */';
 
-        wp_enqueue_style('eli-custom-inline', plugins_url( '/assets/css/custom-inline.css', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__ ));
+        wp_enqueue_style('eli-custom-inline', plugins_url( '/assets/css/custom-inline.css', ELI_FILE__ ));
         wp_add_inline_style( 'eli-custom-inline',  $custom_css_file );
 	}
         
@@ -883,26 +883,6 @@ class Elementinvader_Base extends Widget_Base {
                         return $this->is_edit_mode;
                 }
 
-                // Ajax request as Editor mode
-                $actions = array(
-                        'elementor',
-                        // Templates
-                        'elementor_get_templates',
-                        'elementor_save_template',
-                        'elementor_get_template',
-                        'elementor_delete_template',
-                        'elementor_export_template',
-                        'elementor_import_template',
-                );
-
-                if (isset($_REQUEST['action']) && in_array($_REQUEST['action'], $actions)) {
-                        return true;
-                }
-
-                if (isset($_REQUEST['elementor-preview'])) {
-                        return true;
-                }
-       
                 return false;
         }
 

@@ -1,9 +1,9 @@
 <?php
 
-namespace ElementinvaderAddonsForElementor\Widgets;
+namespace ELI\Widgets;
 
 use Elementor\Core\Breakpoints\Manager as Breakpoints_Manager;
-use ElementinvaderAddonsForElementor\Core\Elementinvader_Base;
+use ELI\Core\Elementinvader_Base;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Utils;
@@ -29,7 +29,7 @@ class EliMenu extends Elementinvader_Base {
     public $inline_css_mobile = '';
 
     public function __construct($data = array(), $args = null) {
-        wp_enqueue_style('elementinvader_addons_for_elementor-main', plugins_url('/assets/css/main.css', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__));
+        wp_enqueue_style('elementinvader_addons_for_elementor-main', plugins_url('/assets/css/main.css', ELI_FILE__));
         wp_enqueue_style('elementor-icons');
         parent::__construct($data, $args);
     }
@@ -132,7 +132,7 @@ class EliMenu extends Elementinvader_Base {
                         'options' => $menus,
                         'save_default' => true,
                         'separator' => 'after',
-                        'description' => sprintf(__('<a href="%s" target="_blank">Open menus in Dashboard to Edit</a>', 'elementinvader-addons-for-elementor'), admin_url('nav-menus.php')),
+                        'description' => sprintf(/* translators: 1: Link to nav-menus.php. */__('<a href="%s" target="_blank">Open menus in Dashboard to Edit</a>', 'elementinvader-addons-for-elementor'), admin_url('nav-menus.php')),
                     ]
             );
         } else {
@@ -140,7 +140,7 @@ class EliMenu extends Elementinvader_Base {
                     'menu',
                     [
                         'type' => Controls_Manager::RAW_HTML,
-                        'raw' => '<strong>' . esc_html__('There are no menus in your site.', 'elementinvader-addons-for-elementor') . '</strong><br>' . sprintf(__('Go to the <a href="%s" target="_blank">Menus screen</a> to create one.', 'elementinvader-addons-for-elementor'), admin_url('nav-menus.php?action=edit&menu=0')),
+                        'raw' => '<strong>' . esc_html__('There are no menus in your site.', 'elementinvader-addons-for-elementor') . '</strong><br>' . sprintf(/* translators: 1: Link to nav-menus.php. */__('Go to the <a href="%s" target="_blank">Menus screen</a> to create one.', 'elementinvader-addons-for-elementor'), admin_url('nav-menus.php?action=edit&menu=0')),
                         'separator' => 'after',
                         'content_classes' => 'wl-panel-alert wl-panel-alert-warning',
                     ]
@@ -184,7 +184,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor  .wl-nav-menu--main .wl-item' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eli  .wl-nav-menu--main .wl-item' => 'color: {{VALUE}}',
                     ],
                 ]
         );
@@ -196,7 +196,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor  .wl-nav-menu--main .wl-item' => 'background-color: {{VALUE}}',
+                        '{{WRAPPER}} .eli  .wl-nav-menu--main .wl-item' => 'background-color: {{VALUE}}',
                     ],
                     'separator' => 'none',
                 ]
@@ -209,7 +209,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor  .wl-nav-menu--main .menu-item.menu-item-has-children > .wl-item:after' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eli  .wl-nav-menu--main .menu-item.menu-item-has-children > .wl-item:after' => 'color: {{VALUE}}',
                     ],
                     'separator' => 'none',
                 ]
@@ -222,7 +222,7 @@ class EliMenu extends Elementinvader_Base {
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .elementinvader-addons-for-elementor .wl_nav_mask' => 'background: {{VALUE}}',
+                    '{{WRAPPER}} .eli .wl_nav_mask' => 'background: {{VALUE}}',
                 ],
                 'separator' => 'none',
             ]
@@ -244,7 +244,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor  .wl-nav-menu--main .wl-item:hover' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eli  .wl-nav-menu--main .wl-item:hover' => 'color: {{VALUE}}',
                     ],
                 ]
         );
@@ -256,7 +256,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor  .wl-nav-menu--main .wl-item:hover' => 'background-color: {{VALUE}}',
+                        '{{WRAPPER}} .eli  .wl-nav-menu--main .wl-item:hover' => 'background-color: {{VALUE}}',
                     ],
                     'separator' => 'none',
                 ]
@@ -269,7 +269,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main .menu-item.menu-item-has-children > .wl-item:hover:after' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--main .menu-item.menu-item-has-children > .wl-item:hover:after' => 'color: {{VALUE}}',
                     ],
                     'separator' => 'none',
                 ]
@@ -291,9 +291,9 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main .current-menu-parent > .wl-item' => 'color: {{VALUE}}',
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main .current-menu-item > .wl-item' => 'color: {{VALUE}}',
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main .menu-item.active > .wl-item' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--main .current-menu-parent > .wl-item' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--main .current-menu-item > .wl-item' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--main .menu-item.active > .wl-item' => 'color: {{VALUE}}',
                     ],
                 ]
         );
@@ -305,9 +305,9 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [ 
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main .current-menu-parent > .wl-item' => 'background-color: {{VALUE}}',
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main .current-menu-item > .wl-item' => 'background-color: {{VALUE}}',
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main .menu-item.active > .wl-item' => 'background-color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--main .current-menu-parent > .wl-item' => 'background-color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--main .current-menu-item > .wl-item' => 'background-color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--main .menu-item.active > .wl-item' => 'background-color: {{VALUE}}',
                     ],
                     'separator' => 'none',
                 ]
@@ -320,9 +320,9 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main .menu-item.menu-item-has-children.current-menu-parent > .wl-item:hover:after' => 'color: {{VALUE}}',
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main .menu-item.menu-item-has-children.current-menu-item > .wl-item:hover:after' => 'color: {{VALUE}}',
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main .menu-item.active > .wl-item:hover:after' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--main .menu-item.menu-item-has-children.current-menu-parent > .wl-item:hover:after' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--main .menu-item.menu-item-has-children.current-menu-item > .wl-item:hover:after' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--main .menu-item.active > .wl-item:hover:after' => 'color: {{VALUE}}',
                     ],
                     'separator' => 'none',
                 ]
@@ -352,7 +352,7 @@ class EliMenu extends Elementinvader_Base {
                         ],
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main .wl-item' => 'padding-left: {{SIZE}}{{UNIT}}; padding-right: {{SIZE}}{{UNIT}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--main .wl-item' => 'padding-left: {{SIZE}}{{UNIT}}; padding-right: {{SIZE}}{{UNIT}}',
                     ],
                 ]
         );
@@ -368,7 +368,7 @@ class EliMenu extends Elementinvader_Base {
                         ],
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main .wl-item' => 'padding-top: {{SIZE}}{{UNIT}}; padding-bottom: {{SIZE}}{{UNIT}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--main .wl-item' => 'padding-top: {{SIZE}}{{UNIT}}; padding-bottom: {{SIZE}}{{UNIT}}',
                     ],
                 ]
         );
@@ -384,9 +384,9 @@ class EliMenu extends Elementinvader_Base {
                         ],
                     ],
                     'selectors' => [
-                        'body:not(.rtl) {{WRAPPER}}  .elementinvader-addons-for-elementor .wl-nav-menu--layout-horizontal .wl-nav-menu > li:not(:last-child)' => 'margin-right: {{SIZE}}{{UNIT}}',
-                        'body.rtl {{WRAPPER}} .elementinvader-addons-for-elementor  .wl-nav-menu--layout-horizontal .wl-nav-menu > li:not(:last-child)' => 'margin-left: {{SIZE}}{{UNIT}}',
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor  .wl-nav-menu--main:not(.wl-nav-menu--layout-horizontal) .wl-nav-menu > li:not(:last-child)' => 'margin-bottom: {{SIZE}}{{UNIT}}',
+                        'body:not(.rtl) {{WRAPPER}}  .eli .wl-nav-menu--layout-horizontal .wl-nav-menu > li:not(:last-child)' => 'margin-right: {{SIZE}}{{UNIT}}',
+                        'body.rtl {{WRAPPER}} .eli  .wl-nav-menu--layout-horizontal .wl-nav-menu > li:not(:last-child)' => 'margin-left: {{SIZE}}{{UNIT}}',
+                        '{{WRAPPER}} .eli  .wl-nav-menu--main:not(.wl-nav-menu--layout-horizontal) .wl-nav-menu > li:not(:last-child)' => 'margin-bottom: {{SIZE}}{{UNIT}}',
                     ],
                 ]
         );
@@ -461,7 +461,7 @@ class EliMenu extends Elementinvader_Base {
                     'render_type' => 'template',
                     'default' => 'flex-start',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main.wl-nav-menu--layout-horizontal' => 'justify-content: {{VALUE}};',
+                        '{{WRAPPER}} .eli .wl-nav-menu--main.wl-nav-menu--layout-horizontal' => 'justify-content: {{VALUE}};',
                     ],
                     'condition' => [
                         'layout!' => 'dropdown',
@@ -555,7 +555,7 @@ class EliMenu extends Elementinvader_Base {
                         'size' => 100,
                     ],
                     'selectors' => [
-                        '{{WRAPPER}}.wl-nav-menu--stretch .elementinvader-addons-for-elementor .wl-nav-menu__container.wl-nav-menu--dropdown' => 'width: {{SIZE}}{{UNIT}}',
+                        '{{WRAPPER}}.wl-nav-menu--stretch .eli .wl-nav-menu__container.wl-nav-menu--dropdown' => 'width: {{SIZE}}{{UNIT}}',
                     ],
                     'condition' => [
                         'dropdown!' => 'none',
@@ -585,7 +585,7 @@ class EliMenu extends Elementinvader_Base {
                         'size' => 30,
                     ],
                     'selectors' => [
-                        '{{WRAPPER}}.wl-nav-menu--toggle .elementinvader-addons-for-elementor .wl-menu-toggle:not(.wl-active) + .wl-nav-menu__container' => 'width: {{SIZE}}{{UNIT}}',
+                        '{{WRAPPER}}.wl-nav-menu--toggle .eli .wl-menu-toggle:not(.wl-active) + .wl-nav-menu__container' => 'width: {{SIZE}}{{UNIT}}',
                     ],
                 ]
         );
@@ -597,7 +597,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => [ 'px', 'em', '%' ],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .eli-container .wl-nav-menu--dropdown.wl-nav-menu__container' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .eli .eli-container .wl-nav-menu--dropdown.wl-nav-menu__container' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
             ]
         );
@@ -610,7 +610,7 @@ class EliMenu extends Elementinvader_Base {
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container' => 'background-color: {{VALUE}}',
+                    '{{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container' => 'background-color: {{VALUE}}',
                 ],
                 'separator' => 'none',
             ]
@@ -688,7 +688,7 @@ class EliMenu extends Elementinvader_Base {
                         'right' => 'justify-content: flex-end;',
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor  .wl-menu-toggle' => '{{VALUE}}',
+                        '{{WRAPPER}} .eli  .wl-menu-toggle' => '{{VALUE}}',
                     ],
                     'condition' => [
                         'toggle!' => '',
@@ -735,7 +735,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown a' => 'color: {{VALUE}}',
                     ],
                 ]
         );
@@ -747,7 +747,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu--dropdown a' => 'background-color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--main .wl-nav-menu--dropdown a' => 'background-color: {{VALUE}}',
                     ],
                     'separator' => 'none',
                 ]
@@ -758,10 +758,10 @@ class EliMenu extends Elementinvader_Base {
             [
                 'name' => 'dropdown_item',
                 'selector' => 
-                               '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu--dropdown a,
-                                {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu .sub-menu .menu-item>a,
-                                {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu--dropdown .sub-menu .menu-item>a,
-                                {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .wl-nav-menu >.menu-item>a',
+                               '{{WRAPPER}} .eli .wl-nav-menu--main .wl-nav-menu--dropdown a,
+                                {{WRAPPER}} .eli .wl-nav-menu--main .wl-nav-menu .sub-menu .menu-item>a,
+                                {{WRAPPER}} .eli .wl-nav-menu--main .wl-nav-menu--dropdown .sub-menu .menu-item>a,
+                                {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .wl-nav-menu >.menu-item>a',
             ]
         );
     
@@ -772,10 +772,10 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', '%'],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu--dropdown a,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu .sub-menu .menu-item>a,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu--dropdown .sub-menu .menu-item>a,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .wl-nav-menu >.menu-item>a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .eli .wl-nav-menu--main .wl-nav-menu--dropdown a,
+                        {{WRAPPER}} .eli .wl-nav-menu--main .wl-nav-menu .sub-menu .menu-item>a,
+                        {{WRAPPER}} .eli .wl-nav-menu--main .wl-nav-menu--dropdown .sub-menu .menu-item>a,
+                        {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .wl-nav-menu >.menu-item>a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
         );
@@ -796,14 +796,14 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a:hover,
-                         {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a:focus,
-                         {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a.wl-item-active,
-                         {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a.wl-item-active:hover,
-                         {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a.wl-item-active:focus,
-                         {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu .sub-menu .menu-item.active>a,
-                         {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown .sub-menu .menu-item.active>a,
-                         {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a.highlighted' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown a:hover,
+                         {{WRAPPER}} .eli .wl-nav-menu--dropdown a:focus,
+                         {{WRAPPER}} .eli .wl-nav-menu--dropdown a.wl-item-active,
+                         {{WRAPPER}} .eli .wl-nav-menu--dropdown a.wl-item-active:hover,
+                         {{WRAPPER}} .eli .wl-nav-menu--dropdown a.wl-item-active:focus,
+                         {{WRAPPER}} .eli .wl-nav-menu .sub-menu .menu-item.active>a,
+                         {{WRAPPER}} .eli .wl-nav-menu--dropdown .sub-menu .menu-item.active>a,
+                         {{WRAPPER}} .eli .wl-nav-menu--dropdown a.highlighted' => 'color: {{VALUE}}',
                     ],
                 ]
         );
@@ -814,17 +814,17 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                       '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a:hover,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a:focus,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown .sub-menu .menu-item.active>a,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu .sub-menu .menu-item.active>a:hover,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu .sub-menu .menu-item.active>a:focus,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu .sub-menu .menu-item>a:hover,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu .sub-menu .menu-item.active>a,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a.wl-item-active,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a.wl-item-active:focus,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a.wl-item-active:hover,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a.highlighted' => 'background-color: {{VALUE}}',
+                       '{{WRAPPER}} .eli .wl-nav-menu--dropdown a:hover,
+                        {{WRAPPER}} .eli .wl-nav-menu--dropdown a:focus,
+                        {{WRAPPER}} .eli .wl-nav-menu--dropdown .sub-menu .menu-item.active>a,
+                        {{WRAPPER}} .eli .wl-nav-menu .sub-menu .menu-item.active>a:hover,
+                        {{WRAPPER}} .eli .wl-nav-menu .sub-menu .menu-item.active>a:focus,
+                        {{WRAPPER}} .eli .wl-nav-menu .sub-menu .menu-item>a:hover,
+                        {{WRAPPER}} .eli .wl-nav-menu .sub-menu .menu-item.active>a,
+                        {{WRAPPER}} .eli .wl-nav-menu--dropdown a.wl-item-active,
+                        {{WRAPPER}} .eli .wl-nav-menu--dropdown a.wl-item-active:focus,
+                        {{WRAPPER}} .eli .wl-nav-menu--dropdown a.wl-item-active:hover,
+                        {{WRAPPER}} .eli .wl-nav-menu--dropdown a.highlighted' => 'background-color: {{VALUE}}',
                     ],
                     'separator' => 'none',
                 ]
@@ -835,9 +835,9 @@ class EliMenu extends Elementinvader_Base {
             [
                 'name' => 'dropdown_item_hover',
                 'selector' => 
-                               '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a:hover,
-                                {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu .sub-menu .menu-item>a:hover,
-                                {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown .sub-menu .menu-item>a:hover',
+                               '{{WRAPPER}} .eli .wl-nav-menu--dropdown a:hover,
+                                {{WRAPPER}} .eli .wl-nav-menu .sub-menu .menu-item>a:hover,
+                                {{WRAPPER}} .eli .wl-nav-menu--dropdown .sub-menu .menu-item>a:hover',
 
                 'separator' => 'before',
             ]
@@ -850,9 +850,9 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', '%'],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a:hover,
-                         {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu .sub-menu .menu-item>a:hover,
-                         {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown .sub-menu .menu-item>a:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown a:hover,
+                         {{WRAPPER}} .eli .wl-nav-menu .sub-menu .menu-item>a:hover,
+                         {{WRAPPER}} .eli .wl-nav-menu--dropdown .sub-menu .menu-item>a:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
         );
@@ -873,8 +873,8 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown .current-menu-parent > a.wl-item' => 'color: {{VALUE}}',
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a.wl-item-active' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown .current-menu-parent > a.wl-item' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown a.wl-item-active' => 'color: {{VALUE}}',
                     ],
                 ]
         );
@@ -886,8 +886,8 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown .current-menu-parent > a.wl-item' => 'background-color: {{VALUE}}',
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a.wl-item-active' => 'background-color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown .current-menu-parent > a.wl-item' => 'background-color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown a.wl-item-active' => 'background-color: {{VALUE}}',
                     ],
                     'separator' => 'none',
                 ]
@@ -898,8 +898,8 @@ class EliMenu extends Elementinvader_Base {
             [
                 'name' => 'dropdown_item_active',
                 'selector' => 
-                               '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown .current-menu-parent > a.wl-item',
-                               '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a.wl-item-active',
+                               '{{WRAPPER}} .eli .wl-nav-menu--dropdown .current-menu-parent > a.wl-item',
+                               '{{WRAPPER}} .eli .wl-nav-menu--dropdown a.wl-item-active',
 
                 'separator' => 'before',
             ]
@@ -912,7 +912,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', '%'],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a.wl-item-active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown a.wl-item-active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
         );
@@ -929,7 +929,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => [ 'px', 'em', '%' ],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .sub-menu' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .eli .sub-menu' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                     'separator' => 'before',
             ]
@@ -940,7 +940,7 @@ class EliMenu extends Elementinvader_Base {
                 [
                     'name' => 'dropdown_typography',
                     'exclude' => ['line_height'],
-                    'selector' => '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a',
+                    'selector' => '{{WRAPPER}} .eli .wl-nav-menu--dropdown a',
                   
                 ]
         );
@@ -961,9 +961,9 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', '%'],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown li:first-child a' => 'border-top-left-radius: {{TOP}}{{UNIT}}; border-top-right-radius: {{RIGHT}}{{UNIT}};',
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown li:last-child a' => 'border-bottom-right-radius: {{BOTTOM}}{{UNIT}}; border-bottom-left-radius: {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown li:first-child a' => 'border-top-left-radius: {{TOP}}{{UNIT}}; border-top-right-radius: {{RIGHT}}{{UNIT}};',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown li:last-child a' => 'border-bottom-right-radius: {{BOTTOM}}{{UNIT}}; border-bottom-left-radius: {{LEFT}}{{UNIT}};',
                     ],
                 ]
         );
@@ -985,7 +985,7 @@ class EliMenu extends Elementinvader_Base {
                     'label' => esc_html__('Horizontal Padding', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::SLIDER,
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown a' => 'padding-left: {{SIZE}}{{UNIT}}; padding-right: {{SIZE}}{{UNIT}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown a' => 'padding-left: {{SIZE}}{{UNIT}}; padding-right: {{SIZE}}{{UNIT}}',
                     ],
                     'separator' => 'before',
                 ]
@@ -1002,7 +1002,7 @@ class EliMenu extends Elementinvader_Base {
                         ],
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor  .wl-nav-menu--dropdown a' => 'padding-top: {{SIZE}}{{UNIT}}; padding-bottom: {{SIZE}}{{UNIT}}',
+                        '{{WRAPPER}} .eli  .wl-nav-menu--dropdown a' => 'padding-top: {{SIZE}}{{UNIT}}; padding-bottom: {{SIZE}}{{UNIT}}',
                     ],
                 ]
         );
@@ -1101,7 +1101,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a' => 'color: {{VALUE}}',
                     ],
                 ]
         );
@@ -1113,7 +1113,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a' => 'background-color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a' => 'background-color: {{VALUE}}',
                     ],
                     'separator' => 'none',
                 ]
@@ -1124,8 +1124,8 @@ class EliMenu extends Elementinvader_Base {
             [
                 'name' => 'dropdown_item_mobile',
                 'selector' => 
-                               '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu  a,
-                                {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu .menu-item>a',
+                               '{{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu  a,
+                                {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu .menu-item>a',
             ]
         );
     
@@ -1136,8 +1136,8 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', '%'],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu  a,
-                         {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu .menu-item>a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu  a,
+                         {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu .menu-item>a' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
         );
@@ -1158,14 +1158,14 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                       '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a:hover,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a:focus,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active:focus,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active:hover,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu li.menu-item.active > a:focus,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu li.menu-item.active > a:hover,
-                        {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.highlighted' => 'color: {{VALUE}}',
+                       '{{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a:hover,
+                        {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a:focus,
+                        {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active,
+                        {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active:focus,
+                        {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active:hover,
+                        {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu li.menu-item.active > a:focus,
+                        {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu li.menu-item.active > a:hover,
+                        {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.highlighted' => 'color: {{VALUE}}',
                     ],
                 ]
         );
@@ -1176,14 +1176,14 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [ 
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a:hover,
-                         {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a:focus,
-                         {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu li.menu-item.active > a:focus,
-                         {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu li.menu-item.active > a:hover,
-                         {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active,
-                         {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active:focus,
-                         {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active:hover,
-                         {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.highlighted' => 'background: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a:hover,
+                         {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a:focus,
+                         {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu li.menu-item.active > a:focus,
+                         {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu li.menu-item.active > a:hover,
+                         {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active,
+                         {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active:focus,
+                         {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active:hover,
+                         {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.highlighted' => 'background: {{VALUE}}',
                      ],
                     'separator' => 'none',
                 ]
@@ -1194,8 +1194,8 @@ class EliMenu extends Elementinvader_Base {
             [
                 'name' => 'dropdown_item_hover_mobile_f',
                 'selector' => 
-                               '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a:hover,
-                                {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu .menu-item>a:hover',
+                               '{{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a:hover,
+                                {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu .menu-item>a:hover',
 
                 'separator' => 'before',
             ]
@@ -1208,9 +1208,9 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', '%'],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a:hover,
-                         {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu .menu-item>a:hover,
-                         {{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu .menu-item>a:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a:hover,
+                         {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu .menu-item>a:hover,
+                         {{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu .menu-item>a:hover' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
         );
@@ -1231,7 +1231,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active' => 'color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active' => 'color: {{VALUE}}',
                     ],
                 ]
         );
@@ -1243,7 +1243,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active' => 'background-color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active' => 'background-color: {{VALUE}}',
                     ],
                     'separator' => 'none',
                 ]
@@ -1254,7 +1254,7 @@ class EliMenu extends Elementinvader_Base {
             [
                 'name' => 'dropdown_item_active_mobile',
                 'selector' => 
-                               '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active',
+                               '{{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active',
 
                 'separator' => 'before',
             ]
@@ -1267,7 +1267,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', '%'],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a.wl-item-active' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
         );
@@ -1284,7 +1284,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => [ 'px', 'em', '%' ],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
             ]
         );
@@ -1316,7 +1316,7 @@ class EliMenu extends Elementinvader_Base {
                     'label' => esc_html__('Horizontal Padding', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::SLIDER,
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a' => 'padding-left: {{SIZE}}{{UNIT}}; padding-right: {{SIZE}}{{UNIT}}',
+                        '{{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu a' => 'padding-left: {{SIZE}}{{UNIT}}; padding-right: {{SIZE}}{{UNIT}}',
                     ],
                     'separator' => 'before',
                 ]
@@ -1333,7 +1333,7 @@ class EliMenu extends Elementinvader_Base {
                         ],
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor  .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu  a' => 'padding-top: {{SIZE}}{{UNIT}}; padding-bottom: {{SIZE}}{{UNIT}}',
+                        '{{WRAPPER}} .eli  .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu  a' => 'padding-top: {{SIZE}}{{UNIT}}; padding-bottom: {{SIZE}}{{UNIT}}',
                     ],
                 ]
         );
@@ -1382,7 +1382,7 @@ class EliMenu extends Elementinvader_Base {
                 'type' => Controls_Manager::COLOR,
                 'default' => '',
                 'selectors' => [
-                    '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu' => 'background: {{VALUE}}',
+                    '{{WRAPPER}} .eli .wl-nav-menu--dropdown.wl-nav-menu__container .sub-menu' => 'background: {{VALUE}}',
                 ],
             ]
         );
@@ -1414,7 +1414,7 @@ class EliMenu extends Elementinvader_Base {
                 Group_Control_Typography::get_type(),
                 [
                     'name' => 'toggle_text_typo',
-                    'selector' => '{{WRAPPER}} .elementinvader-addons-for-elementor  div.wl-menu-toggle .wl-screen-only',
+                    'selector' => '{{WRAPPER}} .eli  div.wl-menu-toggle .wl-screen-only',
                 ]
         );
 
@@ -1424,7 +1424,7 @@ class EliMenu extends Elementinvader_Base {
                     'label' => esc_html__('Color', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor  div.wl-menu-toggle' => 'color: {{VALUE}}', // Harder selector to override text color control
+                        '{{WRAPPER}} .eli  div.wl-menu-toggle' => 'color: {{VALUE}}', // Harder selector to override text color control
                     ],
                 ]
         );
@@ -1435,7 +1435,7 @@ class EliMenu extends Elementinvader_Base {
                     'label' => esc_html__('Background Color', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl-menu-toggle' => 'background-color: {{VALUE}}',
+                        '{{WRAPPER}} .eli .wl-menu-toggle' => 'background-color: {{VALUE}}',
                     ],
                 ]
         );
@@ -1454,7 +1454,7 @@ class EliMenu extends Elementinvader_Base {
                 Group_Control_Typography::get_type(),
                 [
                     'name' => 'toggle_text_typo_hover',
-                    'selector' => '{{WRAPPER}} .elementinvader-addons-for-elementor  div.wl-menu-toggle:hover .wl-screen-only',
+                    'selector' => '{{WRAPPER}} .eli  div.wl-menu-toggle:hover .wl-screen-only',
                 ]
         );
 
@@ -1464,7 +1464,7 @@ class EliMenu extends Elementinvader_Base {
                     'label' => esc_html__('Color', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor  div.wl-menu-toggle:hover' => 'color: {{VALUE}}', // Harder selector to override text color control
+                        '{{WRAPPER}} .eli  div.wl-menu-toggle:hover' => 'color: {{VALUE}}', // Harder selector to override text color control
                     ],
                 ]
         );
@@ -1475,7 +1475,7 @@ class EliMenu extends Elementinvader_Base {
                     'label' => esc_html__('Background Color', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor  .wl-menu-toggle:hover' => 'background-color: {{VALUE}}',
+                        '{{WRAPPER}} .eli  .wl-menu-toggle:hover' => 'background-color: {{VALUE}}',
                     ],
                 ]
         );
@@ -1524,7 +1524,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::SLIDER,
                     'size_units' => ['px', '%'],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor  .wl-menu-toggle' => 'width: {{SIZE}}{{UNIT}}',
+                        '{{WRAPPER}} .eli  .wl-menu-toggle' => 'width: {{SIZE}}{{UNIT}}',
                     ],
                 ]
         );
@@ -1536,7 +1536,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::SLIDER,
                     'size_units' => ['px', '%'],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor  .wl-menu-toggle' => 'height: {{SIZE}}{{UNIT}}',
+                        '{{WRAPPER}} .eli  .wl-menu-toggle' => 'height: {{SIZE}}{{UNIT}}',
                     ],
                 ]
         );
@@ -1548,7 +1548,7 @@ class EliMenu extends Elementinvader_Base {
                     'type' => Controls_Manager::SLIDER,
                     'size_units' => ['px', '%'],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor  .wl-menu-toggle' => 'border-radius: {{SIZE}}{{UNIT}}',
+                        '{{WRAPPER}} .eli  .wl-menu-toggle' => 'border-radius: {{SIZE}}{{UNIT}}',
                     ],
                 ]
         );
@@ -1675,7 +1675,7 @@ class EliMenu extends Elementinvader_Base {
         if (Plugin::$instance->editor->is_edit_mode()):?>
             <script>
                 jQuery('document').ready(function($){
-                    $('.eli-menu .wl-menu-toggle,.wl_close-menu,.elementinvader-addons-for-elementor .wl_nav_mask').off().on('click', function (e) {
+                    $('.eli-menu .wl-menu-toggle,.wl_close-menu,.eli .wl_nav_mask').off().on('click', function (e) {
                         e.preventDefault();
                     
                         var menu_widg = $(this).closest('.elementor-widget-eli-menu');

@@ -1,8 +1,8 @@
 <?php
 
-namespace ElementinvaderAddonsForElementor\Widgets;
+namespace ELI\Widgets;
 
-use ElementinvaderAddonsForElementor\Core\Elementinvader_Base;
+use ELI\Core\Elementinvader_Base;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Utils;
@@ -13,7 +13,7 @@ use Elementor\Icons_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
-use ElementinvaderAddonsForElementor\Modules\Forms\Ajax_Handler;
+use ELI\Modules\Forms\Ajax_Handler;
 
 if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
@@ -32,7 +32,7 @@ class EliBlog_Search extends Elementinvader_Base {
     public $items_num = 0;
 
     public function __construct($data = array(), $args = null) {
-        wp_enqueue_style('eli-main', plugins_url('/assets/css/main.css', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__));
+        wp_enqueue_style('eli-main', plugins_url('/assets/css/main.css', ELI_FILE__));
         parent::__construct($data, $args);
     }
 
@@ -363,10 +363,10 @@ class EliBlog_Search extends Elementinvader_Base {
         $this->add_control(
                 'label_hide',
                 [
-                        'label' => esc_html__( 'Hide Element', 'eli-blocks' ),
+                        'label' => esc_html__( 'Hide Element', 'elementinvader-addons-for-elementor' ),
                         'type' => Controls_Manager::SWITCHER,
-                        'none' => esc_html__( 'Hide', 'eli-blocks' ),
-                        'block' => esc_html__( 'Show', 'eli-blocks' ),
+                        'none' => esc_html__( 'Hide', 'elementinvader-addons-for-elementor' ),
+                        'block' => esc_html__( 'Show', 'elementinvader-addons-for-elementor' ),
                         'return_value' => 'none',
                         'default' => '',
                         'selectors' => [
@@ -1029,11 +1029,11 @@ class EliBlog_Search extends Elementinvader_Base {
         $output_css .= sprintf('@media(max-width:%1$s){%2$s}', '991px', $this->inline_css_tablet);
         $output_css .= sprintf('@media(max-width:%1$s){%2$s}', '768px', $this->inline_css_mobile);
         
-        wp_enqueue_style('eli-custom-inline', plugins_url( '/assets/css/custom-inline.css', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__ ));
+        wp_enqueue_style('eli-custom-inline', plugins_url( '/assets/css/custom-inline.css', ELI_FILE__ ));
       
         /* only for edit mode */
         if (Plugin::$instance->editor->is_edit_mode()) {
-            echo '<style>'.sanitize_text_field($output_css).'</style>';
+            echo '<style>'.wp_kses_post(sanitize_text_field($output_css)).'</style>';
         } else {
             wp_add_inline_style( 'eli-custom-inline', $output_css );
         }

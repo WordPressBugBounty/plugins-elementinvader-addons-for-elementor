@@ -16,30 +16,30 @@
 
 /* * Prefixed by https://autoprefixer.github.io * PostCSS: v7.0.29, * Autoprefixer: v9.7.6 * Browsers: last 9 version */
 
-.elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu a {
+.eli .wl-nav-menu--main .wl-nav-menu a {
     -webkit-transition: 0.4s;
     -o-transition: 0.4s;
     transition: 0.4s;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu a,
-.elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu a:hover,
-.elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu a:focus,
-.elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu a.highlighted {
+.eli .wl-nav-menu--main .wl-nav-menu a,
+.eli .wl-nav-menu--main .wl-nav-menu a:hover,
+.eli .wl-nav-menu--main .wl-nav-menu a:focus,
+.eli .wl-nav-menu--main .wl-nav-menu a.highlighted {
     padding: 13px 20px;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu a.current {
+.eli .wl-nav-menu--main .wl-nav-menu a.current {
     background: #373a3c;
     color: #fff;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu a.disabled {
+.eli .wl-nav-menu--main .wl-nav-menu a.disabled {
     background: #55595c;
     color: #a1a6a9;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu ul {
+.eli .wl-nav-menu--main .wl-nav-menu ul {
     position: absolute;
     border-width: 0;
     border-style: solid;
@@ -51,8 +51,8 @@
     min-width: 100%;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu span.scroll-up,
-.elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu span.scroll-down {
+.eli .wl-nav-menu--main .wl-nav-menu span.scroll-up,
+.eli .wl-nav-menu--main .wl-nav-menu span.scroll-down {
     position: absolute;
     display: none;
     visibility: hidden;
@@ -61,9 +61,9 @@
     height: 20px;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu span.scroll-up-arrow,
-.elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu span.scroll-down-arrow,
-.elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu span.scroll-down-arrow {
+.eli .wl-nav-menu--main .wl-nav-menu span.scroll-up-arrow,
+.eli .wl-nav-menu--main .wl-nav-menu span.scroll-down-arrow,
+.eli .wl-nav-menu--main .wl-nav-menu span.scroll-down-arrow {
     position: absolute;
     top: -2px;
     left: 50%;
@@ -74,26 +74,26 @@
     border-color: transparent transparent #494c4f transparent;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu span.scroll-down-arrow {
+.eli .wl-nav-menu--main .wl-nav-menu span.scroll-down-arrow {
     top: 6px;
     border-style: solid dashed dashed dashed;
     border-color: #494c4f transparent transparent transparent;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--main .wl-nav-menu--dropdown .sub-arrow i {
+.eli .wl-nav-menu--main .wl-nav-menu--dropdown .sub-arrow i {
     -webkit-transform: rotate(-90deg);
     -ms-transform: rotate(-90deg);
     transform: rotate(-90deg);
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--layout-horizontal {
+.eli .wl-nav-menu--layout-horizontal {
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
     display: flex;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--layout-horizontal .wl-nav-menu {
+.eli .wl-nav-menu--layout-horizontal .wl-nav-menu {
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -103,11 +103,11 @@
     flex-wrap: wrap;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--layout-horizontal .wl-nav-menu a {
+.eli .wl-nav-menu--layout-horizontal .wl-nav-menu a {
     white-space: nowrap;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu__align-right .wl-nav-menu {
+.eli .wl-nav-menu__align-right .wl-nav-menu {
     margin-left: auto;
     -webkit-box-pack: end;
     -ms-flex-pack: end;
@@ -115,14 +115,14 @@
     justify-content: flex-end;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu__align-right .wl-nav-menu--layout-vertical>ul>li>a {
+.eli .wl-nav-menu__align-right .wl-nav-menu--layout-vertical>ul>li>a {
     -webkit-box-pack: end;
     -ms-flex-pack: end;
     -webkit-justify-content: flex-end;
     justify-content: flex-end;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu__align-left .wl-nav-menu {
+.eli .wl-nav-menu__align-left .wl-nav-menu {
     margin-right: auto;
     -webkit-box-pack: start;
     -ms-flex-pack: start;
@@ -130,14 +130,14 @@
     justify-content: flex-start;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu__align-left .wl-nav-menu--layout-vertical>ul>li>a {
+.eli .wl-nav-menu__align-left .wl-nav-menu--layout-vertical>ul>li>a {
     -webkit-box-pack: start;
     -ms-flex-pack: start;
     -webkit-justify-content: flex-start;
     justify-content: flex-start;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu__align-center .wl-nav-menu {
+.eli .wl-nav-menu__align-center .wl-nav-menu {
     margin-left: auto;
     margin-right: auto;
     -webkit-box-pack: center;
@@ -146,36 +146,36 @@
     justify-content: center;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu__align-center .wl-nav-menu--layout-vertical>ul>li>a {
+.eli .wl-nav-menu__align-center .wl-nav-menu--layout-vertical>ul>li>a {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     -webkit-justify-content: center;
     justify-content: center;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu__align-justify .wl-nav-menu--layout-horizontal .wl-nav-menu {
+.eli .wl-nav-menu__align-justify .wl-nav-menu--layout-horizontal .wl-nav-menu {
     width: 100%;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu__align-justify .wl-nav-menu--layout-horizontal .wl-nav-menu>li {
+.eli .wl-nav-menu__align-justify .wl-nav-menu--layout-horizontal .wl-nav-menu>li {
     -webkit-box-flex: 1;
     -ms-flex-positive: 1;
     -webkit-flex-grow: 1;
     flex-grow: 1;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu__align-justify .wl-nav-menu--layout-horizontal .wl-nav-menu>li>a {
+.eli .wl-nav-menu__align-justify .wl-nav-menu--layout-horizontal .wl-nav-menu>li>a {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     -webkit-justify-content: center;
     justify-content: center;
 }
 
-.elementinvader-addons-for-elementor .wl-widget-nav-menu:not(.wl-nav-menu--toggle) .wl-menu-toggle {
+.eli .wl-widget-nav-menu:not(.wl-nav-menu--toggle) .wl-menu-toggle {
     display: none;
 }
 
-.elementinvader-addons-for-elementor .wl-widget-nav-menu .wl-widget-container {
+.eli .wl-widget-nav-menu .wl-widget-container {
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -187,12 +187,12 @@
     flex-direction: column;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu {
+.eli .wl-nav-menu {
     position: relative;
     z-index: 2;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu:after {
+.eli .wl-nav-menu:after {
     content: "\00a0";
     display: block;
     height: 0;
@@ -202,9 +202,9 @@
     overflow: hidden;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu,
-.elementinvader-addons-for-elementor .wl-nav-menu ul,
-.elementinvader-addons-for-elementor .wl-nav-menu li {
+.eli .wl-nav-menu,
+.eli .wl-nav-menu ul,
+.eli .wl-nav-menu li {
     display: block;
     list-style: none;
     margin: 0;
@@ -213,48 +213,48 @@
     -webkit-tap-highlight-color: rgba(0, 0, 0, 0);
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu ul {
+.eli .wl-nav-menu ul {
     display: none;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu ul ul a,
-.elementinvader-addons-for-elementor .wl-nav-menu ul ul a:hover,
-.elementinvader-addons-for-elementor .wl-nav-menu ul ul a:focus,
-.elementinvader-addons-for-elementor .wl-nav-menu ul ul a:active {
+.eli .wl-nav-menu ul ul a,
+.eli .wl-nav-menu ul ul a:hover,
+.eli .wl-nav-menu ul ul a:focus,
+.eli .wl-nav-menu ul ul a:active {
     border-left: 16px solid transparent;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu ul ul ul a,
-.elementinvader-addons-for-elementor .wl-nav-menu ul ul ul a:hover,
-.elementinvader-addons-for-elementor .wl-nav-menu ul ul ul a:focus,
-.elementinvader-addons-for-elementor .wl-nav-menu ul ul ul a:active {
+.eli .wl-nav-menu ul ul ul a,
+.eli .wl-nav-menu ul ul ul a:hover,
+.eli .wl-nav-menu ul ul ul a:focus,
+.eli .wl-nav-menu ul ul ul a:active {
     border-left: 24px solid transparent;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu ul ul ul ul a,
-.elementinvader-addons-for-elementor .wl-nav-menu ul ul ul ul a:hover,
-.elementinvader-addons-for-elementor .wl-nav-menu ul ul ul ul a:focus,
-.elementinvader-addons-for-elementor .wl-nav-menu ul ul ul ul a:active {
+.eli .wl-nav-menu ul ul ul ul a,
+.eli .wl-nav-menu ul ul ul ul a:hover,
+.eli .wl-nav-menu ul ul ul ul a:focus,
+.eli .wl-nav-menu ul ul ul ul a:active {
     border-left: 32px solid transparent;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu ul ul ul ul ul a,
-.elementinvader-addons-for-elementor .wl-nav-menu ul ul ul ul ul a:hover,
-.elementinvader-addons-for-elementor .wl-nav-menu ul ul ul ul ul a:focus,
-.elementinvader-addons-for-elementor .wl-nav-menu ul ul ul ul ul a:active {
+.eli .wl-nav-menu ul ul ul ul ul a,
+.eli .wl-nav-menu ul ul ul ul ul a:hover,
+.eli .wl-nav-menu ul ul ul ul ul a:focus,
+.eli .wl-nav-menu ul ul ul ul ul a:active {
     border-left: 40px solid transparent;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu li,
-.elementinvader-addons-for-elementor .wl-nav-menu a {
+.eli .wl-nav-menu li,
+.eli .wl-nav-menu a {
     position: relative;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu li {
+.eli .wl-nav-menu li {
     border-width: 0;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu a {
+.eli .wl-nav-menu a {
     display: -webkit-box;
     display: -ms-flexbox;
     display: -webkit-flex;
@@ -266,37 +266,37 @@
     position: relative;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu a,
-.elementinvader-addons-for-elementor .wl-nav-menu a:hover,
-.elementinvader-addons-for-elementor .wl-nav-menu a:focus {
+.eli .wl-nav-menu a,
+.eli .wl-nav-menu a:hover,
+.eli .wl-nav-menu a:focus {
     padding: 10px 20px;
     line-height: 20px;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu a.current {
+.eli .wl-nav-menu a.current {
     background: #373a3c;
     color: #fff;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu a.disabled {
+.eli .wl-nav-menu a.disabled {
     cursor: not-allowed;
     color: #a1a6a9;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--indicator-none .elementinvader-addons-for-elementor .wl-nav-menu .wl-item.has-submenu {
+.eli .wl-nav-menu--indicator-none .eli .wl-nav-menu .wl-item.has-submenu {
     padding-right: 20px;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--indicator-plus:before {
+.eli .wl-nav-menu--indicator-plus:before {
     font-family: "Open Sans", sans-serif;
 }
 
-.wl-nav-menu--indicator-chevron .elementinvader-addons-for-elementor .menu-item.menu-item-has-children>.wl-item:before {
+.wl-nav-menu--indicator-chevron .eli .menu-item.menu-item-has-children>.wl-item:before {
     font-size: 10px;
 }
 
-.wl-nav-menu--indicator-chevron .elementinvader-addons-for-elementor .wl-nav-menu--dropdown .menu-item.menu-item-has-children>a .eli-caret:after,
-.wl-nav-menu--indicator-chevron .elementinvader-addons-for-elementor .wl-nav-menu--main .menu-item.menu-item-has-children>.wl-item:after {
+.wl-nav-menu--indicator-chevron .eli .wl-nav-menu--dropdown .menu-item.menu-item-has-children>a .eli-caret:after,
+.wl-nav-menu--indicator-chevron .eli .wl-nav-menu--main .menu-item.menu-item-has-children>.wl-item:after {
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
     content: "\f078";
@@ -308,7 +308,7 @@
     left: 10px;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--dropdown .menu-item.menu-item-has-children>a .eli-caret {
+.eli .wl-nav-menu--dropdown .menu-item.menu-item-has-children>a .eli-caret {
     position: absolute;
     top: 0;
     right: 0;
@@ -325,9 +325,9 @@
     border-left: 1px solid #ffffff4f !important;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--dropdown .menu-item.menu-item-has-children>a .eli-caret:after,
-.wl-nav-menu--indicator-angle.elementinvader-addons-for-elementor .menu-item.menu-item-has-children>.wl-item:after,
-.elementinvader-addons-for-elementor .wl-nav-menu--main .menu-item.menu-item-has-children>.wl-item:after {
+.eli .wl-nav-menu--dropdown .menu-item.menu-item-has-children>a .eli-caret:after,
+.wl-nav-menu--indicator-angle.eli .menu-item.menu-item-has-children>.wl-item:after,
+.eli .wl-nav-menu--main .menu-item.menu-item-has-children>.wl-item:after {
     font-family: 'Font Awesome 5 Free';
     font-weight: 900;
     content: "\f107";
@@ -339,15 +339,15 @@
     left: 8px;
 }
 
-.wl-nav-menu--indicator-plus .elementinvader-addons-for-elementor .menu-item.menu-item-has-children>.wl-item:after {
+.wl-nav-menu--indicator-plus .eli .menu-item.menu-item-has-children>.wl-item:after {
     content: '+';
 }
 
-.wl-nav-menu--indicator-none .elementinvader-addons-for-elementor .wl-nav-menu--main .menu-item.menu-item-has-children>.wl-item:after {
+.wl-nav-menu--indicator-none .eli .wl-nav-menu--main .menu-item.menu-item-has-children>.wl-item:after {
     display: none !important;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu .sub-arrow {
+.eli .wl-nav-menu .sub-arrow {
     font-size: 16px;
     line-height: 1;
     padding: 10px 0 10px 10px;
@@ -355,21 +355,21 @@
     margin-bottom: -10px;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu .sub-arrow i {
+.eli .wl-nav-menu .sub-arrow i {
     pointer-events: none;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--dropdown .wl-item:hover,
-.elementinvader-addons-for-elementor .wl-nav-menu--dropdown .wl-item.highlighted,
-.elementinvader-addons-for-elementor .wl-nav-menu--dropdown .wl-item.wl-item-active,
-.elementinvader-addons-for-elementor .wl-nav-menu--dropdown .wl-sub-item:hover,
+.eli .wl-nav-menu--dropdown .wl-item:hover,
+.eli .wl-nav-menu--dropdown .wl-item.highlighted,
+.eli .wl-nav-menu--dropdown .wl-item.wl-item-active,
+.eli .wl-nav-menu--dropdown .wl-sub-item:hover,
 .wl-sub-item.highlighted,
-.elementinvader-addons-for-elementor .wl-sub-item.wl-item-active {
+.eli .wl-sub-item.wl-item-active {
     background-color: #55595c;
     color: #fff;
 }
 
-.elementinvader-addons-for-elementor .wl-menu-toggle {
+.eli .wl-menu-toggle {
     display: inline-block;
     -webkit-box-align: center;
     -ms-flex-align: center;
@@ -393,20 +393,20 @@
     display: flex;
 }
 
-.elementinvader-addons-for-elementor .wl-menu-toggle.wl-active i:before {
+.eli .wl-menu-toggle.wl-active i:before {
     content: '\e87f';
 }
 
-.elementinvader-addons-for-elementor.elementinvader-addons-for-elementor .wl-nav-menu--dropdown {
+.eli.eli .wl-nav-menu--dropdown {
     background-color: #fff;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--dropdown-none.elementinvader-addons-for-elementor .wl-nav-menu--dropdown,
-.elementinvader-addons-for-elementor .wl-nav-menu--dropdown-none .wl-menu-toggle {
+.eli .wl-nav-menu--dropdown-none.eli .wl-nav-menu--dropdown,
+.eli .wl-nav-menu--dropdown-none .wl-menu-toggle {
     display: none;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--dropdown.wl-nav-menu__container {
+.eli .wl-nav-menu--dropdown.wl-nav-menu__container {
     margin-top: 10px;
     -webkit-transition: max-height 0.3s, -webkit-transform 0.3s;
     transition: max-height 0.3s, -webkit-transform 0.3s;
@@ -420,7 +420,7 @@
     max-height: initial !important;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--dropdown a {
+.eli .wl-nav-menu--dropdown a {
     color: #494c4f;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;
@@ -428,47 +428,47 @@
     justify-content: space-between;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--dropdown a.current {
+.eli .wl-nav-menu--dropdown a.current {
     background: #373a3c;
     color: #fff;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--dropdown a.disabled {
+.eli .wl-nav-menu--dropdown a.disabled {
     color: #b3b3b3;
 }
 
-.elementinvader-addons-for-elementor ul.wl-nav-menu--dropdown a,
-.elementinvader-addons-for-elementor ul.wl-nav-menu--dropdown a:hover,
-.elementinvader-addons-for-elementor ul.wl-nav-menu--dropdown a:focus {
+.eli ul.wl-nav-menu--dropdown a,
+.eli ul.wl-nav-menu--dropdown a:hover,
+.eli ul.wl-nav-menu--dropdown a:focus {
     text-shadow: none;
 }
 
-.wl-nav-menu__text-align-center .elementinvader-addons-for-elementor .wl-nav-menu--dropdown .wl-nav-menu a {
+.wl-nav-menu__text-align-center .eli .wl-nav-menu--dropdown .wl-nav-menu a {
     -webkit-box-pack: center;
     -ms-flex-pack: center;
     -webkit-justify-content: center;
     justify-content: center;
 }
 
-.wl-nav-menu--toggle .elementinvader-addons-for-elementor .wl-menu-toggle:not(.wl-active)+.wl-nav-menu__container {
+.wl-nav-menu--toggle .eli .wl-menu-toggle:not(.wl-active)+.wl-nav-menu__container {
     -webkit-transform: scaleY(0);
     -ms-transform: scaleY(0);
     transform: scaleY(0);
     max-height: 0;
 }
 
-.wl-nav-menu--toggle .elementinvader-addons-for-elementor .wl-menu-toggle.wl-active+.wl-nav-menu__container {
+.wl-nav-menu--toggle .eli .wl-menu-toggle.wl-active+.wl-nav-menu__container {
     -webkit-transform: scaleY(1);
     -ms-transform: scaleY(1);
     transform: scaleY(1);
     max-height: 100vh;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu__container.wl-nav-menu--dropdown {
+.eli .wl-nav-menu__container.wl-nav-menu--dropdown {
     border: 0;
 }
 
-.wl-nav-menu--stretch .elementinvader-addons-for-elementor .wl-nav-menu__container.wl-nav-menu--dropdown {
+.wl-nav-menu--stretch .eli .wl-nav-menu__container.wl-nav-menu--dropdown {
     position: absolute;
     z-index: 9997;
     width: 100%;
@@ -479,18 +479,18 @@
     display: block;
 }
 /*
-.elementinvader-addons-for-elementor .wl-nav-menu--main.on_hover .menu-item:hover>ul.wl-nav-menu--dropdown {
+.eli .wl-nav-menu--main.on_hover .menu-item:hover>ul.wl-nav-menu--dropdown {
     display: block;
 }*/
 
-.wl-nav-menu--toggle.wl_nav_show .elementinvader-addons-for-elementor .wl-nav-menu__container {
+.wl-nav-menu--toggle.wl_nav_show .eli .wl-nav-menu__container {
     -webkit-transform: initial !important;
     -ms-transform: initial !important;
     transform: initial !important;
     max-height: initial !important;
 }
 
-.wl-nav-menu--toggle .elementinvader-addons-for-elementor .wl-menu-toggle:not(.wl-active)+.wl-nav-menu__container {
+.wl-nav-menu--toggle .eli .wl-menu-toggle:not(.wl-active)+.wl-nav-menu__container {
     -webkit-transform: translateX(-100%);
     -ms-transform: translateX(-100%);
     transform: translateX(-100%);
@@ -504,18 +504,18 @@
     margin: 0;
 }
 
-body.admin-bar .wl-nav-menu--toggle .elementinvader-addons-for-elementor .wl-menu-toggle:not(.wl-active)+.wl-nav-menu__container {
+body.admin-bar .wl-nav-menu--toggle .eli .wl-menu-toggle:not(.wl-active)+.wl-nav-menu__container {
     padding-top: 50px;
 }
 
-.wl-nav-menu--toggle .elementinvader-addons-for-elementor .wl-menu-toggle.wl-active+.wl-nav-menu__container {
+.wl-nav-menu--toggle .eli .wl-menu-toggle.wl-active+.wl-nav-menu__container {
     -webkit-transform: translateX(1);
     -ms-transform: translateX(1);
     transform: translateX(1);
     max-height: 100vh;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--dropdown span {
+.eli .wl-nav-menu--dropdown span {
     display: block;
     width: 30px;
     height: 3px;
@@ -523,7 +523,7 @@ body.admin-bar .wl-nav-menu--toggle .elementinvader-addons-for-elementor .wl-men
     margin-bottom: 12px;
 }
 
-.elementinvader-addons-for-elementor .wl_close-menu {
+.eli .wl_close-menu {
     position: fixed;
     right: 15px;
     width: 35px;
@@ -531,32 +531,32 @@ body.admin-bar .wl-nav-menu--toggle .elementinvader-addons-for-elementor .wl-men
     top: 20px;
 }
 
-body.admin-bar .elementinvader-addons-for-elementor .wl_close-menu {
+body.admin-bar .eli .wl_close-menu {
     top: 55px;
     background: transparent !important;
 }
 
-body .elementinvader-addons-for-elementor .wl_close-menu {
+body .eli .wl_close-menu {
     background: transparent !important;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--dropdown .wl_close-menu span.bar1 {
+.eli .wl-nav-menu--dropdown .wl_close-menu span.bar1 {
     -webkit-transform: translateY(15px) rotate(-45deg);
     -ms-transform: translateY(15px) rotate(-45deg);
     transform: translateY(15px) rotate(-45deg);
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--dropdown .wl_close-menu span.bar3 {
+.eli .wl-nav-menu--dropdown .wl_close-menu span.bar3 {
     -webkit-transform: translateY(0) rotate(-135deg);
     -ms-transform: translateY(0) rotate(-135deg);
     transform: translateY(0px) rotate(-135deg);
 }
 
-.elementinvader-addons-for-elementor .sub-menu a {
+.eli .sub-menu a {
     padding-right: 30px;
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu .sub-menu .menu-item-has-children > ul {
+.eli .wl-nav-menu .sub-menu .menu-item-has-children > ul {
     margin-top: -2px !important;
     margin-left: -1px;
     padding: 0;
@@ -572,13 +572,13 @@ body .elementinvader-addons-for-elementor .wl_close-menu {
     border-style: solid;
 }
 
-body .elementinvader-addons-for-elementor .wl-menu-toggle {
+body .eli .wl-menu-toggle {
     display: flex;
     align-items: center;
     justify-content: center; 
 }
 
-.elementinvader-addons-for-elementor .wl-nav-menu--dropdown a.wl_close-menu {
+.eli .wl-nav-menu--dropdown a.wl_close-menu {
     padding: 0 !important;
     padding-left: 5px !important;
     transition: all .05s;
@@ -586,22 +586,22 @@ body .elementinvader-addons-for-elementor .wl-menu-toggle {
     transition-delay: 0;
 }
 
-.wl-nav-menu--toggle.wl_nav_show .elementinvader-addons-for-elementor .wl-nav-menu__container a.wl_close-menu {
+.wl-nav-menu--toggle.wl_nav_show .eli .wl-nav-menu__container a.wl_close-menu {
     opacity: 1;
     transition-delay: .4s;
 }
-.wl-nav-menu--toggle:not(.wl_nav_show) .elementinvader-addons-for-elementor .wl-nav-menu__container a.wl_close-menu {
+.wl-nav-menu--toggle:not(.wl_nav_show) .eli .wl-nav-menu__container a.wl_close-menu {
     opacity: 0;
     transition-delay: 0s;
     transition: all 0s;
 }
 
 @media (min-width: 768px) {
-    .wl-nav-menu--dropdown-mobile .elementinvader-addons-for-elementor .wl-nav-menu--dropdown,
-    .wl-nav-menu--dropdown-mobile .elementinvader-addons-for-elementor .wl-menu-toggle {
+    .wl-nav-menu--dropdown-mobile .eli .wl-nav-menu--dropdown,
+    .wl-nav-menu--dropdown-mobile .eli .wl-menu-toggle {
         display: none;
     }
-    .elementinvader-addons-for-elementor .wl-nav-menu .menu-item-has-children>ul {
+    .eli .wl-nav-menu .menu-item-has-children>ul {
         display: block!important;
         -webkit-transition: all 0.35s ease;
         -o-transition: all 0.35s ease;
@@ -612,7 +612,7 @@ body .elementinvader-addons-for-elementor .wl-menu-toggle {
         -ms-transform-origin: 0 0;
         transform-origin: 0 0;
     }
-    .elementinvader-addons-for-elementor .wl-nav-menu .menu-item-has-children.active>ul {
+    .eli .wl-nav-menu .menu-item-has-children.active>ul {
         opacity: 1;
         visibility: visible;
         -webkit-transform: rotateX(0deg);
@@ -624,19 +624,19 @@ body .elementinvader-addons-for-elementor .wl-menu-toggle {
 }
 
 @media (min-width: 1025px) {
-    .wl-nav-menu--dropdown-tablet .elementinvader-addons-for-elementor .wl-nav-menu--dropdown,
-    .wl-nav-menu--dropdown-tablet .elementinvader-addons-for-elementor .wl-menu-toggle {
+    .wl-nav-menu--dropdown-tablet .eli .wl-nav-menu--dropdown,
+    .wl-nav-menu--dropdown-tablet .eli .wl-menu-toggle {
         display: none;
     }
 }
-.wl-nav-menu--dropdown-tablet .elementinvader-addons-for-elementor .wl_nav_mask {
+.wl-nav-menu--dropdown-tablet .eli .wl_nav_mask {
     display: none;
 }
 @media (max-width: 1024px) {
-    .wl-nav-menu--dropdown-tablet .elementinvader-addons-for-elementor .wl-nav-menu--main {
+    .wl-nav-menu--dropdown-tablet .eli .wl-nav-menu--main {
         display: none;
     }
-    .wl-nav-menu--dropdown-tablet.wl_nav_show .elementinvader-addons-for-elementor .wl_nav_mask {
+    .wl-nav-menu--dropdown-tablet.wl_nav_show .eli .wl_nav_mask {
         left: 0;
         top: 0;
         right: 0;
@@ -648,26 +648,26 @@ body .elementinvader-addons-for-elementor .wl-menu-toggle {
         z-index: 996;
         display: block;
     }
-    .wl-nav-menu--dropdown-tablet.wl_nav_show .elementinvader-addons-for-elementor .menu-item-has-children>.wl-nav-menu--dropdown {
+    .wl-nav-menu--dropdown-tablet.wl_nav_show .eli .menu-item-has-children>.wl-nav-menu--dropdown {
         display: none !important;
     }
-    .wl-nav-menu--dropdown-tablet.wl_nav_show .elementinvader-addons-for-elementor .menu-item-has-children.active>.wl-nav-menu--dropdown {
+    .wl-nav-menu--dropdown-tablet.wl_nav_show .eli .menu-item-has-children.active>.wl-nav-menu--dropdown {
         display: block !important;
     }
 }
 
 @media (max-width: 767px) {
         
-    .wl-nav-menu--dropdown-tablet.wl_nav_show .elementinvader-addons-for-elementor .menu-item-has-children>.wl-nav-menu--dropdown {
+    .wl-nav-menu--dropdown-tablet.wl_nav_show .eli .menu-item-has-children>.wl-nav-menu--dropdown {
         padding-left: 5px;
     }
-    .wl-nav-menu--dropdown-mobile.wl_nav_show .elementinvader-addons-for-elementor .menu-item-has-children.active>.wl-nav-menu--dropdown {
+    .wl-nav-menu--dropdown-mobile.wl_nav_show .eli .menu-item-has-children.active>.wl-nav-menu--dropdown {
         display: block;
     }
-    .wl-nav-menu--dropdown-mobile .elementinvader-addons-for-elementor .wl-nav-menu--main {
+    .wl-nav-menu--dropdown-mobile .eli .wl-nav-menu--main {
         display: none;
     }
-    .wl-nav-menu--dropdown-mobile.wl_nav_show .elementinvader-addons-for-elementor .wl_nav_mask {
+    .wl-nav-menu--dropdown-mobile.wl_nav_show .eli .wl_nav_mask {
         left: 0;
         top: 0;
         right: 0;
@@ -681,6 +681,6 @@ body .elementinvader-addons-for-elementor .wl-menu-toggle {
     }
 }
 
-.elementinvader-addons-for-elementor.eli-menu .wl-nav-menu--main .current-menu-item>.wl-item {
+.eli.eli-menu .wl-nav-menu--main .current-menu-item>.wl-item {
     color: #0074e4;
 }

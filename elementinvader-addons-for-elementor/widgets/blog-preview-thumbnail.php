@@ -1,8 +1,8 @@
 <?php
 
-namespace ElementinvaderAddonsForElementor\Widgets;
+namespace ELI\Widgets;
 
-use ElementinvaderAddonsForElementor\Core\Elementinvader_Base;
+use ELI\Core\Elementinvader_Base;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Utils;
@@ -13,7 +13,7 @@ use Elementor\Icons_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
-use ElementinvaderAddonsForElementor\Modules\Forms\Ajax_Handler;
+use ELI\Modules\Forms\Ajax_Handler;
 
 if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
@@ -29,7 +29,7 @@ class EliBlog_Preview_Thumbnail extends Elementinvader_Base {
     public $items_num = 0;
 
     public function __construct($data = array(), $args = null) {
-        wp_enqueue_style('eli-main', plugins_url('/assets/css/main.css', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__));
+        wp_enqueue_style('eli-main', plugins_url('/assets/css/main.css', ELI_FILE__));
         parent::__construct($data, $args);
     }
 
@@ -111,7 +111,7 @@ class EliBlog_Preview_Thumbnail extends Elementinvader_Base {
         $items = [
             [
                 'key'=>'styles_thumbnail',
-                'label'=> esc_html__('Styles', 'wpdirectorykit'),
+                'label'=> esc_html__('Styles', 'elementinvader-addons-for-elementor'),
                 'selector_hide'=>'',
                 'selector'=>'{{WRAPPER}} .eli_blog_preview_thumbnail img',
                 'selector_hover'=>'{{WRAPPER}} .eli_blog_preview_thumbnail:hover img',
@@ -189,7 +189,7 @@ class EliBlog_Preview_Thumbnail extends Elementinvader_Base {
         if(Plugin::$instance->editor->is_edit_mode())
             $object['is_edit_mode'] = true;
       
-        echo $this->view('thumbnail', $object); 
+        $this->view('thumbnail', $object, true); 
     }
 
 	public static function ma_el_get_post_types()

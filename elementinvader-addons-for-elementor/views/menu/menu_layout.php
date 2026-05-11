@@ -1,4 +1,5 @@
-<div class="widget-eli elementinvader-addons-for-elementor eli-menu elementor-clickable" id="eli_<?php echo esc_html($this->get_id_int()); ?>">
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
+<div class="widget-eli eli eli-menu elementor-clickable" id="eli_<?php echo esc_html($this->get_id_int()); ?>">
     <div class="eli-container">
         <div class="wl_nav_mask"></div>
         <?php

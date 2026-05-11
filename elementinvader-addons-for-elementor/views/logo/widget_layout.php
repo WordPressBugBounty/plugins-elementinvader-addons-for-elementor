@@ -1,3 +1,4 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <div class="widget-eli eli-logo" id="eli_<?php echo esc_html($this->get_id_int());?>">
     <div class="eli_container">
         <?php if (!empty($settings['custom_logo_image']['url']) ) : ?>

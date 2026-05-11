@@ -1,3 +1,4 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <div class="widget-eli eli_slider" id="eli_<?php echo esc_html($this->get_id_int()); ?>">
     <div class="eli_container">
         <div class="ili_slider_box <?php echo esc_attr($settings['t_options_slider_animation_style']) . '_animation'; ?> <?php echo esc_attr(join(' ', [$settings['t_styles_dots_position_style'], $settings['t_styles_arrows_position_style'], $settings['t_styles_arrows_position'], $settings['t_styles_arrows_position_style']])); ?>">

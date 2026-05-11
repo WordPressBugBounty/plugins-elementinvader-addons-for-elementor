@@ -1,8 +1,8 @@
 <?php
 
-namespace ElementinvaderAddonsForElementor\Widgets;
+namespace ELI\Widgets;
 
-use ElementinvaderAddonsForElementor\Core\Elementinvader_Base;
+use ELI\Core\Elementinvader_Base;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Utils;
@@ -162,7 +162,7 @@ class EliMap extends Elementinvader_Base {
         $this->add_control(
             'marker_icon_image', 
             [
-                    'label' => esc_html__( 'Upload custom image for marker', 'plugin-domain' ),
+                    'label' => esc_html__( 'Upload custom image for marker', 'elementinvader-addons-for-elementor' ),
                     'type' => \Elementor\Controls_Manager::MEDIA,
                     'render_type' => 'template',
             ]
@@ -249,8 +249,8 @@ class EliMap extends Elementinvader_Base {
                 ],
                 'render_type' => 'template',
                 'selectors' => [
-                    '{{WRAPPER}} .elementinvader-addons-for-elementor .wl_marker-container' => 'height: {{SIZE}}px;width: {{SIZE}}px',
-                    '{{WRAPPER}} .elementinvader-addons-for-elementor .wl_face i' => 'line-height: calc({{SIZE}}px * 1.1)',
+                    '{{WRAPPER}} .eli .wl_marker-container' => 'height: {{SIZE}}px;width: {{SIZE}}px',
+                    '{{WRAPPER}} .eli .wl_face i' => 'line-height: calc({{SIZE}}px * 1.1)',
                 ],
                 'conditions' => [
                     'terms' => [
@@ -334,7 +334,7 @@ class EliMap extends Elementinvader_Base {
             $repeater->add_control(
                     'marker_icon_image', 
                     [
-                            'label' => esc_html__( 'Choose Image For Custom Marker', 'plugin-domain' ),
+                            'label' => esc_html__( 'Choose Image For Custom Marker', 'elementinvader-addons-for-elementor' ),
                             'type' => \Elementor\Controls_Manager::MEDIA,
                     ]
             );
@@ -411,7 +411,7 @@ class EliMap extends Elementinvader_Base {
                         'size' => 350,
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .sw_map_box' => 'height: {{SIZE}}px',
+                        '{{WRAPPER}} .eli .sw_map_box' => 'height: {{SIZE}}px',
                     ],
                     'separator' => 'after',
                 ]
@@ -635,7 +635,7 @@ class EliMap extends Elementinvader_Base {
                 ],
                 'render_type' => 'template',
                 'selectors' => [
-                    '{{WRAPPER}} .elementinvader-addons-for-elementor .wl_face i' => 'font-size: {{SIZE}}px',
+                    '{{WRAPPER}} .eli .wl_face i' => 'font-size: {{SIZE}}px',
                 ],
                 'conditions' => [
                     'terms' => [
@@ -662,7 +662,7 @@ class EliMap extends Elementinvader_Base {
                 ],
                 'render_type' => 'template',
                 'selectors' => [
-                    '{{WRAPPER}} .elementinvader-addons-for-elementor .wl_face i' => 'top: {{SIZE}}px',
+                    '{{WRAPPER}} .eli .wl_face i' => 'top: {{SIZE}}px',
                 ],
                 'conditions' => [
                     'terms' => [
@@ -679,14 +679,14 @@ class EliMap extends Elementinvader_Base {
         $this->add_control(
             'marker_icon_hide',
             [
-                    'label' => esc_html__( 'Hide Icon', 'eli-blocks' ),
+                    'label' => esc_html__( 'Hide Icon', 'elementinvader-addons-for-elementor' ),
                     'type' => Controls_Manager::SWITCHER,
-                    'none' => esc_html__( 'Hide', 'eli-blocks' ),
-                    'block' => esc_html__( 'Show', 'eli-blocks' ),
+                    'none' => esc_html__( 'Hide', 'elementinvader-addons-for-elementor' ),
+                    'block' => esc_html__( 'Show', 'elementinvader-addons-for-elementor' ),
                     'return_value' => 'none',
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl_face i' => 'display: {{VALUE}};',
+                        '{{WRAPPER}} .eli .wl_face i' => 'display: {{VALUE}};',
                     ],
                     'conditions' => [
                         'terms' => [
@@ -714,7 +714,7 @@ class EliMap extends Elementinvader_Base {
                     'label' => esc_html__('Marker Border', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl_marker-card:before' => 'background-color: {{VALUE}};',
+                        '{{WRAPPER}} .eli .wl_marker-card:before' => 'background-color: {{VALUE}};',
                     ],
                 ]
         );
@@ -725,7 +725,7 @@ class EliMap extends Elementinvader_Base {
                     'label' => esc_html__('Marker Background', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl_marker-card:after' => 'background-color: {{VALUE}};',
+                        '{{WRAPPER}} .eli .wl_marker-card:after' => 'background-color: {{VALUE}};',
                     ],
                 ]
         );
@@ -756,7 +756,7 @@ class EliMap extends Elementinvader_Base {
                     'label' => esc_html__('Marker Border', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader-addons-for-elementor .wl_marker-container:hover .wl_marker-card:before' => 'background-color: {{VALUE}};',
+                        '{{WRAPPER}} .eli .wl_marker-container:hover .wl_marker-card:before' => 'background-color: {{VALUE}};',
                     ],
                 ]
         );
@@ -767,7 +767,7 @@ class EliMap extends Elementinvader_Base {
                 'label' => esc_html__('Marker Background', 'elementinvader-addons-for-elementor'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .elementinvader-addons-for-elementor .wl_marker-container:hover .wl_marker-card:after' => 'background-color: {{VALUE}};',
+                    '{{WRAPPER}} .eli .wl_marker-container:hover .wl_marker-card:after' => 'background-color: {{VALUE}};',
                 ],
             ]
         );
@@ -887,7 +887,7 @@ class EliMap extends Elementinvader_Base {
         );
 
         $object = [
-            'normal' => '{{WRAPPER}} .elementinvader-addons-for-elementor .eli_infobox',
+            'normal' => '{{WRAPPER}} .eli .eli_infobox',
         ];
         $this->generate_renders_tabs($object, 'section_map_infobox_s', ['align','background','border','border_radius','padding','shadow']);
          /*
@@ -916,7 +916,7 @@ class EliMap extends Elementinvader_Base {
         );
 
         $object = [
-            'normal' => '{{WRAPPER}} .elementinvader-addons-for-elementor .eli_infobox .eli_infobox_title',
+            'normal' => '{{WRAPPER}} .eli .eli_infobox .eli_infobox_title',
         ];
         $this->generate_renders_tabs($object, 'section_map_infobox_title_s','text');
        
@@ -931,7 +931,7 @@ class EliMap extends Elementinvader_Base {
         );
 
         $object = [
-            'normal' => '{{WRAPPER}} .elementinvader-addons-for-elementor .eli_infobox .eli_infobox_text',
+            'normal' => '{{WRAPPER}} .eli .eli_infobox .eli_infobox_text',
         ];
         $this->generate_renders_tabs($object, 'section_map_infobox_text_s', 'text');
         
@@ -947,21 +947,21 @@ class EliMap extends Elementinvader_Base {
         $this->add_control(
                 'card_items_hide',
                 [
-                        'label' => esc_html__( 'Hide Element', 'eli-blocks' ),
+                        'label' => esc_html__( 'Hide Element', 'elementinvader-addons-for-elementor' ),
                         'type' => Controls_Manager::SWITCHER,
-                        'none' => esc_html__( 'Hide', 'eli-blocks' ),
-                        'block' => esc_html__( 'Show', 'eli-blocks' ),
+                        'none' => esc_html__( 'Hide', 'elementinvader-addons-for-elementor' ),
+                        'block' => esc_html__( 'Show', 'elementinvader-addons-for-elementor' ),
                         'return_value' => 'none',
                         'default' => '',
                         'selectors' => [
-                            '{{WRAPPER}} .elementinvader-addons-for-elementor .leaflet-container a.leaflet-popup-close-button' => 'display: {{VALUE}};',
+                            '{{WRAPPER}} .eli .leaflet-container a.leaflet-popup-close-button' => 'display: {{VALUE}};',
                         ],
                 ]
         );
 
         $object = [
-            'normal' => '{{WRAPPER}} .elementinvader-addons-for-elementor .leaflet-container a.leaflet-popup-close-button',
-            'hover' => '{{WRAPPER}} .elementinvader-addons-for-elementor .leaflet-container a.leaflet-popup-close-button%1$s',
+            'normal' => '{{WRAPPER}} .eli .leaflet-container a.leaflet-popup-close-button',
+            'hover' => '{{WRAPPER}} .eli .leaflet-container a.leaflet-popup-close-button%1$s',
         ];
         $this->generate_renders_tabs($object, 'section_map_infobox_close_s', ['background','border','color', 'border_radius','padding','shadow']);
          
@@ -976,14 +976,14 @@ class EliMap extends Elementinvader_Base {
      
 
         ?>
-        <div class="elementinvader-addons-for-elementor elementor-clickable elementor-custom-embed" id="eli_<?php echo esc_html($this->get_id_int()); ?>">
+        <div class="eli elementor-clickable elementor-custom-embed" id="eli_<?php echo esc_html($this->get_id_int()); ?>">
             <div class="eli-container">
                 <?php
                 if (Plugin::$instance->editor->is_edit_mode()):
                     ?>
-                    <?php echo $this->generate_map(['settings' => $settings, 'is_edit_mode' => true]); ?>
+                    <?php $this->generate_map(['settings' => $settings, 'is_edit_mode' => true]); ?>
                 <?php else: ?>
-                    <?php echo $this->generate_map(['settings' => $settings]); ?>
+                    <?php $this->generate_map(['settings' => $settings]); ?>
         <?php endif; ?>
             </div>
         </div>
@@ -992,8 +992,7 @@ class EliMap extends Elementinvader_Base {
     }
 
     private function generate_map($obj = []) {
-        $output = $this->view('map_layout', $obj);
-        return $output;
+        $this->view('map_layout', $obj, true);
     }
 
     function _infowindow_content($listing, $custom_data = array()) {
@@ -1014,11 +1013,11 @@ class EliMap extends Elementinvader_Base {
 
         $protocol = isset($_SERVER['HTTPS']) && $_SERVER['HTTPS'] != 'off' ? 'https' : 'http';
         if (true) {
-            wp_enqueue_script('leaflet', plugins_url( '/assets/libs/leaflet/leaflet.js', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__ ), array('jquery'));
-            wp_enqueue_script('leaflet-cluster', plugins_url( '/assets/libs/leaflet/leaflet.markercluster.js', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__ ), array('jquery'));
-            wp_enqueue_style('leaflet', plugins_url( '/assets/libs/leaflet/leaflet.css', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__ ));
-            wp_enqueue_style('leaflet-cluster-def', plugins_url( '/assets/libs/leaflet/markerCluster.Default.css', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__ ));
-            wp_enqueue_style('leaflet-cluster', plugins_url( '/assets/libs/leaflet/MarkerCluster.css', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__ ));
+            wp_enqueue_script('leaflet', plugins_url( '/assets/libs/leaflet/leaflet.js', ELI_FILE__ ), array('jquery'));
+            wp_enqueue_script('leaflet-cluster', plugins_url( '/assets/libs/leaflet/leaflet.markercluster.js', ELI_FILE__ ), array('jquery'));
+            wp_enqueue_style('leaflet', plugins_url( '/assets/libs/leaflet/leaflet.css', ELI_FILE__ ));
+            wp_enqueue_style('leaflet-cluster-def', plugins_url( '/assets/libs/leaflet/markerCluster.Default.css', ELI_FILE__ ));
+            wp_enqueue_style('leaflet-cluster', plugins_url( '/assets/libs/leaflet/MarkerCluster.css', ELI_FILE__ ));
         } else {
             wp_deregister_script('maps-google-api-js');
             wp_register_script('maps-google-api-js', $protocol . "://maps.google.com/maps/api/js?libraries=places,geometry" . $api_key_part . "", array('jquery'));

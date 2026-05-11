@@ -1,8 +1,8 @@
 <?php
 
-namespace ElementinvaderAddonsForElementor\Widgets;
+namespace ELI\Widgets;
 
-use ElementinvaderAddonsForElementor\Core\Elementinvader_Base;
+use ELI\Core\Elementinvader_Base;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Utils;
@@ -13,7 +13,7 @@ use Elementor\Icons_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
-use ElementinvaderAddonsForElementor\Modules\Forms\Ajax_Handler;
+use ELI\Modules\Forms\Ajax_Handler;
 
 if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
@@ -68,7 +68,7 @@ class EliContact_Form extends Elementinvader_Base {
                 esc_html__('Config', 'elementinvader-addons-for-elementor')
         );
 
-        wp_enqueue_style('elementinvader_addons_for_elementor-main', plugins_url('/assets/css/main.css', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__));
+        wp_enqueue_style('elementinvader_addons_for_elementor-main', plugins_url('/assets/css/main.css', ELI_FILE__));
         parent::__construct($data, $args);
     }
 
@@ -207,7 +207,7 @@ class EliContact_Form extends Elementinvader_Base {
         $repeater->add_control(
             'field_link_text',
             [
-                'label' => __( 'Link text', 'wdk-membership' ),
+                'label' => __( 'Link text', 'elementinvader-addons-for-elementor' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'conditions' => [
                     'terms' => [
@@ -977,7 +977,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'label' => esc_html__('Secret Key', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::TEXT,
                     'label_block' => true,
-                    'description' => sprintf(esc_html__('Configurate only if use recaptha, %1$s Get Keys %2$s', 'elementinvader-addons-for-elementor'),'<a href="https://www.google.com/recaptcha/about/" target="_blank">','</a>'),
+                    'description' => sprintf( /* translators: 1: Link to get keys, 2: Closing tag. */esc_html__('Configurate only if use recaptha, %1$s Get Keys %2$s', 'elementinvader-addons-for-elementor'),'<a href="https://www.google.com/recaptcha/about/" target="_blank">','</a>'),
                 ]
         );
 
@@ -1058,8 +1058,8 @@ class EliContact_Form extends Elementinvader_Base {
                         ],
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group' => 'padding-left: {{SIZE}}{{UNIT}};padding-right: {{SIZE}}{{UNIT}};',
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_container' => 'margin-left: -{{SIZE}}{{UNIT}};margin-right: -{{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group' => 'padding-left: {{SIZE}}{{UNIT}};padding-right: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_container' => 'margin-left: -{{SIZE}}{{UNIT}};margin-right: -{{SIZE}}{{UNIT}};',
                     ],
                 ]
         );
@@ -1079,7 +1079,7 @@ class EliContact_Form extends Elementinvader_Base {
                         ],
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group' => 'margin-bottom: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group' => 'margin-bottom: {{SIZE}}{{UNIT}};',
                     ],
                 ]
         );
@@ -1108,7 +1108,7 @@ class EliContact_Form extends Elementinvader_Base {
                         ],
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group label' => 'padding-bottom: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group label' => 'padding-bottom: {{SIZE}}{{UNIT}};',
                     ],
                 ]
         );
@@ -1127,7 +1127,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'label' => esc_html__('Text Color', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group label' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group label' => 'color: {{VALUE}};',
                     ],
                 ]
         );
@@ -1136,7 +1136,7 @@ class EliContact_Form extends Elementinvader_Base {
                 Group_Control_Typography::get_type(),
                 [
                     'name' => 'label_typography',
-                    'selector' => '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group label',
+                    'selector' => '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group label',
                 ]
         );
         $this->end_controls_tab();
@@ -1155,7 +1155,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'label' => esc_html__('Text Color', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group:hover label' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group:hover label' => 'color: {{VALUE}};',
                     ],
                 ]
         );
@@ -1164,7 +1164,7 @@ class EliContact_Form extends Elementinvader_Base {
                 Group_Control_Typography::get_type(),
                 [
                     'name' => 'label_typography_hover',
-                    'selector' => '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group:hover label',
+                    'selector' => '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group:hover label',
                 ]
         );
 
@@ -1181,7 +1181,7 @@ class EliContact_Form extends Elementinvader_Base {
                         ],
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group label' => 'transition-duration: {{SIZE}}ms',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group label' => 'transition-duration: {{SIZE}}ms',
                     ],
                     'separator' => 'before',
                 ]
@@ -1220,7 +1220,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'label' => esc_html__('Text Color', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group .elementinvader_addons_for_elementor_f_field' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group .eli_f_field' => 'color: {{VALUE}};',
                     ],
                 ]
         );
@@ -1229,7 +1229,7 @@ class EliContact_Form extends Elementinvader_Base {
                 Group_Control_Typography::get_type(),
                 [
                     'name' => 'field_typography',
-                    'selector' => '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group .elementinvader_addons_for_elementor_f_field',
+                    'selector' => '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group .eli_f_field',
                 ]
         );
 
@@ -1246,17 +1246,17 @@ class EliContact_Form extends Elementinvader_Base {
                         ],
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group input.elementinvader_addons_for_elementor_f_field:not([type="radio"]):not([type="checkbox"]),
-                        {{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group select.elementinvader_addons_for_elementor_f_field:not([type="radio"]):not([type="checkbox"])' => 'height: {{SIZE}}{{UNIT}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group input.eli_f_field:not([type="radio"]):not([type="checkbox"]),
+                        {{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group select.eli_f_field:not([type="radio"]):not([type="checkbox"])' => 'height: {{SIZE}}{{UNIT}};',
                     ],
                     'separator' => 'before',
                 ]
         );
 
         $object = [
-            'normal' => '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group input.elementinvader_addons_for_elementor_f_field:not([type="radio"]):not([type="checkbox"]),
-                        {{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group textarea.elementinvader_addons_for_elementor_f_field,
-                        {{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group select.elementinvader_addons_for_elementor_f_field:not([type="radio"]):not([type="checkbox"])',
+            'normal' => '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group input.eli_f_field:not([type="radio"]):not([type="checkbox"]),
+                        {{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group textarea.eli_f_field,
+                        {{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group select.eli_f_field:not([type="radio"]):not([type="checkbox"])',
         ];
         $this->generate_renders_tabs($object, 'field_padding', ['padding']);
 
@@ -1267,7 +1267,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '#ffffff',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group .elementinvader_addons_for_elementor_f_field' => 'background-color: {{VALUE}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group .eli_f_field' => 'background-color: {{VALUE}};',
                     ],
                     'separator' => 'before',
                 ]
@@ -1279,7 +1279,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'label' => esc_html__('Border Color', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group .elementinvader_addons_for_elementor_f_field' => 'border-color: {{VALUE}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group .eli_f_field' => 'border-color: {{VALUE}};',
                     ],
                     'separator' => 'before',
                 ]
@@ -1293,7 +1293,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'placeholder' => '1',
                     'size_units' => ['px'],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group .elementinvader_addons_for_elementor_f_field' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group .eli_f_field' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
         );
@@ -1305,7 +1305,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', '%'],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group .elementinvader_addons_for_elementor_f_field' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group .eli_f_field' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
         );
@@ -1317,7 +1317,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'exclude' => [
                         'box_shadow_position',
                     ],
-                    'selector' => '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group .elementinvader_addons_for_elementor_f_field',
+                    'selector' => '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group .eli_f_field',
                 ]
         );
            
@@ -1339,7 +1339,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'label' => esc_html__('Text Color', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group .elementinvader_addons_for_elementor_f_field:focus' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group .eli_f_field:focus' => 'color: {{VALUE}};',
                     ],
                 ]
         );
@@ -1348,7 +1348,7 @@ class EliContact_Form extends Elementinvader_Base {
                 Group_Control_Typography::get_type(),
                 [
                     'name' => 'field_typography_focus',
-                    'selector' => '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group .elementinvader_addons_for_elementor_f_field:focus',
+                    'selector' => '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group .eli_f_field:focus',
                 ]
         );
 
@@ -1358,7 +1358,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'label' => esc_html__('Background Color', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group .elementinvader_addons_for_elementor_f_field:focus' => 'background-color: {{VALUE}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group .eli_f_field:focus' => 'background-color: {{VALUE}};',
                     ],
                     'separator' => 'before',
                 ]
@@ -1370,7 +1370,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'label' => esc_html__('Border Color', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group .elementinvader_addons_for_elementor_f_field:focus' => 'border-color: {{VALUE}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group .eli_f_field:focus' => 'border-color: {{VALUE}};',
                     ],
                     'separator' => 'before',
                 ]
@@ -1384,7 +1384,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'placeholder' => '1',
                     'size_units' => ['px'],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group .elementinvader_addons_for_elementor_f_field:focus' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group .eli_f_field:focus' => 'border-width: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
         );
@@ -1396,7 +1396,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', '%'],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group .elementinvader_addons_for_elementor_f_field:focus' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group .eli_f_field:focus' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
         );
@@ -1408,7 +1408,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'exclude' => [
                         'box_shadow_position',
                     ],
-                    'selector' => '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group .elementinvader_addons_for_elementor_f_field:focus',
+                    'selector' => '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group .eli_f_field:focus',
                 ]
         );
 
@@ -1425,7 +1425,7 @@ class EliContact_Form extends Elementinvader_Base {
                         ],
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group .elementinvader_addons_for_elementor_f_field' => 'transition-duration: {{SIZE}}ms',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group .eli_f_field' => 'transition-duration: {{SIZE}}ms',
                     ],
                     'separator' => 'before',
                 ]
@@ -1463,7 +1463,7 @@ class EliContact_Form extends Elementinvader_Base {
                 'label' => esc_html__('Accept Link Color', 'elementinvader-addons-for-elementor'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .elementinvader_contact_form .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.checkbox label .accept_link' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .elementinvader_contact_form .eli_f .eli_f_group.checkbox label .accept_link' => 'color: {{VALUE}};',
                 ],
                 'separator' => 'before',
             ]
@@ -1473,7 +1473,7 @@ class EliContact_Form extends Elementinvader_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'field_accept_link_typography',
-                'selector' => '{{WRAPPER}} .elementinvader_contact_form .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.checkbox label .accept_link',
+                'selector' => '{{WRAPPER}} .elementinvader_contact_form .eli_f .eli_f_group.checkbox label .accept_link',
             ]
         );
             
@@ -1494,7 +1494,7 @@ class EliContact_Form extends Elementinvader_Base {
                 'label' => esc_html__('Accept Link Color', 'elementinvader-addons-for-elementor'),
                 'type' => Controls_Manager::COLOR,
                 'selectors' => [
-                    '{{WRAPPER}} .elementinvader_contact_form .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.checkbox label .accept_link:hover' => 'color: {{VALUE}};',
+                    '{{WRAPPER}} .elementinvader_contact_form .eli_f .eli_f_group.checkbox label .accept_link:hover' => 'color: {{VALUE}};',
                 ],
                 'separator' => 'before',
             ]
@@ -1504,7 +1504,7 @@ class EliContact_Form extends Elementinvader_Base {
             Group_Control_Typography::get_type(),
             [
                 'name' => 'field_accept_link_typography_hover',
-                'selector' => '{{WRAPPER}} .elementinvader_contact_form .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.checkbox label .accept_link:hover',
+                'selector' => '{{WRAPPER}} .elementinvader_contact_form .eli_f .eli_f_group.checkbox label .accept_link:hover',
             ]
         );
 
@@ -1539,7 +1539,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'label' => esc_html__('Background Color', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_button button' => 'background-color: {{VALUE}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_button button' => 'background-color: {{VALUE}};',
                     ],
                 ]
         );
@@ -1551,8 +1551,8 @@ class EliContact_Form extends Elementinvader_Base {
                     'type' => Controls_Manager::COLOR,
                     'default' => '',
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_button button' => 'color: {{VALUE}};',
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_button button svg' => 'fill: {{VALUE}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_button button' => 'color: {{VALUE}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_button button svg' => 'fill: {{VALUE}};',
                     ],
                 ]
         );
@@ -1561,14 +1561,14 @@ class EliContact_Form extends Elementinvader_Base {
                 Group_Control_Typography::get_type(),
                 [
                     'name' => 'button_typography',
-                    'selector' => '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_button button',
+                    'selector' => '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_button button',
                 ]
         );
 
         $this->add_group_control(
                 Group_Control_Border::get_type(), [
             'name' => 'button_border',
-            'selector' => '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_button button',
+            'selector' => '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_button button',
                 ]
         );
 
@@ -1579,7 +1579,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', '%'],
                     'selectors' => [
-                        '{{WRAPPER}}  .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_button button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}}  .elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_button button' => 'border-radius: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
         );
@@ -1591,7 +1591,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => ['px', 'em', '%'],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_button button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_button button' => 'padding: {{TOP}}{{UNIT}} {{RIGHT}}{{UNIT}} {{BOTTOM}}{{UNIT}} {{LEFT}}{{UNIT}};',
                     ],
                 ]
         );
@@ -1603,7 +1603,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'exclude' => [
                         'button_shadow_position',
                     ],
-                    'selector' => '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_button button',
+                    'selector' => '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_button button',
                 ]
         );
 
@@ -1622,7 +1622,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'label' => esc_html__('Background Color', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}}  .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_button button:hover' => 'background-color: {{VALUE}};',
+                        '{{WRAPPER}}  .elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_button button:hover' => 'background-color: {{VALUE}};',
                     ],
                 ]
         );
@@ -1633,7 +1633,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'label' => esc_html__('Text Color', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}}  .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_button button:hover' => 'color: {{VALUE}};',
+                        '{{WRAPPER}}  .elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_button button:hover' => 'color: {{VALUE}};',
                     ],
                 ]
         );
@@ -1644,7 +1644,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'label' => esc_html__('Border Color', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::COLOR,
                     'selectors' => [
-                        '{{WRAPPER}}  .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_button button:hover' => 'border-color: {{VALUE}};',
+                        '{{WRAPPER}}  .elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_button button:hover' => 'border-color: {{VALUE}};',
                     ],
                     'condition' => [
                         'button_border_border!' => '',
@@ -1660,7 +1660,7 @@ class EliContact_Form extends Elementinvader_Base {
                     'exclude' => [
                         'button_shadow_position',
                     ],
-                    'selector' => '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_button button:hover',
+                    'selector' => '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_button button:hover',
                 ]
         );
 
@@ -1686,7 +1686,7 @@ class EliContact_Form extends Elementinvader_Base {
                         ],
                     ],
                     'selectors' => [
-                        '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_button button' => 'transition-duration: {{SIZE}}ms',
+                        '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_button button' => 'transition-duration: {{SIZE}}ms',
                     ],
                     'separator' => 'before',
                 ]
@@ -1722,8 +1722,8 @@ class EliContact_Form extends Elementinvader_Base {
         );
 
         $object = [
-            'normal' => '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_button button .fa-custom-ajax-indicator',
-            'hover'=>'{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_button button%1$s .fa-custom-ajax-indicator'
+            'normal' => '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_button button .fa-custom-ajax-indicator',
+            'hover'=>'{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_button button%1$s .fa-custom-ajax-indicator'
         ];
         $this->generate_renders_tabs($object, 'style_ajax_load_indicator_s', 'full');
 
@@ -1760,7 +1760,7 @@ class EliContact_Form extends Elementinvader_Base {
         );
 
         $object = [
-            'normal' => '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_alert.elementinvader_addons_for_elementor_alert-success',
+            'normal' => '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_alert.eli_alert-success',
         ];
         $this->generate_renders_tabs($object, 'success_message_color', 'text-block', ['align', 'typo', 'shadow', 'border_radius', 'transition']);
 
@@ -1774,7 +1774,7 @@ class EliContact_Form extends Elementinvader_Base {
         );
 
         $object = [
-            'normal' => '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_alert.elementinvader_addons_for_elementor_alert-danger',
+            'normal' => '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_alert.eli_alert-danger',
         ];
         $this->generate_renders_tabs($object, 'card_caption_i_style', 'text-block', ['align', 'typo', 'shadow', 'border_radius', 'transition']);
 
@@ -1788,7 +1788,7 @@ class EliContact_Form extends Elementinvader_Base {
         );
 
         $object = [
-            'normal' => '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_alert.elementinvader_addons_for_elementor_alert-primary',
+            'normal' => '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_alert.eli_alert-primary',
         ];
         $this->generate_renders_tabs($object, 'info_mess_label', 'text-block', ['align', 'typo', 'shadow', 'border_radius', 'transition']);
 
@@ -1802,7 +1802,7 @@ class EliContact_Form extends Elementinvader_Base {
         );
 
         $object = [
-            'normal' => '{{WRAPPER}} .elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_alert',
+            'normal' => '{{WRAPPER}} .elementinvader_contact_form  .eli_f .eli_alert',
         ];
         $this->generate_renders_tabs($object, 'card_caption_i_style_basic', ['align', 'typo', 'padding', 'border_radius']);
 
@@ -1845,7 +1845,7 @@ class EliContact_Form extends Elementinvader_Base {
             $form_data['recaptcha_site_key'] = $settings['recaptcha_site_key'];
             $form_data['recaptcha_secret_key'] = $settings['recaptcha_secret_key'];
 
-            update_option('elementinvader_addons_for_elementor_form_' . $this->get_id_int(), $form_data);
+            update_option('eli_form_' . $this->get_id_int(), $form_data);
         }
 
 
@@ -2019,14 +2019,14 @@ class EliContact_Form extends Elementinvader_Base {
         if (isset($element[$prefix]) && $element[$prefix])
             if ($element[$prefix] == 'auto_flexible')
                 $this->inline_css .= "
-                        #elementinvader_addons_for_elementor_" . $this->get_id_int() . ".elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_{$index} {
+                        #eli_" . $this->get_id_int() . ".elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_{$index} {
                             width:auto;-webkit-flex: 1 2 auto;
                             flex: 1 2 auto;
                         }
                     ";
             elseif ($element[$prefix] == 'auto')
                 $this->inline_css .= "
-                        #elementinvader_addons_for_elementor_" . $this->get_id_int() . ".elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_{$index} {
+                        #eli_" . $this->get_id_int() . ".elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_{$index} {
                             
                             width:auto;-webkit-flex: 0 0 auto;
                             flex: 0 0 auto;
@@ -2034,7 +2034,7 @@ class EliContact_Form extends Elementinvader_Base {
                     ";
             else
                 $this->inline_css .= "
-                        #elementinvader_addons_for_elementor_" . $this->get_id_int() . ".elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_{$index} {
+                        #eli_" . $this->get_id_int() . ".elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_{$index} {
                             width: {$element[$prefix]}%;
                             -webkit-flex: 0 0 {$element[$prefix]}%;
                             flex: 0 0 {$element[$prefix]}%;
@@ -2045,21 +2045,21 @@ class EliContact_Form extends Elementinvader_Base {
         if (isset($element[$prefix . '_tablet']) && $element[$prefix . '_tablet'])
             if ($element[$prefix . '_tablet'] == 'auto_flexible')
                 $this->inline_css_tablet .= "
-                        #elementinvader_addons_for_elementor_" . $this->get_id_int() . ".elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_{$index} {
+                        #eli_" . $this->get_id_int() . ".elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_{$index} {
                             width:auto;-webkit-flex: 1 2 auto;
                             flex: 1 2 auto;
                         }
                     ";
             elseif ($element[$prefix . '_tablet'] == 'auto')
                 $this->inline_css_tablet .= "
-                        #elementinvader_addons_for_elementor_" . $this->get_id_int() . ".elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_{$index} {
+                        #eli_" . $this->get_id_int() . ".elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_{$index} {
                             width:auto;-webkit-flex: 0 0 auto;
                             flex: 0 0 auto;
                         }
                     ";
             else
                 $this->inline_css_tablet .= "
-                        #elementinvader_addons_for_elementor_" . $this->get_id_int() . ".elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_{$index} {
+                        #eli_" . $this->get_id_int() . ".elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_{$index} {
                             width: {$element[$prefix . '_tablet']}%;
                             -webkit-flex: 0 0 {$element[$prefix . '_tablet']}%;
                             flex: 0 0 {$element[$prefix . '_tablet']}%;
@@ -2069,21 +2069,21 @@ class EliContact_Form extends Elementinvader_Base {
         if (isset($element[$prefix . '_mobile']) && $element[$prefix . '_mobile'])
             if ($element[$prefix . '_mobile'] == 'auto')
                 $this->inline_css_mobile .= "
-                        #elementinvader_addons_for_elementor_" . $this->get_id_int() . ".elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_{$index} {
+                        #eli_" . $this->get_id_int() . ".elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_{$index} {
                             width:auto;-webkit-flex: 0 0 auto;
                             flex: 0 0 auto;
                         }
                     ";
             elseif ($element[$prefix . '_mobile'] == 'auto')
                 $this->inline_css_mobile .= "
-                        #elementinvader_addons_for_elementor_" . $this->get_id_int() . ".elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_{$index} {
+                        #eli_" . $this->get_id_int() . ".elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_{$index} {
                             width:auto;-webkit-flex: 1 2 auto;
                             flex: 1 2 auto;
                         }
                     ";
             else
                 $this->inline_css_mobile .= "
-                        #elementinvader_addons_for_elementor_" . $this->get_id_int() . ".elementinvader_contact_form  .elementinvader_addons_for_elementor_f .elementinvader_addons_for_elementor_f_group.elementinvader_addons_for_elementor_f_group_el_{$index} {
+                        #eli_" . $this->get_id_int() . ".elementinvader_contact_form  .eli_f .eli_f_group.eli_f_group_el_{$index} {
                             width: {$element[$prefix . '_mobile']}%;
                             -webkit-flex: 0 0 {$element[$prefix . '_mobile']}%;
                             flex: 0 0 {$element[$prefix . '_mobile']}%;
@@ -2097,11 +2097,11 @@ class EliContact_Form extends Elementinvader_Base {
         $output_css .= sprintf('@media(max-width:%1$s){%2$s}', '991px', $this->inline_css_tablet);
         $output_css .= sprintf('@media(max-width:%1$s){%2$s}', '768px', $this->inline_css_mobile);
 
-        wp_enqueue_style('eli-custom-inline', plugins_url( '/assets/css/custom-inline.css', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__ ));
+        wp_enqueue_style('eli-custom-inline', plugins_url( '/assets/css/custom-inline.css', ELI_FILE__ ));
 
         /* only for edit mode */
         if (Plugin::$instance->editor->is_edit_mode()) {
-            echo '<style>'.sanitize_text_field($output_css).'</style>';
+            echo '<style>'.wp_kses_post(sanitize_text_field($output_css)).'</style>';
         } else {
             wp_add_inline_style( 'eli-custom-inline', $output_css );
         }

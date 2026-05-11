@@ -1,6 +1,7 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <div class="widget-eli eli_blog_preview_thumbnail" id="eli_<?php echo esc_html($this->get_id_int());?>">
     <?php if($is_edit_mode):?>
-        <img src="<?php echo ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_URL;?>/assets/img/placeholder.jpg" alt="">
+        <img src="<?php echo esc_url(ELI_URL);?>/assets/img/placeholder.jpg" alt="">
     <?php else:?>
         <?php
         // Get the post thumbnail of 'medium' size
@@ -9,10 +10,10 @@
         // Check if the post has a thumbnail
         if ($post_thumbnail) {
             // Display the post thumbnail
-            echo $post_thumbnail;
+            echo wp_kses_post($post_thumbnail);
         } else {
             // Post does not have a thumbnail
-            echo '<img src="'.ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_URL.'/assets/img/placeholder.jpg" alt="">';
+            echo '<img src="'.esc_url(ELI_URL).'/assets/img/placeholder.jpg" alt="">';
         }
     ?>
     <?php endif?>

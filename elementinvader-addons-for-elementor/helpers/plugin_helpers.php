@@ -1,4 +1,6 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <?php
+
 if ( ! function_exists('eli_btn_edit'))
 {
     function eli_btn_edit($uri)
@@ -11,7 +13,7 @@ if ( ! function_exists('eli_btn_read'))
 {
     function eli_btn_read($uri, $title=NULL)
     {
-        if(empty($title))$title=__('Read', 'eli_win');
+        if(empty($title))$title=__('Read', 'elementinvader-addons-for-elementor');
         
         return eli_anchor($uri, '<i class="glyphicon glyphicon-search"></i> '.$title, array('class'=>'btn btn-primary btn-xs'));
     }
@@ -24,7 +26,7 @@ if ( ! function_exists('eli_btn_open'))
         if($target === NULL)
             $target = '_blank';
 
-        return eli_anchor($uri, '<i class="glyphicon glyphicon-search"></i>', array('class'=>'btn btn-primary btn-xs', 'target'=>$target, 'title'=>__('Open details', 'eli_win')));
+        return eli_anchor($uri, '<i class="glyphicon glyphicon-search"></i>', array('class'=>'btn btn-primary btn-xs', 'target'=>$target, 'title'=>__('Open details', 'elementinvader-addons-for-elementor')));
     }
 }
 
@@ -35,7 +37,7 @@ if ( ! function_exists('eli_btn_open_ajax'))
         if($target === NULL)
             $target = '_blank';
 
-        return eli_anchor($uri, '<i class="glyphicon glyphicon-search"></i>', array('class'=>'btn btn-primary btn-xs popup-with-form-ajax', 'target'=>$target, 'title'=>__('Open details', 'eli_win')));
+        return eli_anchor($uri, '<i class="glyphicon glyphicon-search"></i>', array('class'=>'btn btn-primary btn-xs popup-with-form-ajax', 'target'=>$target, 'title'=>__('Open details', 'elementinvader-addons-for-elementor')));
     }
 }
 
@@ -52,14 +54,14 @@ if ( ! function_exists('eli_btn_delete'))
     function eli_btn_delete($uri, $confirm_question = TRUE, $title='')
     {
         $target = '';
-        if(isset($_GET['popup']))
+        if(isset($_GET['popup']))  // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only parameter.
         {
             $target = '';
         }
 
         if($confirm_question)
         {
-            return eli_anchor($uri, '<i class="glyphicon glyphicon-remove"></i> ', array( 'target' => $target,  'title' => $title, 'onclick' => 'return confirm(\''.__('Are you sure?', 'eli_win').'\')', 'class'=>'btn btn-danger btn-xs delete_button'));
+            return eli_anchor($uri, '<i class="glyphicon glyphicon-remove"></i> ', array( 'target' => $target,  'title' => $title, 'onclick' => 'return confirm(\''.__('Are you sure?', 'elementinvader-addons-for-elementor').'\')', 'class'=>'btn btn-danger btn-xs delete_button'));
         }
         else
         {
@@ -73,12 +75,12 @@ if ( ! function_exists('eli_btn_save'))
     function eli_btn_save($uri, $empty = '-empty')
     {
         $target = '';
-        if(isset($_GET['popup']))
+        if(isset($_GET['popup'])) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only parameter.
         {
             $target = '';
         }
 
-        return eli_anchor($uri, '<i class="glyphicon glyphicon-heart'.$empty.'"></i> ', array( 'target' => $target, 'class'=>'btn btn-danger btn-xs save_button', 'title'=>__('Save as Favourite for further analysis', 'eli_win')));
+        return eli_anchor($uri, '<i class="glyphicon glyphicon-heart'.$empty.'"></i> ', array( 'target' => $target, 'class'=>'btn btn-danger btn-xs save_button', 'title'=>__('Save as Favourite for further analysis', 'elementinvader-addons-for-elementor')));
     }
 }
 
@@ -87,14 +89,14 @@ if ( ! function_exists('eli_btn_block'))
     function eli_btn_block($uri, $confirm_question = FALSE, $title='')
     {
         $target = '';
-        if(isset($_GET['popup']))
+        if(isset($_GET['popup'])) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only parameter.
         {
             $target = '_blank';
         }
 
         if($confirm_question)
         {
-            return eli_anchor($uri, '<i class="glyphicon glyphicon-lock"></i> ', array( 'target' => $target, 'title' => $title, 'onclick' => 'return confirm(\''.__('Are you sure?', 'eli_win').'\')', 'class'=>'btn btn-warning btn-xs block_button'));
+            return eli_anchor($uri, '<i class="glyphicon glyphicon-lock"></i> ', array( 'target' => $target, 'title' => $title, 'onclick' => 'return confirm(\''.__('Are you sure?', 'elementinvader-addons-for-elementor').'\')', 'class'=>'btn btn-warning btn-xs block_button'));
         }
         else
         {
@@ -110,7 +112,7 @@ if ( ! function_exists('eli_btn_view'))
     {
         if($confirm_question)
         {
-            return eli_anchor($uri, '<i class="glyphicon glyphicon-search"></i> ', array( 'title' => $title, 'onclick' => 'return confirm(\''.__('Are you sure?', 'eli_win').'\')', 'class'=>'btn btn-info btn-xs'));
+            return eli_anchor($uri, '<i class="glyphicon glyphicon-search"></i> ', array( 'title' => $title, 'onclick' => 'return confirm(\''.__('Are you sure?', 'elementinvader-addons-for-elementor').'\')', 'class'=>'btn btn-info btn-xs'));
         }
         else
         {
@@ -124,12 +126,12 @@ if ( ! function_exists('eli_btn_hide'))
     function eli_btn_hide($uri)
     {
         $target = '';
-        if(isset($_GET['popup']))
+        if(isset($_GET['popup'])) // phpcs:ignore WordPress.Security.NonceVerification.Recommended -- Read-only parameter.
         {
             $target = '_blank';
         }
 
-        return eli_anchor($uri, '<i class="glyphicon glyphicon-eye-close"></i> ', array( 'target' => $target, 'class'=>'btn btn-default btn-xs', 'title'=>__('Define hide rules', 'eli_win')));
+        return eli_anchor($uri, '<i class="glyphicon glyphicon-eye-close"></i> ', array( 'target' => $target, 'class'=>'btn btn-default btn-xs', 'title'=>__('Define hide rules', 'elementinvader-addons-for-elementor')));
     }
 }
 
@@ -392,8 +394,8 @@ function eli_verify_form_token($token) {
 }
 
 function eli_get_request_context() {
-    $ip    = $_SERVER['REMOTE_ADDR'] ?? '';
-    $agent = $_SERVER['HTTP_USER_AGENT'] ?? '';
+    $ip    = isset($_SERVER['REMOTE_ADDR']) ? sanitize_text_field(wp_unslash($_SERVER['REMOTE_ADDR'])) : '';
+    $agent = isset($_SERVER['HTTP_USER_AGENT']) ? sanitize_text_field(wp_unslash($_SERVER['HTTP_USER_AGENT'])) : '';
 
     return hash('sha256', $ip . '|' . $agent);
 }

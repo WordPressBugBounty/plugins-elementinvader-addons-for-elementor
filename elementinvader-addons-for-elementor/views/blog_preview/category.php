@@ -1,3 +1,4 @@
+<?php if ( ! defined( 'ABSPATH' ) ) exit; ?>
 <div class="widget-eli eli_blog_preview_category" id="eli_<?php echo esc_html($this->get_id_int());?>">
     <?php if($is_edit_mode):?>
         <?php if($settings['is_link'] == 'yes'):?>

@@ -1,11 +1,11 @@
 === ElementInvader Addons for Elementor ===
 Contributors: elementinvader
-Donate link: elementinvader.com 
+Donate link: https://elementinvader.com/
 Tags: elementor addon, elementor addons, elementor widget, elementor
-Requires at least: 5.2
-Requires PHP: 5.6
+Requires at least: 6.2
+Requires PHP: 7.4
 Tested up to: 6.9
-Stable tag: 1.4.3
+Stable tag: 1.4.4
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -37,6 +37,8 @@ If you have any idea for new interesting element or trouble please inform us via
 
 We will be always happy to help you!
 
+Contact for security issues: https://elementinvader.com/ ideas@elementinvader.com
+
 == Installation ==
 
 This section describes how to install the plugin and get it working automatically
@@ -46,7 +48,7 @@ This section describes how to install the plugin and get it working automaticall
 
 This section describes how to install the plugin and get it working manually
 
-1. Upload `elementinvader-addons-for-elementor.zip` to the `/wp-content/plugins/` directory and extract
+1. Upload `eli.zip` to the `/wp-content/plugins/` directory and extract
 2. Activate the plugin through the 'Plugins' menu in WordPress
 
 == Frequently Asked Questions ==
@@ -87,6 +89,9 @@ There is website where yo ucan found compatible plugin version for your wp / PHP
 4. Simple Newsletter for Elementor, with mailchimp api, email alerts for admin and export msigned maillist option.
 
 == Changelog ==
+
+= 1.4.4 =
+* Security fix
 
 = 1.4.3 =
 * Security fix

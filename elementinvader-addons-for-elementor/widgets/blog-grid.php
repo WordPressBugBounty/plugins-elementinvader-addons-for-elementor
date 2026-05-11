@@ -1,8 +1,8 @@
 <?php
 
-namespace ElementinvaderAddonsForElementor\Widgets;
+namespace ELI\Widgets;
 
-use ElementinvaderAddonsForElementor\Core\Elementinvader_Base;
+use ELI\Core\Elementinvader_Base;
 use Elementor\Widget_Base;
 use Elementor\Controls_Manager;
 use Elementor\Utils;
@@ -13,7 +13,7 @@ use Elementor\Icons_Manager;
 use Elementor\Group_Control_Typography;
 use Elementor\Group_Control_Border;
 use Elementor\Group_Control_Box_Shadow;
-use ElementinvaderAddonsForElementor\Modules\Forms\Ajax_Handler;
+use ELI\Modules\Forms\Ajax_Handler;
 
 if (!defined('ABSPATH'))
     exit; // Exit if accessed directly
@@ -29,11 +29,11 @@ class EliBlog_Grid extends Elementinvader_Base {
     public $items_num = 0;
 
     public function __construct($data = array(), $args = null) {
-        wp_enqueue_style('eli-main', plugins_url('/assets/css/main.css', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR__FILE__));
+        wp_enqueue_style('eli-main', plugins_url('/assets/css/main.css', ELI_FILE__));
         
         if(true) {
-            wp_enqueue_style( 'eli-modal', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_URL.'/assets/css/eli-modal.css', false, false); 
-            wp_enqueue_script('eli-modal', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_URL.'/assets/js/eli-modal.js', array( 'jquery' ), '1.0', false );
+            wp_enqueue_style( 'eli-modal', ELI_URL.'/assets/css/eli-modal.css', false, false); 
+            wp_enqueue_script('eli-modal', ELI_URL.'/assets/js/eli-modal.js', array( 'jquery' ), '1.0', false );
         }
         parent::__construct($data, $args);
     }
@@ -101,11 +101,11 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_control (
             'custom_layout',
             [
-                'label' => __( 'ID Post template layout for custom layout', 'wpdirectorykit' ),
+                'label' => __( 'ID Post template layout for custom layout', 'elementinvader-addons-for-elementor' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => '',
-                'placeholder' => __( 'put your template id', 'wpdirectorykit' ),
-                'description' => __( 'Create layout here', 'wpdirectorykit' ).' '.sprintf(__('%1$s here %2$s','elementinvader-addons-for-elementor'),'<a target="_blank" href="'.admin_url('edit.php?post_type=elementor_library#add_new').'">','</a>'),
+                'placeholder' => __( 'put your template id', 'elementinvader-addons-for-elementor' ),
+                'description' => __( 'Create layout here', 'elementinvader-addons-for-elementor' ).' '.sprintf( /* translators: 1: Link to create new layout, 2: Closing tag. */__('%1$s here %2$s','elementinvader-addons-for-elementor'),'<a target="_blank" href="'.admin_url('edit.php?post_type=elementor_library#add_new').'">','</a>'),
             ]
         );
 
@@ -149,11 +149,11 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_control (
             'popup_layout',
             [
-                'label' => __( 'ID Post template layout for popup view', 'wpdirectorykit' ),
+                'label' => __( 'ID Post template layout for popup view', 'elementinvader-addons-for-elementor' ),
                 'type' => \Elementor\Controls_Manager::TEXT,
                 'default' => '',
-                'placeholder' => __( 'put your template id', 'wpdirectorykit' ),
-                'description' => __( 'Create layout here', 'wpdirectorykit' ).' '.sprintf(__('%1$s here %2$s','elementinvader-addons-for-elementor'),'<a target="_blank" href="'.admin_url('edit.php?post_type=elementor_library#add_new').'">','</a>'),
+                'placeholder' => __( 'put your template id', 'elementinvader-addons-for-elementor' ),
+                'description' => __( 'Create layout here', 'elementinvader-addons-for-elementor' ).' '.sprintf( /* translators: 1: Link to create new layout, 2: Closing tag. */__('%1$s here %2$s','elementinvader-addons-for-elementor'),'<a target="_blank" href="'.admin_url('edit.php?post_type=elementor_library#add_new').'">','</a>'),
                 'conditions' => [
                     'terms' => [
                         [
@@ -170,7 +170,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->start_controls_tab(
             'style_normal_tab',
             [
-                'label' => esc_html__( 'Popup', 'textdomain' ),
+                'label' => esc_html__( 'Popup', 'elementinvader-addons-for-elementor' ),
                 'conditions' => [
                     'terms' => [
                         [
@@ -193,7 +193,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'section_form_style_header_1',
             [
-                'label' => esc_html__('Popup Styles', 'wpdirectorykit'),
+                'label' => esc_html__('Popup Styles', 'elementinvader-addons-for-elementor'),
                 'type' => Controls_Manager::HEADING,
             ]
         );
@@ -208,7 +208,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'section_form_style_heigth',
            [
-               'label' => esc_html__('Height', 'wpdirectorykit'),
+               'label' => esc_html__('Height', 'elementinvader-addons-for-elementor'),
                'type' => Controls_Manager::SLIDER,
                'range' => [
                    'px' => [
@@ -235,7 +235,7 @@ class EliBlog_Grid extends Elementinvader_Base {
        $this->add_responsive_control(
             'section_form_style_width',
            [
-               'label' => esc_html__('Width', 'wpdirectorykit'),
+               'label' => esc_html__('Width', 'elementinvader-addons-for-elementor'),
                'type' => Controls_Manager::SLIDER,
                'range' => [
                    'px' => [
@@ -373,14 +373,14 @@ class EliBlog_Grid extends Elementinvader_Base {
             $repeater->add_control(
                 'key',
                 [
-                    'label' => esc_html__('Key', 'wpdirectorykit'),
+                    'label' => esc_html__('Key', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::TEXT,
                 ]
             );
             $repeater->add_control(
                 'compare',
                 [
-                    'label'   => esc_html__('Compare', 'wpdirectorykit'),
+                    'label'   => esc_html__('Compare', 'elementinvader-addons-for-elementor'),
                     'type'    => \Elementor\Controls_Manager::SELECT,
                     'options' => [
                         '='           => '= (Equal)',
@@ -407,7 +407,7 @@ class EliBlog_Grid extends Elementinvader_Base {
             $repeater->add_control(
                 'value',
                 [
-                    'label' => esc_html__('Value', 'wpdirectorykit'),
+                    'label' => esc_html__('Value', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::TEXT,
                 ]
             );
@@ -435,7 +435,7 @@ class EliBlog_Grid extends Elementinvader_Base {
             $repeater->add_control(
                 'post_id',
                 [
-                    'label' => esc_html__('Post ID', 'wpdirectorykit'),
+                    'label' => esc_html__('Post ID', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::NUMBER,
                 ]
             );
@@ -526,7 +526,7 @@ class EliBlog_Grid extends Elementinvader_Base {
             [
                 'label' => '',
                 'type' => \Elementor\Controls_Manager::RAW_HTML,
-                'raw' => sprintf(__( 'Manager Posts <a href="%1$s" target="_blank"> open </a>', 'elementinvader-addons-for-elementor' ), admin_url('edit.php')),
+                'raw' => sprintf( /* translators: 1: Link to manager posts. */__( 'Manager Posts <a href="%1$s" target="_blank"> open </a>', 'elementinvader-addons-for-elementor' ), admin_url('edit.php')),
                 'content_classes' => 'eli_elementor_hint',
                 'separator' => 'after',
             ]
@@ -844,7 +844,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'layout_carousel_columns',
             [
-                'label' => __( 'Count grid', 'wpdirectorykit' ),
+                'label' => __( 'Count grid', 'elementinvader-addons-for-elementor' ),
                 'type' => \Elementor\Controls_Manager::NUMBER,
                 'min' => 1,
                 'max' => 10,
@@ -857,7 +857,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
                 'carousel_column_gap_carousel',
                 [
-                    'label' => esc_html__('Slider Gap', 'wpdirectorykit'),
+                    'label' => esc_html__('Slider Gap', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::SLIDER,
                     'range' => [
                         'px' => [
@@ -883,7 +883,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control (
                 'carousel_column_gap',
                 [
-                    'label' => esc_html__('Columns Gap', 'wpdirectorykit'),
+                    'label' => esc_html__('Columns Gap', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::SLIDER,
                     'default' => [
                         'size' => 10,
@@ -913,7 +913,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
                 'carousel_column_gap_top',
                 [
-                    'label' => esc_html__('Columns Gap Top', 'wpdirectorykit'),
+                    'label' => esc_html__('Columns Gap Top', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::SLIDER,
                     'default' => [
                         'size' => 0,
@@ -942,7 +942,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'carousel_column_gap_bottom',
             [
-                'label' => esc_html__('Columns Gap Bottom', 'wpdirectorykit'),
+                'label' => esc_html__('Columns Gap Bottom', 'elementinvader-addons-for-elementor'),
                 'type' => Controls_Manager::SLIDER,
                 'default' => [
                     'size' => 10,
@@ -972,7 +972,7 @@ class EliBlog_Grid extends Elementinvader_Base {
     $this->add_control(
         'basic_el_header_1',
         [
-            'label' => esc_html__('Text', 'wpdirectorykit'),
+            'label' => esc_html__('Text', 'elementinvader-addons-for-elementor'),
             'type' => Controls_Manager::HEADING,
             'separator' => 'before',
         ]
@@ -981,7 +981,7 @@ class EliBlog_Grid extends Elementinvader_Base {
     $this->add_control(
         'content_button_text',
         [
-            'label' => __( 'Button Open Text', 'wpdirectorykit' ),
+            'label' => __( 'Button Open Text', 'elementinvader-addons-for-elementor' ),
             'type' => \Elementor\Controls_Manager::TEXT,
             'default' => '',
         ]
@@ -990,7 +990,7 @@ class EliBlog_Grid extends Elementinvader_Base {
     $this->add_responsive_control(
         'thumbn_slider_h',
         [
-            'label' => esc_html__('Thumbnail Slider', 'wpdirectorykit'),
+            'label' => esc_html__('Thumbnail Slider', 'elementinvader-addons-for-elementor'),
             'type' => Controls_Manager::HEADING,
             'separator' => 'before',
         ]
@@ -999,7 +999,7 @@ class EliBlog_Grid extends Elementinvader_Base {
     $this->add_responsive_control(
         'thumbn_slider_arrow_left',
         [
-            'label' => esc_html__('Icon Left', 'wpdirectorykit'),
+            'label' => esc_html__('Icon Left', 'elementinvader-addons-for-elementor'),
             'type' => Controls_Manager::ICONS,
             'label_block' => true,
         ]
@@ -1008,7 +1008,7 @@ class EliBlog_Grid extends Elementinvader_Base {
     $this->add_responsive_control(
         'thumbn_slider_arrow_right',
         [
-            'label' => esc_html__('Icon Right', 'wpdirectorykit'),
+            'label' => esc_html__('Icon Right', 'elementinvader-addons-for-elementor'),
             'type' => Controls_Manager::ICONS,
             'label_block' => true,
         ]
@@ -1019,7 +1019,7 @@ class EliBlog_Grid extends Elementinvader_Base {
     $this->start_controls_section(
         'layout_carousel_sec',
         [
-            'label' => esc_html__('Carousel Options', 'wpdirectorykit'),
+            'label' => esc_html__('Carousel Options', 'elementinvader-addons-for-elementor'),
             'tab' => Controls_Manager::TAB_STYLE,
             'conditions' => [
                 'terms' => [
@@ -1036,10 +1036,10 @@ class EliBlog_Grid extends Elementinvader_Base {
     $this->add_control(
         'layout_carousel_is_centerMode',
         [
-            'label' => __( 'centerMode', 'wpdirectorykit' ),
+            'label' => __( 'centerMode', 'elementinvader-addons-for-elementor' ),
             'type' => \Elementor\Controls_Manager::SWITCHER,
-            'label_on' => __( 'On', 'wpdirectorykit' ),
-            'label_off' => __( 'Off', 'wpdirectorykit' ),
+            'label_on' => __( 'On', 'elementinvader-addons-for-elementor' ),
+            'label_off' => __( 'Off', 'elementinvader-addons-for-elementor' ),
             'return_value' => 'true',
             'default' => '',
         ]
@@ -1048,10 +1048,10 @@ class EliBlog_Grid extends Elementinvader_Base {
     $this->add_control(
         'layout_carousel_is_infinite',
         [
-            'label' => __( 'Infinite', 'wpdirectorykit' ),
+            'label' => __( 'Infinite', 'elementinvader-addons-for-elementor' ),
             'type' => \Elementor\Controls_Manager::SWITCHER,
-            'label_on' => __( 'On', 'wpdirectorykit' ),
-            'label_off' => __( 'Off', 'wpdirectorykit' ),
+            'label_on' => __( 'On', 'elementinvader-addons-for-elementor' ),
+            'label_off' => __( 'Off', 'elementinvader-addons-for-elementor' ),
             'return_value' => 'true',
             'default' => 'true',
         ]
@@ -1060,10 +1060,10 @@ class EliBlog_Grid extends Elementinvader_Base {
     $this->add_control(
         'layout_carousel_is_autoplay',
         [
-            'label' => __( 'Autoplay', 'wpdirectorykit' ),
+            'label' => __( 'Autoplay', 'elementinvader-addons-for-elementor' ),
             'type' => \Elementor\Controls_Manager::SWITCHER,
-            'label_on' => __( 'On', 'wpdirectorykit' ),
-            'label_off' => __( 'Off', 'wpdirectorykit' ),
+            'label_on' => __( 'On', 'elementinvader-addons-for-elementor' ),
+            'label_off' => __( 'Off', 'elementinvader-addons-for-elementor' ),
             'return_value' => 'true',
             'default' => '',
         ]
@@ -1072,7 +1072,7 @@ class EliBlog_Grid extends Elementinvader_Base {
     $this->add_control(
         'layout_carousel_speed',
         [
-            'label' => __( 'Speed', 'wpdirectorykit' ),
+            'label' => __( 'Speed', 'elementinvader-addons-for-elementor' ),
             'type' => \Elementor\Controls_Manager::NUMBER,
             'min' => 0,
             'max' => 100000,
@@ -1084,13 +1084,13 @@ class EliBlog_Grid extends Elementinvader_Base {
     $this->add_control(
         'layout_carousel_animation_style',
         [
-            'label' => __( 'Animation Style', 'wpdirectorykit' ),
+            'label' => __( 'Animation Style', 'elementinvader-addons-for-elementor' ),
             'type' => \Elementor\Controls_Manager::SELECT,
             'default' => 'fade',
             'options' => [
-                'slide'  => __( 'Slide', 'wpdirectorykit' ),
-                'fade' => __( 'Fade', 'wpdirectorykit' ),
-                'fade_in_in' => __( 'Fade in', 'wpdirectorykit' ),
+                'slide'  => __( 'Slide', 'elementinvader-addons-for-elementor' ),
+                'fade' => __( 'Fade', 'elementinvader-addons-for-elementor' ),
+                'fade_in_in' => __( 'Fade in', 'elementinvader-addons-for-elementor' ),
             ],
         ]
     );
@@ -1098,17 +1098,17 @@ class EliBlog_Grid extends Elementinvader_Base {
     $this->add_control(
         'layout_carousel_cssease',
         [
-            'label' => __( 'cssEase', 'wpdirectorykit' ),
+            'label' => __( 'cssEase', 'elementinvader-addons-for-elementor' ),
             'type' => \Elementor\Controls_Manager::SELECT,
             'default' => 'linear',
             'options' => [
-                'linear'  => __( 'linear', 'wpdirectorykit' ),
-                'ease' => __( 'ease', 'wpdirectorykit' ),
-                'ease-in' => __( 'ease-in', 'wpdirectorykit' ),
-                'ease-out' => __( 'ease-out', 'wpdirectorykit' ),
-                'ease-in-out' => __( 'ease-in-out', 'wpdirectorykit' ),
-                'step-start' => __( 'step-start', 'wpdirectorykit' ),
-                'step-end' => __( 'step-end', 'wpdirectorykit' ),
+                'linear'  => __( 'linear', 'elementinvader-addons-for-elementor' ),
+                'ease' => __( 'ease', 'elementinvader-addons-for-elementor' ),
+                'ease-in' => __( 'ease-in', 'elementinvader-addons-for-elementor' ),
+                'ease-out' => __( 'ease-out', 'elementinvader-addons-for-elementor' ),
+                'ease-in-out' => __( 'ease-in-out', 'elementinvader-addons-for-elementor' ),
+                'step-start' => __( 'step-start', 'elementinvader-addons-for-elementor' ),
+                'step-end' => __( 'step-end', 'elementinvader-addons-for-elementor' ),
             ],
         ]
     );
@@ -1120,7 +1120,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->start_controls_section(
             'styles_carousel_arrows_section',
             [
-                'label' => esc_html__('Carousel Arrows', 'wpdirectorykit'),
+                'label' => esc_html__('Carousel Arrows', 'elementinvader-addons-for-elementor'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'conditions' => [
                     'terms' => [
@@ -1137,10 +1137,10 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'styles_carousel_arrows_hide',
             [
-                    'label' => esc_html__( 'Hide Element', 'wpdirectorykit' ),
+                    'label' => esc_html__( 'Hide Element', 'elementinvader-addons-for-elementor' ),
                     'type' => Controls_Manager::SWITCHER,
-                    'none' => esc_html__( 'Hide', 'wpdirectorykit' ),
-                    'block' => esc_html__( 'Show', 'wpdirectorykit' ),
+                    'none' => esc_html__( 'Hide', 'elementinvader-addons-for-elementor' ),
+                    'block' => esc_html__( 'Show', 'elementinvader-addons-for-elementor' ),
                     'return_value' => 'none',
                     'default' => '',
                     'selectors' => [
@@ -1152,13 +1152,13 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'styles_carousel_arrows_position',
             [
-                'label' => __( 'Position', 'wpdirectorykit' ),
+                'label' => __( 'Position', 'elementinvader-addons-for-elementor' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'eli_slider_arrows_bottom',
                 'options' => [
-                    'eli_slider_arrows_bottom'  => __( 'Bottom', 'wpdirectorykit' ),
-                    'eli_slider_arrows_middle' => __( 'Center', 'wpdirectorykit' ),
-                    'eli_slider_arrows_top' => __( 'Top', 'wpdirectorykit' ),
+                    'eli_slider_arrows_bottom'  => __( 'Bottom', 'elementinvader-addons-for-elementor' ),
+                    'eli_slider_arrows_middle' => __( 'Center', 'elementinvader-addons-for-elementor' ),
+                    'eli_slider_arrows_top' => __( 'Top', 'elementinvader-addons-for-elementor' ),
                 ],
             ]
         );
@@ -1166,23 +1166,23 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'styles_carousel_arrows_align',
             [
-                'label' => __( 'Align', 'wpdirectorykit' ),
+                'label' => __( 'Align', 'elementinvader-addons-for-elementor' ),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                            'title' => esc_html__( 'Left', 'wpdirectorykit' ),
+                            'title' => esc_html__( 'Left', 'elementinvader-addons-for-elementor' ),
                             'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                            'title' => esc_html__( 'Center', 'wpdirectorykit' ),
+                            'title' => esc_html__( 'Center', 'elementinvader-addons-for-elementor' ),
                             'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                            'title' => esc_html__( 'Right', 'wpdirectorykit' ),
+                            'title' => esc_html__( 'Right', 'elementinvader-addons-for-elementor' ),
                             'icon' => 'eicon-text-align-right',
                     ],
                     'justify' => [
-                            'title' => esc_html__( 'Justified', 'wpdirectorykit' ),
+                            'title' => esc_html__( 'Justified', 'elementinvader-addons-for-elementor' ),
                             'icon' => 'eicon-text-align-justify',
                     ],
                 ],
@@ -1211,7 +1211,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'styles_carousel_arrows_icon_left_h',
             [
-                'label' => esc_html__('Arrow left', 'wpdirectorykit'),
+                'label' => esc_html__('Arrow left', 'elementinvader-addons-for-elementor'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -1220,7 +1220,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'styles_carousel_arrows_s_m_left_margin',
             [
-                    'label' => esc_html__( 'Margin', 'wpdirectorykit' ),
+                    'label' => esc_html__( 'Margin', 'elementinvader-addons-for-elementor' ),
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => [ 'px', 'em', '%' ],
                     'allowed_dimensions' => 'horizontal',
@@ -1233,7 +1233,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'styles_carousel_arrows_icon_left',
             [
-                'label' => esc_html__('Icon', 'wpdirectorykit'),
+                'label' => esc_html__('Icon', 'elementinvader-addons-for-elementor'),
                 'type' => Controls_Manager::ICONS,
                 'label_block' => true,
                 'default' => [
@@ -1246,7 +1246,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'styles_carousel_arrows_icon_right_h',
             [
-                'label' => esc_html__('Arrow right', 'wpdirectorykit'),
+                'label' => esc_html__('Arrow right', 'elementinvader-addons-for-elementor'),
                 'type' => Controls_Manager::HEADING,
                 'separator' => 'before',
             ]
@@ -1255,7 +1255,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'styles_carousel_arrows_s_m_right_margin',
             [
-                    'label' => esc_html__( 'Margin', 'wpdirectorykit' ),
+                    'label' => esc_html__( 'Margin', 'elementinvader-addons-for-elementor' ),
                     'type' => Controls_Manager::DIMENSIONS,
                     'size_units' => [ 'px', 'em', '%' ],
                     'allowed_dimensions' => 'horizontal',
@@ -1268,7 +1268,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'styles_carousel_arrows_icon_right',
             [
-                'label' => esc_html__('Icon', 'wpdirectorykit'),
+                'label' => esc_html__('Icon', 'elementinvader-addons-for-elementor'),
                 'type' => Controls_Manager::ICONS,
                 'label_block' => true,
                 'default' => [
@@ -1289,7 +1289,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->start_controls_section(
             'styles_carousel_dots_section',
             [
-                'label' => esc_html__('Carousel Dots', 'wpdirectorykit'),
+                'label' => esc_html__('Carousel Dots', 'elementinvader-addons-for-elementor'),
                 'tab' => Controls_Manager::TAB_STYLE,
                 'conditions' => [
                     'terms' => [
@@ -1306,10 +1306,10 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
                 'styles_carousel_dots_hide',
                 [
-                        'label' => esc_html__( 'Hide Element', 'wpdirectorykit' ),
+                        'label' => esc_html__( 'Hide Element', 'elementinvader-addons-for-elementor' ),
                         'type' => Controls_Manager::SWITCHER,
-                        'none' => esc_html__( 'Hide', 'wpdirectorykit' ),
-                        'block' => esc_html__( 'Show', 'wpdirectorykit' ),
+                        'none' => esc_html__( 'Hide', 'elementinvader-addons-for-elementor' ),
+                        'block' => esc_html__( 'Show', 'elementinvader-addons-for-elementor' ),
                         'return_value' => 'none',
                         'default' => '',
                         'selectors' => [
@@ -1321,12 +1321,12 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'styles_carousel_dots_position_style',
             [
-                'label' => __( 'Position Style', 'wpdirectorykit' ),
+                'label' => __( 'Position Style', 'elementinvader-addons-for-elementor' ),
                 'type' => \Elementor\Controls_Manager::SELECT,
                 'default' => 'eli_slider_dots_out',
                 'options' => [
-                    'eli_slider_dots_out' => __( 'Out', 'wpdirectorykit' ),
-                    'eli_slider_dots_in' => __( 'In', 'wpdirectorykit' ),
+                    'eli_slider_dots_out' => __( 'Out', 'elementinvader-addons-for-elementor' ),
+                    'eli_slider_dots_in' => __( 'In', 'elementinvader-addons-for-elementor' ),
                 ],
             ]
         );
@@ -1334,23 +1334,23 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'styles_carousel_dots_align',
             [
-                'label' => __( 'Position', 'wpdirectorykit' ),
+                'label' => __( 'Position', 'elementinvader-addons-for-elementor' ),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                            'title' => esc_html__( 'Left', 'wpdirectorykit' ),
+                            'title' => esc_html__( 'Left', 'elementinvader-addons-for-elementor' ),
                             'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                            'title' => esc_html__( 'Center', 'wpdirectorykit' ),
+                            'title' => esc_html__( 'Center', 'elementinvader-addons-for-elementor' ),
                             'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                            'title' => esc_html__( 'Right', 'wpdirectorykit' ),
+                            'title' => esc_html__( 'Right', 'elementinvader-addons-for-elementor' ),
                             'icon' => 'eicon-text-align-right',
                     ],
                     'justify' => [
-                            'title' => esc_html__( 'Justified', 'wpdirectorykit' ),
+                            'title' => esc_html__( 'Justified', 'elementinvader-addons-for-elementor' ),
                             'icon' => 'eicon-text-align-justify',
                     ],
                 ],
@@ -1370,7 +1370,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'styles_carousel_dots_icon',
             [
-                'label' => esc_html__('Icon', 'wpdirectorykit'),
+                'label' => esc_html__('Icon', 'elementinvader-addons-for-elementor'),
                 'type' => Controls_Manager::ICONS,
                 'label_block' => true,
                 'default' => [
@@ -1393,7 +1393,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->start_controls_section(
             'pagination_styles',
             [
-                'label' => esc_html__('Pagination Section', 'wpdirectorykit'),
+                'label' => esc_html__('Pagination Section', 'elementinvader-addons-for-elementor'),
                 'tab' => '1',
                 'conditions' => [
                     'terms' => [
@@ -1409,19 +1409,19 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_responsive_control(
             'pagination_styles_align',
             [
-                'label' => __( 'Align', 'wpdirectorykit' ),
+                'label' => __( 'Align', 'elementinvader-addons-for-elementor' ),
                 'type' => Controls_Manager::CHOOSE,
                 'options' => [
                     'left' => [
-                            'title' => esc_html__( 'Left', 'wpdirectorykit' ),
+                            'title' => esc_html__( 'Left', 'elementinvader-addons-for-elementor' ),
                             'icon' => 'eicon-text-align-left',
                     ],
                     'center' => [
-                            'title' => esc_html__( 'Center', 'wpdirectorykit' ),
+                            'title' => esc_html__( 'Center', 'elementinvader-addons-for-elementor' ),
                             'icon' => 'eicon-text-align-center',
                     ],
                     'right' => [
-                            'title' => esc_html__( 'Right', 'wpdirectorykit' ),
+                            'title' => esc_html__( 'Right', 'elementinvader-addons-for-elementor' ),
                             'icon' => 'eicon-text-align-right',
                     ],
                 ],
@@ -1462,7 +1462,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         $this->add_control(
             'pagination_styles_head',
                 [
-                    'label' => esc_html__('Pagination Links', 'wpdirectorykit'),
+                    'label' => esc_html__('Pagination Links', 'elementinvader-addons-for-elementor'),
                     'type' => Controls_Manager::HEADING,
                     'separator' => 'before',
                 ]
@@ -1780,8 +1780,8 @@ class EliBlog_Grid extends Elementinvader_Base {
         $settings = $this->get_settings();
 
         if(true) {
-            wp_enqueue_style( 'eli-modal', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_URL.'/assets/css/eli-modal.css', false, false); 
-            wp_enqueue_script('eli-modal', ELEMENTINVADER_ADDONS_FOR_ELEMENTOR_URL.'/assets/js/eli-modal.js', array( 'jquery' ), '1.0', false );
+            wp_enqueue_style( 'eli-modal', ELI_URL.'/assets/css/eli-modal.css', false, false); 
+            wp_enqueue_script('eli-modal', ELI_URL.'/assets/js/eli-modal.js', array( 'jquery' ), '1.0', false );
         }
 
         $args = array();
@@ -1840,41 +1840,41 @@ class EliBlog_Grid extends Elementinvader_Base {
                     break;
             }
         }
-
+        // phpcs:disable WordPress.Security.NonceVerification.Recommended
         if(is_string($allposts)){
             $allposts .= '&paged='.$paged;
             $allposts .= '&posts_per_page='.$settings['config_limit'];
-            if(isset($_GET['s']))
-                $allposts .= '&s='.sanitize_text_field($_GET['s']);
+            if(isset($_GET['s'])) 
+                $allposts .= '&s='.esc_attr(sanitize_text_field(wp_unslash($_GET['s']))); 
             if(isset($_GET['search']))
-                $allposts .= '&s='.sanitize_text_field($_GET['search']);
+                $allposts .= '&s='.esc_attr(sanitize_text_field(wp_unslash($_GET['search']))); 
 
         }elseif((is_array($allposts))) {
             if(isset($_GET['s'])) {
-                $allposts ['s'] = sanitize_text_field($_GET['s']);
+                $allposts ['s'] = esc_attr(sanitize_text_field(wp_unslash($_GET['s'])));
             }
             if(isset($_GET['search'])) {
-                $allposts ['s'] = sanitize_text_field($_GET['search']);
+                $allposts ['s'] = esc_attr(sanitize_text_field(wp_unslash($_GET['search'])));
             }
         }
 
         if(isset($_GET['cat'])) {
             if(is_string($allposts)){
-                $allposts .= '&category_name='.sanitize_text_field($_GET['cat']);
+                $allposts .= '&category_name='.esc_attr(sanitize_text_field(wp_unslash($_GET['cat'])));
             }elseif((is_array($allposts))) {
-                $allposts['category_name'] = sanitize_text_field($_GET['cat']);
+                $allposts['category_name'] = esc_attr(sanitize_text_field(wp_unslash($_GET['cat'])));
             }
         }
 
         if(isset($_GET['tag'])) {
             if(is_string($allposts)){
-                $allposts .= '&tag='.sanitize_text_field($_GET['tag']);
+                $allposts .= '&tag='.esc_attr(sanitize_text_field(wp_unslash($_GET['tag'])));
             }elseif((is_array($allposts))) {
 
-                $allposts['tag'] = sanitize_text_field($_GET['tag']);
+                $allposts['tag'] = esc_attr(sanitize_text_field(wp_unslash($_GET['tag'])));
             }
         }
-
+        // phpcs:enable WordPress.Security.NonceVerification.Recommended
 
 		if ($settings['config_limit_order_by'] == 'custom_field' && !empty($settings['config_limit_order_by_custom'])) {
 
@@ -1950,11 +1950,6 @@ class EliBlog_Grid extends Elementinvader_Base {
             }
         }
 		
-		if(isset($_GET['test'])) {
-			dump($allposts);
-		}
-	
-
         $wp_query = new \WP_Query($allposts); 
 
         $object = ['wp_query'=>$wp_query, 'settings'=>$settings,'id_int'=>$id_int];
@@ -1963,7 +1958,7 @@ class EliBlog_Grid extends Elementinvader_Base {
         if(Plugin::$instance->editor->is_edit_mode())
             $object['is_edit_mode'] = true;
       
-        echo $this->view('widget_layout', $object); 
+        $this->view('widget_layout', $object, true); 
     }
 
 	public static function ma_el_get_post_types()

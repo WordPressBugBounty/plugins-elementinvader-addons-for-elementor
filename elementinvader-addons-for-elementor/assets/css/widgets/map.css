@@ -12,22 +12,22 @@
 * Browsers: last 9 version
 */ 
 
-.elementinvader-addons-for-elementor div.sw_map_box{
+.eli div.sw_map_box{
     height:350px;
 }
 
-.elementinvader-addons-for-elementor .wl_marker-cluster img,
-.elementinvader-addons-for-elementor .wl_cluster img {
+.eli .wl_marker-cluster img,
+.eli .wl_cluster img {
     display: none !important;
 }
 
-.elementinvader-addons-for-elementor .wl_marker-cluster,
-.elementinvader-addons-for-elementor .wl_cluster {
+.eli .wl_marker-cluster,
+.eli .wl_cluster {
     background: transparent !important;
 }
 
-.elementinvader-addons-for-elementor .wl_marker-cluster div,
-.elementinvader-addons-for-elementor .wl_cluster div {
+.eli .wl_marker-cluster div,
+.eli .wl_cluster div {
     color: #fff !important;
     width: 36px !important;
     height: 36px !important;
@@ -40,8 +40,8 @@
     font-size: 14px !important;
 }
 
-.elementinvader-addons-for-elementor .wl_marker-cluster div:before,
-.elementinvader-addons-for-elementor .wl_cluster div:before {
+.eli .wl_marker-cluster div:before,
+.eli .wl_cluster div:before {
     border: 7px solid #0074e4;
     opacity: 0.25;
     -webkit-box-shadow: inset 0 0 0 4px #0074e4;
@@ -84,13 +84,13 @@
     }
 }
 
-.elementinvader-addons-for-elementor .wl_map-marker-container {
+.eli .wl_map-marker-container {
   position: absolute;
   margin-top: 10px;
   -webkit-transform: translate3d(-50%, -100%, 0);
   transform: translate3d(-50%, -100%, 0); }
 
-.elementinvader-addons-for-elementor .wl_marker-container {
+.eli .wl_marker-container {
   position: relative;
   margin: 10px auto;
   width: 49px;
@@ -103,11 +103,11 @@
   margin-bottom: 21px;
   }
 
-.elementinvader-addons-for-elementor .wl_marker-container {
+.eli .wl_marker-container {
   -webkit-perspective: 1000;
   perspective: 1000; }
 
-.elementinvader-addons-for-elementor .wl_marker-card {
+.eli .wl_marker-card {
   width: 100%;
   height: 100%;
   -webkit-transform-style: preserve-3d;
@@ -119,11 +119,11 @@
   z-index: 1;
   }
 
-.elementinvader-addons-for-elementor .leaflet-bottom {
+.eli .leaflet-bottom {
     line-height: 1;
 }
   
-.elementinvader-addons-for-elementor .wl_marker-arrow {
+.eli .wl_marker-arrow {
     display: none;
     width: 0;
     content: "";
@@ -144,7 +144,7 @@
     z-index: 1;
   }
 
-.elementinvader-addons-for-elementor .wl_face {
+.eli .wl_face {
   position: absolute;
   width: 100%;
   height: 124%;
@@ -161,7 +161,7 @@
           transform: perspective(100px);
   }
 
-.elementinvader-addons-for-elementor .wl_face i {
+.eli .wl_face i {
   line-height: 61px;
   font-size: 18px;
   position: relative;
@@ -174,7 +174,7 @@
   transition: all .15s;
   }
 
-.elementinvader-addons-for-elementor .wl_face.front {
+.eli .wl_face.front {
     color: #0074e4;
     z-index: 100;
     position: relative;
@@ -182,11 +182,11 @@
     position: absolute;
   }
 
-.elementinvader-addons-for-elementor .wl_marker-container:hover .wl_face i {
+.eli .wl_marker-container:hover .wl_face i {
     color: #fff;
 }
 
-.elementinvader-addons-for-elementor .wl_marker-card:after {
+.eli .wl_marker-card:after {
     content: '';
     position: absolute;
     margin-top: 0px;
@@ -211,11 +211,11 @@
     filter: blur(.25px);
 }
     
-.elementinvader-addons-for-elementor .wl_marker-card::after {
+.eli .wl_marker-card::after {
     background: transparent;
 }
 
-.elementinvader-addons-for-elementor .wl_marker-card:before {
+.eli .wl_marker-card:before {
     content: '';
     position: absolute;
     top: 2px;
@@ -239,11 +239,11 @@
     filter: blur(.25px);
 }
 
-.elementinvader-addons-for-elementor .wl_marker-container:hover .wl_marker-card:after {
+.eli .wl_marker-container:hover .wl_marker-card:after {
     opacity: 0;
   }
 
-.elementinvader-addons-for-elementor .wl_face.back {
+.eli .wl_face.back {
   -webkit-transform: rotateY(180deg);
   transform: rotateY(180deg);
   -webkit-box-sizing: border-box;
@@ -254,12 +254,12 @@
   z-index: 25;
   }
 
-.elementinvader-addons-for-elementor .wl_face.back i {
+.eli .wl_face.back i {
   trasform: scaleX(-1);
   line-height: 38px;
   font-size: 18px; }
 
-.elementinvader-addons-for-elementor .wl_face.back:after {
+.eli .wl_face.back:after {
   content: "";
   display: block;
   width: 36px;
@@ -270,8 +270,8 @@
           border-radius: 10%;
   position: absolute; }
 
-.elementinvader-addons-for-elementor .custom-zoom-in,
-.elementinvader-addons-for-elementor .custom-zoom-out {
+.eli .custom-zoom-in,
+.eli .custom-zoom-out {
   background-color: #fff;
   color: #333;
   cursor: pointer;
@@ -288,36 +288,36 @@
   height: 34px;
   width: 34px; }
 
-.elementinvader-addons-for-elementor .custom-zoom-in:hover,
-.elementinvader-addons-for-elementor .custom-zoom-out:hover {
+.eli .custom-zoom-in:hover,
+.eli .custom-zoom-out:hover {
   background-color: #66676b;
   color: #fff; }
 
-.elementinvader-addons-for-elementor .custom-zoom-in:before,
-.elementinvader-addons-for-elementor .custom-zoom-out:before {
+.eli .custom-zoom-in:before,
+.eli .custom-zoom-out:before {
   font-family: "FontAwesome";
   width: 100%;
   line-height: 35px;
   transition: -webkit-text-stroke 0.3s;
   -webkit-text-stroke: 1px #fff; }
 
-.elementinvader-addons-for-elementor .zoomControlWrapper {
+.eli .zoomControlWrapper {
   position: absolute;
   left: 0;
   right: auto;
   width: 70px; }
 
-.elementinvader-addons-for-elementor .custom-zoom-in:before {
+.eli .custom-zoom-in:before {
   content: "\f067"; }
 
-.elementinvader-addons-for-elementor .custom-zoom-out:before {
+.eli .custom-zoom-out:before {
   content: "\f068"; }
 
-.elementinvader-addons-for-elementor .custom-zoom-in:hover:before,
-.elementinvader-addons-for-elementor .custom-zoom-out:hover:before {
+.eli .custom-zoom-in:hover:before,
+.eli .custom-zoom-out:hover:before {
   -webkit-text-stroke: 1px #66676b; }
 
-.elementinvader-addons-for-elementor #mapnav-buttons {
+.eli #mapnav-buttons {
   position: absolute;
   -webkit-transform: translate(0, 0);
   -ms-transform: translate(0, 0);
@@ -330,20 +330,20 @@
   list-style: none;
   padding: 0; }
 
-.elementinvader-addons-for-elementor #mapnav-buttons.top {
+.eli #mapnav-buttons.top {
   top: 20px;
   right: 20px;
   bottom: auto; }
 
-.elementinvader-addons-for-elementor #mapnav-buttons li {
+.eli #mapnav-buttons li {
   float: left;
   margin-left: 4px;
   line-height: 20px; }
 
-.elementinvader-addons-for-elementor #geoLocation,
-.elementinvader-addons-for-elementor #mapnav-buttons a,
-.elementinvader-addons-for-elementor #scrollEnabling,
-.elementinvader-addons-for-elementor #streetView {
+.eli #geoLocation,
+.eli #mapnav-buttons a,
+.eli #scrollEnabling,
+.eli #streetView {
   color: #333;
   background-color: #fff;
   padding: 9px 18px 7px;
@@ -360,16 +360,16 @@
   -webkit-box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.2);
   box-shadow: 0 1px 4px -1px rgba(0, 0, 0, 0.2); }
 
-.elementinvader-addons-for-elementor #geoLocation:hover,
-.elementinvader-addons-for-elementor #mapnav-buttons a:hover,
-.elementinvader-addons-for-elementor #scrollEnabling.enabled,
-.elementinvader-addons-for-elementor #scrollEnabling:hover,
-.elementinvader-addons-for-elementor #streetView:hover {
+.eli #geoLocation:hover,
+.eli #mapnav-buttons a:hover,
+.eli #scrollEnabling.enabled,
+.eli #scrollEnabling:hover,
+.eli #streetView:hover {
   background-color: #66676b;
   color: #fff; }
 
-.elementinvader-addons-for-elementor #nextpoint:after,
-.elementinvader-addons-for-elementor #prevpoint:before {
+.eli #nextpoint:after,
+.eli #prevpoint:before {
   font-family: "FontAwesome";
   position: relative;
   font-weight: 500;
@@ -378,17 +378,17 @@
   top: 0;
   line-height: 1px; }
 
-.elementinvader-addons-for-elementor #prevpoint:before {
+.eli #prevpoint:before {
   content: "\f104";
   margin: 0 6px 0 0; }
 
-.elementinvader-addons-for-elementor #nextpoint:after {
+.eli #nextpoint:after {
   content: "\f105";
   margin: 0 0 0 6px; }
 
-.elementinvader-addons-for-elementor #geoLocation,
-.elementinvader-addons-for-elementor #scrollEnabling,
-.elementinvader-addons-for-elementor #streetView {
+.eli #geoLocation,
+.eli #scrollEnabling,
+.eli #streetView {
   position: absolute;
   top: 20px;
   right: 20px;
@@ -396,9 +396,9 @@
   font-size: 13px;
   line-height: 21px; }
 
-.elementinvader-addons-for-elementor #geoLocation:before,
-.elementinvader-addons-for-elementor #scrollEnabling:before,
-.elementinvader-addons-for-elementor #streetView:before {
+.eli #geoLocation:before,
+.eli #scrollEnabling:before,
+.eli #streetView:before {
   content: "\e015";
   font-family: "simple-line-icons";
   position: relative;
@@ -407,22 +407,22 @@
   font-size: 15px;
   line-height: 1px; }
 
-.elementinvader-addons-for-elementor #scrollEnabling:before {
+.eli #scrollEnabling:before {
   margin-left: -3px; }
 
-.elementinvader-addons-for-elementor #streetView:before {
+.eli #streetView:before {
   content: "\f21d";
   font-family: "FontAwesome";
   font-size: 16px;
   top: 1px;
   margin-right: 8px; }
 
-.elementinvader-addons-for-elementor #geoLocation {
+.eli #geoLocation {
   right: auto;
   left: 20px;
   padding: 8px 11px; }
 
-.elementinvader-addons-for-elementor #geoLocation:before {
+.eli #geoLocation:before {
   content: "\f192";
   font-family: "FontAwesome";
   font-size: 16px;
@@ -431,12 +431,12 @@
 }
 
 
-.elementinvader-addons-for-elementor .infoBox {
+.eli .infoBox {
     -webkit-border-radius: 4px;
             border-radius: 4px;
 }
 
-.elementinvader-addons-for-elementor .map-box {
+.eli .map-box {
     background-color: #fff;
     margin-bottom: 5px;
     -webkit-border-radius: 4px;
@@ -446,7 +446,7 @@
     position: relative;
 }
 
-.elementinvader-addons-for-elementor .map-box .rate-info {
+.eli .map-box .rate-info {
     position: absolute;
     bottom: 84px;
     left: 0;
@@ -471,7 +471,7 @@
     z-index: 5;
 }
 
-.elementinvader-addons-for-elementor .map-box .rate-info > h5 {
+.eli .map-box .rate-info > h5 {
     top: 4px;
     float: left;
     color: #fff;
@@ -486,19 +486,19 @@
     z-index: 5;
 }
 
-.elementinvader-addons-for-elementor .map-box h4 {
+.eli .map-box h4 {
     margin: 0;
     padding: 0;
 }
 
-.elementinvader-addons-for-elementor .map-box h4 a {
+.eli .map-box h4 a {
     padding: 0 0 2px;
     font-size: 17px;
     line-height: 25px;
     display: inline-block;
 }
 
-.elementinvader-addons-for-elementor .listing-img-container {
+.eli .listing-img-container {
     position: relative;
     height: 100%;
     display: block;
@@ -506,47 +506,47 @@
             box-shadow: none !important;
 }
 
-.elementinvader-addons-for-elementor .map-box h4 a:hover {
+.eli .map-box h4 a:hover {
     color: #66676b;
 }
 
-.elementinvader-addons-for-elementor .map-box p {
+.eli .map-box p {
     padding: 0;
     line-height: 25px;
     margin: 2px 0 0;
     font-size: 14px;
 }
 
-.elementinvader-addons-for-elementor .map-box ul.listing-details {
+.eli .map-box ul.listing-details {
     padding: 0;
     font-size: 14px;
     display: none;
 }
 
-.elementinvader-addons-for-elementor .map-box .listing-title {
+.eli .map-box .listing-title {
     padding: 16px 22px;
 }
 
-.elementinvader-addons-for-elementor .map-box .listing-img-content {
+.eli .map-box .listing-img-content {
     padding: 18px 22px;
 }
 
-.elementinvader-addons-for-elementor .map-box .listing-img-content span {
+.eli .map-box .listing-img-content span {
     font-size: 21px;
 }
 
-.elementinvader-addons-for-elementor .map-box .listing-img-content .listing-price i {
+.eli .map-box .listing-img-content .listing-price i {
     font-size: 15px;
     margin: -7px 0 0;
 }
 
-.elementinvader-addons-for-elementor .infoBox > img {
+.eli .infoBox > img {
     position: absolute !important;
     right: 0;
     top: 0;
 }
 
-.elementinvader-addons-for-elementor .map-box .listing-img-container::before {
+.eli .map-box .listing-img-container::before {
     content: "";
     display: none;
     position: absolute;
@@ -558,7 +558,7 @@
     background-color: rgba(35, 35, 37, 0.2);
 }
 
-.elementinvader-addons-for-elementor .map-box .listing-item-content {
+.eli .map-box .listing-item-content {
 position: static;
     width: 100%;
     margin-top: -3px;
@@ -571,7 +571,7 @@ position: static;
     box-shadow: none;
 }
 
-.elementinvader-addons-for-elementor .map-box .listing-item-content h3 {
+.eli .map-box .listing-item-content h3 {
     color: #242526;
     font-size: 16px;
     padding: 0 0 2px;
@@ -581,18 +581,18 @@ position: static;
     margin-bottom: 5px;
 }
 
-.elementinvader-addons-for-elementor .map-box .listing-item-content span {
+.eli .map-box .listing-item-content span {
     font-size: 12px;
     font-weight: 400;
     display: inline-block;
     color: #aeb4b6;
 }
 
-.elementinvader-addons-for-elementor .map-box .listing-item-content span i {
+.eli .map-box .listing-item-content span i {
     padding-right: 5px;
 }
 
-.elementinvader-addons-for-elementor .infoBox-close {
+.eli .infoBox-close {
     position: absolute;
     top: 10px;
     right: 10px;
@@ -613,13 +613,13 @@ position: static;
     -webkit-text-stroke: 1px #fff;
 }
 
-.elementinvader-addons-for-elementor .infoBox-close:hover {
+.eli .infoBox-close:hover {
     color: #fff;
     background-color: #66676b;
     -webkit-text-stroke: 1px #66676b;
 }
 
-.elementinvader-addons-for-elementor .map-box-icon {
+.eli .map-box-icon {
     height: 38px;
     width: 38px;
     position: absolute;
@@ -638,7 +638,7 @@ position: static;
     visibility: hidden;
 }
 
-.elementinvader-addons-for-elementor .map-box-icon:before {
+.eli .map-box-icon:before {
     content: "\f064";
     font-family: "FontAwesome";
     position: relative;
@@ -646,7 +646,7 @@ position: static;
     display: block;
 }
 
-.elementinvader-addons-for-elementor .map-box-image:hover .map-box-icon {
+.eli .map-box-image:hover .map-box-icon {
     opacity: 1;
     visibility: visible;
     -webkit-transform: translateY(0);
@@ -654,27 +654,27 @@ position: static;
     transform: translateX(0);
 }
 
-.elementinvader-addons-for-elementor .map-box-image {
+.eli .map-box-image {
     position: relative;
     overflow: hidden;
     display: block;
 }
 
-.elementinvader-addons-for-elementor .infoBox .star-rating {
+.eli .infoBox .star-rating {
     font-size: 16px;
     margin-top: 1px;
 }
 
-.elementinvader-addons-for-elementor .infoBox .star-rating span {
+.eli .infoBox .star-rating span {
     margin-right: 3px;
 }
 
-.elementinvader-addons-for-elementor .infoBox .rating-counter {
+.eli .infoBox .rating-counter {
     position: relative;
     top: -1px;
 }
 
-.elementinvader-addons-for-elementor .infoBox:after {
+.eli .infoBox:after {
     content: "";
     position: absolute;
     bottom: -5px;
@@ -693,19 +693,19 @@ position: static;
 
 /* custom marker */
 
-.elementinvader-addons-for-elementor .leaflet-container .leaflet-marker-pane .wl_marker-container-image img {
+.eli .leaflet-container .leaflet-marker-pane .wl_marker-container-image img {
     max-width: 20px !important;
     max-height: 20px !important;
 }
 
-.elementinvader-addons-for-elementor .leaflet-container .leaflet-marker-pane .wl_marker-container-image.clicked .wl_marker-card,
-.elementinvader-addons-for-elementor .leaflet-container .leaflet-marker-pane .wl_marker-container-image:hover .wl_marker-card {
+.eli .leaflet-container .leaflet-marker-pane .wl_marker-container-image.clicked .wl_marker-card,
+.eli .leaflet-container .leaflet-marker-pane .wl_marker-container-image:hover .wl_marker-card {
     -webkit-transform: initial;
     -ms-transform: initial;
     transform: initial;
 }
 
-.elementinvader-addons-for-elementor .google_marker span {
+.eli .google_marker span {
     position: absolute;
     z-index: 2;
     width: 29px;
@@ -737,13 +737,13 @@ position: static;
     text-align: center;
 }
 
-.elementinvader-addons-for-elementor .google_marker span i {
+.eli .google_marker span i {
     line-height: 1;
     font-size: 16px;
     margin-left: 0;
 }
 
-.elementinvader-addons-for-elementor .leaflet-container .leaflet-marker-pane .google_marker img {
+.eli .leaflet-container .leaflet-marker-pane .google_marker img {
     position: absolute;
     z-index: 2;
     max-width: 20px !important;
@@ -758,7 +758,7 @@ position: static;
     max-width: 18px;
 }
 
-.elementinvader-addons-for-elementor .gm-style .google_marker img {
+.eli .gm-style .google_marker img {
     max-width: 18px;
 }
 
@@ -766,33 +766,33 @@ position: static;
 
 /* leaftet map */
 
-.elementinvader-addons-for-elementor .leaflet-popup-content-wrapper,
-.elementinvader-addons-for-elementor .leaflet-popup-tip,
-.elementinvader-addons-for-elementor .popupCustom .leaflet-popup-content-wrapper,
-.elementinvader-addons-for-elementor .popupCustom .leaflet-popup-tip {
+.eli .leaflet-popup-content-wrapper,
+.eli .leaflet-popup-tip,
+.eli .popupCustom .leaflet-popup-content-wrapper,
+.eli .popupCustom .leaflet-popup-tip {
     /* background: transparent; */
     /* color: #333; */
     /* -webkit-box-shadow: none; */
     /* box-shadow: none; */
 }
 
-.elementinvader-addons-for-elementor .leaflet-popup-content-wrapper .leaflet-popup-content,
-.elementinvader-addons-for-elementor .popupCustom .leaflet-popup-content-wrapper .leaflet-popup-content {
+.eli .leaflet-popup-content-wrapper .leaflet-popup-content,
+.eli .popupCustom .leaflet-popup-content-wrapper .leaflet-popup-content {
     margin: 0;
     margin-bottom: 0;
 }
 
-.elementinvader-addons-for-elementor .leaflet-popup-content-wrapper .leaflet-popup-content,
-.elementinvader-addons-for-elementor .popupCustom .leaflet-popup-content-wrapper .leaflet-popup-content {
+.eli .leaflet-popup-content-wrapper .leaflet-popup-content,
+.eli .popupCustom .leaflet-popup-content-wrapper .leaflet-popup-content {
     position: relative;
 }
 
-.elementinvader-addons-for-elementor .leaflet-popup-content-wrapper .infoBox-close,
-.elementinvader-addons-for-elementor .popupCustom .leaflet-popup-content-wrapper .infoBox-close {
+.eli .leaflet-popup-content-wrapper .infoBox-close,
+.eli .popupCustom .leaflet-popup-content-wrapper .infoBox-close {
     display: none;
 }
 
-.elementinvader-addons-for-elementor .infobox:after {
+.eli .infobox:after {
     content: "";
     position: absolute;
     bottom: -17px;
@@ -812,7 +812,7 @@ position: static;
     margin-left: -4px;
 }
 
-.elementinvader-addons-for-elementor .leaflet-container a.leaflet-popup-close-button {
+.eli .leaflet-container a.leaflet-popup-close-button {
     position: absolute;
     top: 8px;
     right: 8px;
@@ -852,21 +852,21 @@ position: static;
     padding: 1px 4px;
 }
 
-.elementinvader-addons-for-elementor .leaflet-container a.leaflet-popup-close-button:hover {
+.eli .leaflet-container a.leaflet-popup-close-button:hover {
     color: #fff;
     background-color: #66676b;
 }
 
-.elementinvader-addons-for-elementor .leaflet-container a.leaflet-popup-close-button:after {
+.eli .leaflet-container a.leaflet-popup-close-button:after {
     content: "\f00d";
     font-size: 15px;
 }
 
-.elementinvader-addons-for-elementor  .leaflet-container:hover a.leaflet-popup-close-button {
+.eli  .leaflet-container:hover a.leaflet-popup-close-button {
     opacity: 1;
 }
 
-.elementinvader-addons-for-elementor .popupcustom-default .leaflet-popup-content-wrapper .leaflet-popup-content {
+.eli .popupcustom-default .leaflet-popup-content-wrapper .leaflet-popup-content {
     min-width: 150px;
     background: #fff;
     text-align: center;
@@ -874,37 +874,37 @@ position: static;
     margin: 0;
 }
 
-.elementinvader-addons-for-elementor .widget-property-map .popupcustom-default .leaflet-popup-content-wrapper .leaflet-popup-content {
+.eli .widget-property-map .popupcustom-default .leaflet-popup-content-wrapper .leaflet-popup-content {
     padding: 0;
 }
 
-.elementinvader-addons-for-elementor .widget-property-map .leaflet-container .popupcustom-default .map-box {
+.eli .widget-property-map .leaflet-container .popupcustom-default .map-box {
     border-bottom: 0;
 }
 
-.elementinvader-addons-for-elementor .leaflet-container .popupcustom-default a.leaflet-popup-close-button {
+.eli .leaflet-container .popupcustom-default a.leaflet-popup-close-button {
     position: absolute;
     top: 8px;
     right: 8px;
 }
 
-.elementinvader-addons-for-elementor .leaflet-top,
-.elementinvader-addons-for-elementor .leaflet-bottom,
-.elementinvader-addons-for-elementor .leaflet-pane {
+.eli .leaflet-top,
+.eli .leaflet-bottom,
+.eli .leaflet-pane {
     z-index: 1 !important;
 }
 
-.elementinvader-addons-for-elementor .leaflet-top,
-.elementinvader-addons-for-elementor .leaflet-bottom {
+.eli .leaflet-top,
+.eli .leaflet-bottom {
     z-index: 10;
 }
 
-.elementinvader-addons-for-elementor .infobox {
+.eli .infobox {
     width: 319px;
     height: 295px;
 }
 
-.elementinvader-addons-for-elementor .map-box .listing-img-container img {
+.eli .map-box .listing-img-container img {
     width: 100%;
     -webkit-border-radius: 4px 4px 0 0;
     border-radius: 4px 4px 0 0;
@@ -916,7 +916,7 @@ position: static;
     box-shadow: none;
 }
 
-.elementinvader-addons-for-elementor .map-box .rate-info > span {
+.eli .map-box .rate-info > span {
     color: #fff;
     text-transform: uppercase;
     font-size: 12px;
@@ -930,7 +930,7 @@ position: static;
     z-index: 5;
 }
 
-.elementinvader-addons-for-elementor .rate-info:before {
+.eli .rate-info:before {
     content: '';
     position: absolute;
     top: 0;
@@ -943,22 +943,22 @@ position: static;
     z-index: 0;
 }
 
-.elementinvader-addons-for-elementor a {
+.eli a {
     -webkit-box-shadow: none !important;
             box-shadow: none !important;
 }
 
-.elementinvader-addons-for-elementor .leaflet-top {
+.eli .leaflet-top {
     top: 50%;
     margin-top: -37px;
 }
 
-.elementinvader-addons-for-elementor .leaflet-touch .leaflet-bar {
+.eli .leaflet-touch .leaflet-bar {
     border: 0;
     background-clip: padding-box;
 }
 
-.elementinvader-addons-for-elementor .leaflet-touch .leaflet-bar a{
+.eli .leaflet-touch .leaflet-bar a{
       background-color: #fff;
       color: #333;
       cursor: pointer;
@@ -979,23 +979,23 @@ position: static;
       line-height: 1;
 }
 
-.elementinvader-addons-for-elementor .leaflet-touch .leaflet-bar a:hover{
+.eli .leaflet-touch .leaflet-bar a:hover{
     background-color: #66676b;
     color: #fff;
 }
 
-.elementinvader-addons-for-elementor .eli_infobox {
+.eli .eli_infobox {
     padding: 15px 20px;
     width: 180px;
 }
 
-.elementinvader-addons-for-elementor .eli_infobox .eli_infobox_title {
+.eli .eli_infobox .eli_infobox_title {
     font-size: 16px;
     margin: 0;
     padding-bottom: 10px;
 }
 
-.elementinvader-addons-for-elementor .eli_infobox .eli_infobox_text {
+.eli .eli_infobox .eli_infobox_text {
     font-size: 12px;
     margin: 0;
 }
@@ -1006,15 +1006,15 @@ position: static;
 
 @media not all and (min-resolution: 0.001dpcm) {
     @supports (-webkit-appearance: none) and (stroke-color: transparent) {
-      body .elementinvader-addons-for-elementor  .wl_marker-card::before,
-  body .elementinvader-addons-for-elementor  .wl_marker-card::after {
+      body .eli  .wl_marker-card::before,
+  body .eli  .wl_marker-card::after {
         -webkit-transform: perspective(0) rotateX(0deg) rotateZ(-44deg);
         transform: perspective(0) rotateX(0deg) rotateZ(-44deg);
       }
-      body .elementinvader-addons-for-elementor  .wl_marker-card::after {
+      body .eli  .wl_marker-card::after {
         top: 10px;
       }
-      body .elementinvader-addons-for-elementor  .wl_marker-card::before {
+      body .eli  .wl_marker-card::before {
         top: 8px;
       }
     }
