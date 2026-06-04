@@ -420,7 +420,7 @@
     max-height: initial !important;
 }
 
-.eli .wl-nav-menu--dropdown a {
+.eli .wl-nav-menu--dropdown .menu-main-container a  {
     color: #494c4f;
     -webkit-box-pack: justify;
     -ms-flex-pack: justify;

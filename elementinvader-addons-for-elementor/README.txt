@@ -4,8 +4,8 @@ Donate link: https://elementinvader.com/
 Tags: elementor addon, elementor addons, elementor widget, elementor
 Requires at least: 6.2
 Requires PHP: 7.4
-Tested up to: 6.9
-Stable tag: 1.4.4
+Tested up to: 7.0
+Stable tag: 1.4.5
 License: GPLv2 or later
 License URI: http://www.gnu.org/licenses/gpl-2.0.html
 
@@ -89,6 +89,9 @@ There is website where yo ucan found compatible plugin version for your wp / PHP
 4. Simple Newsletter for Elementor, with mailchimp api, email alerts for admin and export msigned maillist option.
 
 == Changelog ==
+
+= 1.4.5 =
+* Fix cache issue
 
 = 1.4.4 =
 * Security fix

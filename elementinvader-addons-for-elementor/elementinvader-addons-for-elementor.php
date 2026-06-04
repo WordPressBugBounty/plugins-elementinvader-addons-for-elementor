@@ -4,7 +4,7 @@
  * Plugin Name: ElementInvader Addons for Elementor
  * Description: Ready to use Elementor Addon Elements like Menu, Forms, Maps, Newsletter with many styling options
  * Plugin URI:  https://elementinvader.com
- * Version:     1.4.4
+ * Version:     1.4.5
  * Requires PHP:      7.4
  * Author:      ElementInvader
  * Author URI:  https://elementinvader.com
@@ -19,6 +19,7 @@
 
 if (! defined('ABSPATH')) exit; // Exit if accessed directly
 
+define('ELI_VERSION', '1.4.5');
 define('ELI_FILE__', __FILE__);
 define('ELI_PATH', plugin_dir_path(__FILE__));
 define('ELI_URL', plugin_dir_url(__FILE__));
@@ -149,12 +150,12 @@ if (!function_exists('eli_esc_elemview')) {
 
 function eli_setup()
 {
-    wp_enqueue_style('fontawesome-5', plugins_url('/assets/libs/fontawesome-5.8/css/fontawesome-5.css', ELI_FILE__), false, false);
-    wp_enqueue_style('elementinvader_addons_for_elementor-main', plugins_url('/assets/css/main.css', ELI_FILE__), false, false);
-    wp_enqueue_style('elementinvader_addons_for_elementor-widgets', plugins_url('/assets/css/widgets.css', ELI_FILE__), array(), '1.1');
-    wp_enqueue_style('elementinvader_addons_for_elementor-hover-animations', plugins_url('/assets/css/eli-hover.css', ELI_FILE__), false, false);
+    wp_enqueue_style('fontawesome-5', plugins_url('/assets/libs/fontawesome-5.8/css/fontawesome-5.css', ELI_FILE__), false, ELI_VERSION);
+    wp_enqueue_style('elementinvader_addons_for_elementor-main', plugins_url('/assets/css/main.css', ELI_FILE__), false, ELI_VERSION);
+    wp_enqueue_style('elementinvader_addons_for_elementor-widgets', plugins_url('/assets/css/widgets.css', ELI_FILE__), array(), ELI_VERSION);
+    wp_enqueue_style('elementinvader_addons_for_elementor-hover-animations', plugins_url('/assets/css/eli-hover.css', ELI_FILE__), false, ELI_VERSION);
 
-    wp_enqueue_style('wdk-scroll-mobile-swipe', plugins_url('/assets/libs/wdkscrollmobileswipe/wdk-scroll-mobile-swipe.css', ELI_FILE__), false, false);
+    wp_enqueue_style('wdk-scroll-mobile-swipe', plugins_url('/assets/libs/wdkscrollmobileswipe/wdk-scroll-mobile-swipe.css', ELI_FILE__), false, ELI_VERSION);
     wp_register_script('wdk-scroll-mobile-swipe', plugins_url('/assets/libs/wdkscrollmobileswipe/wdk-scroll-mobile-swipe.js', ELI_FILE__), array('jquery'), '1.0', false);
     wp_enqueue_script('wdk-scroll-mobile-swipe');
 
